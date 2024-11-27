@@ -1,0 +1,108 @@
+// Marquee
+.top-marquee{
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    p{
+        padding-bottom: 0!important;
+        margin-bottom: 0!important;
+        font-size: .9em;
+    }
+}
+// header
+.top-header{
+    height: 90vh;
+    background-image: url(../img/header.png);
+    background-size: cover;
+    background-position: center top;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    .menu{
+        svg{
+            fill: $white;
+            width: 30px;
+        }
+        .navbar-toggler{
+            border: none!important;
+        }
+        .navbar-nav{
+            background-color: $darkColor;
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            justify-content: space-between;
+            padding: 0 30px;
+            li{
+                a{
+                    color: $white!important;
+                }
+            }
+        }
+    }
+    .overlay{
+        background-color: rgba(0,0, 0, 0);
+        position: relative;
+        z-index: 3;
+        height: 100%;
+    }
+}
+// banner 1
+.banner-1{
+    .row{
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+// servicies
+.servicies{
+    figure > div{
+        background-color: $white;
+        border-radius: 12px;
+        border: solid $keyColor 3px;
+        height: 120px;
+        img{
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            border-top-left-radius: 12px;
+            border-bottom-left-radius: 12px;
+        }
+        figcaption{
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
+// faqs
+.faqs{
+    background-image: url(../img/bg-faqs.png);
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    .accordion{
+        background-color: transparent!important;
+        .accordion-item{
+            background-color: transparent!important;
+            margin-bottom: 8px;
+        }
+        h2 button.accordion-button{
+            background-color: transparent!important;
+        }
+        p{
+            font-family: $mainFont;
+            color: $darkColor;
+            font-size: .9em;
+        }
+    }
+}
+footer{
+    a{
+        color: $white;
+        font-size: .9em;
+        text-decoration: none;
+    }
+}

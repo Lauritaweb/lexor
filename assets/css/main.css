@@ -1,0 +1,224 @@
+@import url("https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&display=swap");
+@font-face {
+  font-family: "halenoirtext-regularregular";
+  src: url("../fonts/halenoirtext-regular.woff2") format("woff2"), url("../fonts/halenoirtext-regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+p,
+a {
+  font-family: "halenoirtext-regularregular";
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Baskervville", serif;
+}
+
+.main-font {
+  font-family: "halenoirtext-regularregular";
+}
+
+.secondary-font {
+  font-family: "Baskervville", serif;
+}
+
+.bg-main {
+  background-color: #033333;
+}
+
+.bg-dark {
+  background-color: #111111 !important;
+}
+
+.bg-key {
+  background-color: #FFE600;
+  background-image: url(../img/trama.svg);
+  background-repeat: repeat-x;
+}
+
+.bg-light {
+  background-color: #dbdbe3 !important;
+}
+
+.bg-degrade {
+  background: linear-gradient(to top, #033333, #FFE600);
+}
+
+.bg-pattern {
+  background-image: url(../img/trama.svg);
+  background-repeat: repeat;
+}
+
+.text-key {
+  color: #FFE600;
+}
+
+.text-dark {
+  color: #111111 !important;
+}
+
+.text-heading {
+  border-bottom: 1px #111111 solid;
+  width: 30%;
+}
+
+.container-fluid {
+  padding-right: 50px;
+  padding-left: 50px;
+}
+
+.btn-main, .btn-key-outline {
+  background-color: #033333;
+  color: rgb(245, 241, 241);
+  border-radius: 12px;
+  padding: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 300px;
+  max-width: 320px;
+  text-decoration: none;
+}
+.btn-main:hover, .btn-key-outline:hover {
+  background-color: transparent;
+  border: solid 1px #033333;
+  color: #033333;
+}
+
+.btn-key-outline {
+  background-color: transparent;
+  color: #FFE600;
+  border: solid 1px #FFE600;
+}
+
+.top-marquee {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.top-marquee p {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+  font-size: 0.9em;
+}
+
+.top-header {
+  height: 90vh;
+  background-image: url(../img/header.png);
+  background-size: cover;
+  background-position: center top;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+.top-header .menu svg {
+  fill: rgb(245, 241, 241);
+  width: 30px;
+}
+.top-header .menu .navbar-toggler {
+  border: none !important;
+}
+.top-header .menu .navbar-nav {
+  background-color: #111111;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: space-between;
+  padding: 0 30px;
+}
+.top-header .menu .navbar-nav li a {
+  color: rgb(245, 241, 241) !important;
+}
+.top-header .overlay {
+  background-color: rgba(0, 0, 0, 0);
+  position: relative;
+  z-index: 3;
+  height: 100%;
+}
+
+.banner-1 .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.servicies figure > div {
+  background-color: rgb(245, 241, 241);
+  border-radius: 12px;
+  border: solid #FFE600 3px;
+  height: 120px;
+}
+.servicies figure > div img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+.servicies figure > div figcaption {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.faqs {
+  background-image: url(../img/bg-faqs.png);
+  background-repeat: no-repeat;
+  background-position: bottom right;
+}
+.faqs .accordion {
+  background-color: transparent !important;
+}
+.faqs .accordion .accordion-item {
+  background-color: transparent !important;
+  margin-bottom: 8px;
+}
+.faqs .accordion h2 button.accordion-button {
+  background-color: transparent !important;
+}
+.faqs .accordion p {
+  font-family: "halenoirtext-regularregular";
+  color: #111111;
+  font-size: 0.9em;
+}
+
+footer a {
+  color: rgb(245, 241, 241);
+  font-size: 0.9em;
+  text-decoration: none;
+}
+
+@media (width < 768px) {
+  .container-fluid {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .top-header .overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  .top-header .menu .navbar-nav {
+    flex-direction: column !important;
+    background-color: rgba(0, 0, 0, 0.8);
+    text-align: center !important;
+  }
+  .top-header .menu .navbar-nav li a {
+    text-align: center;
+    border-bottom: solid 1px white;
+  }
+  .top-header .menu .navbar-nav li a.no-border {
+    border-bottom: solid 1px transparent !important;
+  }
+  .steps img {
+    width: 100%;
+  }
+  .servicies .text-heading,
+  .faqs .text-heading {
+    width: auto;
+  }
+}
+
+/*# sourceMappingURL=main.css.map */
