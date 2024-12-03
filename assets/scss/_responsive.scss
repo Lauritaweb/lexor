@@ -34,6 +34,7 @@
     }
     // nav
     .menu{
+        height: 10vh;
         .navbar-nav{
             flex-direction: column!important;
             background-color: rgba(0,0, 0, 1);
@@ -66,7 +67,9 @@
     }
     // main search
     .main-search{
-        height: 70vh;
+        height:60vh;
+        justify-content: flex-start!important;
+        padding-top: 50px;
         .btn-key{
             min-width:100%;
         }

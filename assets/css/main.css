@@ -352,6 +352,9 @@ footer a:hover {
   .top-header .menu .navbar-nav li a.no-border, .top-header-alpha .menu .navbar-nav li a.no-border {
     border-bottom: solid 1px transparent !important;
   }
+  .menu {
+    height: 10vh;
+  }
   .menu .navbar-nav {
     flex-direction: column !important;
     background-color: rgb(0, 0, 0);
@@ -374,7 +377,9 @@ footer a:hover {
     width: auto;
   }
   .main-search {
-    height: 70vh;
+    height: 60vh;
+    justify-content: flex-start !important;
+    padding-top: 50px;
   }
   .main-search .btn-key {
     min-width: 100%;
