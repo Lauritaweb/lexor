@@ -61,6 +61,11 @@ h3{
     background-image: url(../img/trama.svg);
     background-repeat: repeat;
 }
+.bg-alpha{
+    background-image: url(../img/header_alpha.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 // text
 .text-key{
     color: $keyColor;
@@ -95,9 +100,48 @@ h3{
         color: $mainColor;
     }
 }
+.btn-key{
+    @extend .btn-main;
+    background-color: $keyColor;
+    color: $mainColor;
+    &:hover{
+        border: solid 1px $keyColor;
+        background-color: transparent;
+        color: $keyColor;
+    }
+}
 .btn-key-outline{
     @extend .btn-main;
     background-color: transparent;
     color: $keyColor;
-    border:solid 1px $keyColor
+    border:solid 1px $keyColor;
+    &:hover{
+        color:$white;
+        border: solid $white 1px;
+    }
+}
+.btn-search{
+    border: solid 1px $keyColor;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    color: $keyColor;
+    border-radius: 6px;
+    height: 36px;
+    width: 36px;
+    &:hover{
+        border: solid $white 1px;
+    }
+    svg{
+        width:15px;
+        fill: $keyColor;
+        &:hover{
+            fill: $white;
+        }
+    }
+}
+// height
+.hv-80{
+    height: 83vh;
 }
