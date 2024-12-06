@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Portal Asesor | Portal Respaldar Argentina</title>
+  <!-- Favicons -->
+  <link href="../assets/img/favicon.svg" rel="icon">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Signika:wght@300..700&display=swap" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="../assets/vendor/simple-datatables/style.css" rel="stylesheet">
+  <!-- Main CSS File -->
+  <link href="../assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
+      <div class="d-flex align-items-center justify-content-between">
+        <a href="./index-asesor.html" class="logo d-flex align-items-center">
+          <img src="../assets/img/logo.svg" alt="">
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+      </div><!-- End Logo -->
+      <nav  class="header-nav ms-auto">  
+        <ul>
+          <li class="nav-item dropdown pe-3">
+            <!-- users avatar -->
+            <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+              <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+              <span class="d-none d-md-block dropdown-toggle ps-2">Laura</span>
+            </a><!-- End Profile Iamge Icon -->
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+              <li class="dropdown-header">
+                <h6>Maria Laura</h6>
+                <span>Avalle</span>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class="dropdown-item d-flex align-items-center" href="https://www.lexorabogados.com.ar/l">
+                  <i class="bi bi-box-arrow-right"></i>
+                  <span>Cerrar sesión</span>
+                </a>
+              </li>
+            </ul><!-- End Profile Dropdown Items -->
+          </li><!-- End Profile Nav -->
+        </ul>
+      </nav><!-- End Icons Navigation -->
+    </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+    <ul class="sidebar-nav" id="sidebar-nav">
+      <li>
+        <a href="./index-asesor.html" class="text-success fw-bold">
+          <i class="bi bi-grid"></i>
+          <span>Portal Asesor Respaldar</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="./users-profiles.html">
+          <i class="bi bi-person"></i>
+          <span>Gestión de afiliados</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="./dashboard-appointments.html">
+          <i class="bi bi-calendar2-check"></i>
+          <span>Gestión de citas</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="https://www.lexorabogados.com.ar/">
+          <i class="bi bi-box-arrow-in-right"></i>
+          <span>Cerrar sesión</span>
+        </a>
+      </li>
+
+    </ul>
+  </aside><!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Datos del afiliado</h1>
+      <nav>
+        <ol class="breadcrumb mt-4">
+          <li class="breadcrumb-item"><a href="./index-asesor.html">Home</a></li>
+          <li class="breadcrumb-item active">Datos del afiliado</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section profile">
+      <div class="row">
+        
+        <div class="col-xl-9">
+
+          <div class="card">
+            <div class="card-body pt-3">
+              <!-- Bordered Tabs -->
+              <ul class="nav nav-tabs nav-tabs-bordered">
+
+                <li class="nav-item">
+                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Datos personales</button>
+                </li>
+
+                <li class="nav-item">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Editar datos personales</button>
+                </li>
+
+                <li class="nav-item">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Cambiar contraseña</button>
+                </li>
+                
+                <li class="nav-item">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Estado de cuenta</button>
+                </li>
+
+              </ul>
+              <div class="tab-content pt-2">
+
+                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                  <h5 class="card-title">Sobre mi</h5>
+                  <p class="small fst-italic">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</p>
+
+                  <h5 class="card-title">Datos personales</h5>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">Nombre</div>
+                    <div class="col-lg-9 col-md-8">Maria Laura</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">Apellido</div>
+                    <div class="col-lg-9 col-md-8">Avalle</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">DNI</div>
+                    <div class="col-lg-9 col-md-8">2487569</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Cargo</div>
+                    <div class="col-lg-9 col-md-8">Policia</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Fuerza</div>
+                    <div class="col-lg-9 col-md-8">Policia de la provincia de Bs As</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Provincia</div>
+                    <div class="col-lg-9 col-md-8">Buenos Aires</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Dirección</div>
+                    <div class="col-lg-9 col-md-8">Presidente Perón 123, Quilmes. Buenos Aires</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Teléfono</div>
+                    <div class="col-lg-9 col-md-8">1115798423</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Email</div>
+                    <div class="col-lg-9 col-md-8">hola@example.com</div>
+                  </div>
+
+                  <h5 class="card-title">Datos bancarios</h5>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Nombre del titular de la cuenta</div>
+                    <div class="col-lg-9 col-md-8">Maria Laura Avalle</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Número de cuenta bancaria (CBU/CVU)</div>
+                    <div class="col-lg-9 col-md-8">0000000000000000000</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Nombre del banco</div>
+                    <div class="col-lg-9 col-md-8">Banco Galicia</div>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Tipo de cuenta</div>
+                    <div class="col-lg-9 col-md-8">Cuenta corriente en pesos </div>
+                  </div>
+
+                </div>
+
+                <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+
+                  <!-- Profile Edit Form -->
+                  <form>
+                    <div class="row mb-3">
+                      <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Foto de perfil</label>
+                      <div class="col-md-8 col-lg-9">
+                        <img src="../assets/img/profile-img.jpg" alt="Profile">
+                        <div class="pt-2">
+                          <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
+                          <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Nombre
+                        <span class="text-danger">*</span>
+                      </label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="fullName" type="text" class="form-control" id="fullName" value="Maria Laura">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Apellido
+                        <span class="text-danger">*</span>
+                      </label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="fullName" type="text" class="form-control" id="fullName" value="Avalle">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Tipo de documento
+                        <span class="text-danger">*</span>
+                      </label>
+                      <div class="col-md-8 col-lg-9">
+                        <select id="account-type" name="account-type" class="form-select">
+                          <option value="current">DNI</option>
+                          <option value="savings">DU</option>
+                          <option value="savings">Libreta cívica</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Número
+                        <span class="text-danger">*</span>
+                      </label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="fullName" type="text" class="form-control" id="fullName" value="2458796">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="about" class="col-md-4 col-lg-3 col-form-label">Sobre mi</label>
+                      <div class="col-md-8 col-lg-9">
+                        <textarea name="about" class="form-control" id="about" style="height: 100px">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</textarea>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="Poisition" class="col-md-4 col-lg-3 col-form-label">Cargo
+                        <span class="text-danger">*</span>
+                      </label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="position" type="text" class="form-control" id="Position" value="Policia">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="Force" class="col-md-4 col-lg-3 col-form-label">Fuerza
+                        <span class="text-danger">*</span>
+                      </label>
+                      <div class="col-md-8 col-lg-9">
+                        <!-- <input name="force" type="text" class="form-control" id="Force" value="Policia de Buenos Aires"> -->
+                        <select id="account-type" name="account-type" class="form-select">
+                          <option value="">Policia de la provincia de Buenos Aires</option>
+                          <option value="">Policia Federal</option>
+                          <option value="">Gendarmeria</option>
+                          <option value="">Ejercito Nacional</option>
+                          <option value="">Prefectura</option>
+                          <option value="">Otra ...</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="Province" class="col-md-4 col-lg-3 col-form-label">Provincia
+                        <span class="text-danger">*</span>
+                      </label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="Province" type="text" class="form-control" id="Province" value="Buenos Aires">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="Address" class="col-md-4 col-lg-3 col-form-label">Dirección
+                        <span class="text-danger">*</span>
+                      </label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="address" type="text" class="form-control" id="Address" value="Presidente Perón 123, Quilmes. Buenos Aires">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Teléfono
+                        <span class="text-danger">*</span>
+                      </label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="phone" type="text" class="form-control" id="Phone" value="1115798423">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email
+                        <span class="text-danger">*</span>
+                      </label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="email" type="email" class="form-control" id="Email" value="hola@example.com">
+                      </div>
+                    </div>
+
+                  <h5 class="card-title">Datos bancarios</h5>
+
+                  <div class="row mb-3">
+                    <label class="col-md-4 col-lg-3 col-form-label">Nombre del titular de la cuenta
+                      <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="" type="text" class="form-control" id="" value="Maria Laura Avalle">
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label class="col-md-4 col-lg-3 col-form-label">Número de cuenta bancaria (CBU/CVU)
+                      <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="" type="text" class="form-control" id="" value="0000000000000000000">
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label class="col-md-4 col-lg-3 col-form-label">Nombre del banco
+                      <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="" type="text" class="form-control" id="" value="Banco Galicia">
+                    </div>
+                  </div>
+
+
+                  <div class="row mb-3">
+                    <label class="col-md-4 col-lg-3 col-form-label">Tipo de cuenta
+                      <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-md-8 col-lg-9">
+                      <select id="account-type" name="account-type" class="form-select">
+                        <option value="current">Cuenta corriente</option>
+                        <option value="savings">Caja de ahorros</option>
+                      </select>
+                    </div>
+                  </div>
+
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                    </div>
+                  </form><!-- End Profile Edit Form -->
+
+                </div>
+
+                <div class="tab-pane fade pt-3" id="profile-settings">
+
+                  <table class="table table-borderless datatable">
+                    <thead>
+                      <tr>
+                        <th scope="col">Comprobante</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Concepto</th>
+                        <th scope="col">Importe</th>
+                        <th scope="col">Estado</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">#2457</th>
+                        <td>10/05/24</td>
+                        <td>FACTURA</td>
+                        <td>$18.000</td>
+                        <td><span class="badge bg-success">Abonado</span></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">#2457</th>
+                        <td>20/03/24</td>
+                        <td>FACTURA</td>
+                        <td>$17.000</td>
+                        <td><span class="badge bg-warning">Pendiente</span></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">#2457</th>
+                        <td>10/02/24</td>
+                        <td>FACTURA</td>
+                        <td>$16.000</td>
+                        <td><span class="badge bg-success">Abonado</span></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">#2457</th>
+                        <td>20/05/24</td>
+                        <td>FACTURA</td>
+                        <td>$15.000</td>
+                        <td><span class="badge bg-danger">Rechazado</span></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">#2457</th>
+                        <td>20/05/24</td>
+                        <td>FACTURA</td>
+                        <td>$14.000</td>
+                        <td><span class="badge bg-success">Abonado</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  
+                </div>
+
+                <div class="tab-pane fade pt-3" id="profile-change-password">
+                  <!-- Change Password Form -->
+                  <form>
+
+                    <div class="row mb-3">
+                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Contraseña actual</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="password" type="password" class="form-control" id="currentPassword">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Nueva contraseña</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="newpassword" type="password" class="form-control" id="newPassword">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Repetir nueva contraseña</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="renewpassword" type="password" class="form-control" id="renewPassword">
+                      </div>
+                    </div>
+
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-primary">Cambiar contraseña</button>
+                    </div>
+                  </form><!-- End Change Password Form -->
+
+                </div>
+
+              </div><!-- End Bordered Tabs -->
+
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-xl-3">
+
+          <div class="card">
+            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+              <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+              <h2>Maria Laura</h2>
+              <h3>Avalle</h3>
+            </div>
+          </div>
+
+        </div><!-- ends col-xl-3 -->
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+ <!-- ======= Footer ======= -->
+ <footer id="footer" class="footer">
+  <div class="copyright">
+    &copy; Copyright <strong><span>Lexor</span></strong>. Todos los derechos reservados
+  </div>
+  <div class="credits">
+    Diseñado <a href="https://twc.com.ar/">The Wireframes company</a>
+  </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/vendor/chart.js/chart.umd.js"></script>
+<script src="../assets/vendor/echarts/echarts.min.js"></script>
+<script src="../assets/vendor/quill/quill.js"></script>
+<script src="../assets/vendor/simple-datatables/simple-datatables.js"></script>
+<script src="../assets/vendor/tinymce/tinymce.min.js"></script>
+<script src="../assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Main JS File -->
+<script src="../assets/js/main.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+Portal de búsqueda legal: Un buscador que permite a los usuarios encontrar abogados por especialidad y zona.
+Sistema de gestión para abogados: Incluyendo gestión de citas, perfiles y horarios.
+Chatbot interactivo: Un asistente virtual que guía a los usuarios mediante un cuestionario para encontrar el abogado adecuado.
+
+
+
+Búsqueda y filtro de abogados:
+    Sistema de búsqueda que permita a los usuarios encontrar abogados por especialidad (ej. derecho laboral, derecho familiar, derecho penal, etc.) y ubicación geográfica (ciudad o barrio).
+    Filtros adicionales para facilitar la selección de abogados según disponibilidad horaria o tipo de consulta (online o presencial).
+Perfiles básicos de abogados:
+    Cada abogado tendrá un perfil básico que incluirá:
+        Nombre, especialización y años de experiencia.
+        Información de contacto (correo electrónico o teléfono) y zona de atención.
+        Breve biografía y educación.
+        Disponibilidad de horarios para consultas.
+    Los perfiles no incluirán aún reseñas de clientes.
+Sistema de gestión para abogados:
+    Los abogados podrán gestionar su perfil y disponibilidad de horarios.
+    Herramienta de agendamiento de citas para que los usuarios reserven consultas online o presenciales.
+    Confirmación automática de citas con notificaciones por correo electrónico para ambas partes (usuario y abogado).
+
+
+
+
+ABM Bogas
+    Especializacion
+    Ubicacion geografica
+    ABM Horarios
+
+Calendario con citas
