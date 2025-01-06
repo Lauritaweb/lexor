@@ -1,0 +1,213 @@
+// Marquee
+.top-marquee{
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    p{
+        padding-bottom: 0!important;
+        margin-bottom: 0!important;
+        font-size: .9em;
+    }
+}
+// header
+.top-header{
+    height: 90vh;
+    background-image: url(../img/header.png);
+    background-size: cover;
+    background-position: center top;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    .overlay{
+        background-color: rgba(0,0, 0, 0);
+        position: relative;
+        z-index: 3;
+        height: 100%;
+    }
+}
+.menu{
+    svg{
+        fill: $white;
+        width: 30px;
+    }
+    .navbar-toggler{
+        border: none!important;
+    }
+    .navbar-nav{
+        background-color: $darkColor;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        justify-content: space-between;
+        padding: 0 30px;
+        li{
+            a{
+                color: $white!important;
+            }
+        }
+    }
+}
+.top-header-alpha{
+    @extend .top-header;
+    background-image: url(../img/header_alpha.png);
+}
+// banner 1
+.banner-1{
+    .row{
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+// servicies
+.servicies{
+    figure > div{
+        background-color: $white;
+        border-radius: 12px;
+        border: solid $keyColor 3px;
+        height: 120px;
+        img{
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            border-top-left-radius: 12px;
+            border-bottom-left-radius: 12px;
+        }
+        figcaption{
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
+// faqs
+.faqs{
+    background-image: url(../img/bg-faqs.png);
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    .accordion{
+        background-color: transparent!important;
+        .accordion-item{
+            background-color: transparent!important;
+            margin-bottom: 8px;
+        }
+        h2 button.accordion-button{
+            background-color: transparent!important;
+        }
+        p{
+            font-family: $mainFont;
+            color: $darkColor;
+            font-size: .9em;
+        }
+    }
+}
+footer{
+    a{
+        color: $white;
+        font-size: .9em;
+        text-decoration: none;
+        &:hover{
+            color: $keyColor;
+        }
+    }
+}
+// section buscar
+.main-search{
+    height: 80vh;
+}
+// .top-header-alpha{
+//     height: 94vh;
+//     .main-search{
+//         position: absolute;
+//         top: 50%;
+//         left: 50%;
+//         transform: translate(-50%, -50%);
+//         z-index: 20;
+//     }
+// }
+// secondary search
+// .secondary-search{
+//     position: relative;
+//     top: -80vh;
+//     z-index: 800;
+// }
+
+// results
+.results{
+    border-radius: 12px;
+    figure.card{
+        background-color: transparent;
+        border-radius: 12px;
+        .card-img-top{
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            display: block;
+            margin: auto;
+            border: solid 2px $keyColor;
+            transform: translateY(30px);
+        }
+        .card-body{
+            border: solid 1px $keyColor;
+            background-color: $mainColor;
+            border-radius: 12px;
+            padding: 30px 10px 10px;
+            color: $white;
+            ul{
+                list-style-type: none;
+                padding-left: 0;
+            }
+        }
+        figcaption.card-title{
+            font-weight: 700;
+        }
+        .btn-key{
+            min-width: 100%;
+            max-width: 100%;
+            width: 100%!important;
+        }
+    }
+}
+// Details
+.details{
+    display: flex;
+    align-items: center;
+    ul{
+        list-style-type: none;
+        li{
+            margin-right: 10px;
+            width: 33%;
+            height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        img{
+            width: 20px;
+            height: 20px;
+            border: none!important;
+            display: block;
+            border-radius: 0;
+        }
+    }
+    img{
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: solid $keyColor 2px;
+    }
+}
+// burbuja Lexi
+.lexi{
+    position: fixed;
+    bottom: 30px;
+    right: 10px;
+    z-index: 1000;
+    img{
+        height: 130px;
+    }
+}

@@ -1,0 +1,104 @@
+// 768px
+@media (width < 768px){
+    .container-fluid{
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    // header
+    .top-header{
+        .overlay{
+            background-color: rgba(0,0, 0, .5);
+        }
+        .main-search{
+            z-index: 4;
+        }
+    // nav
+    .menu{
+        .navbar-nav{
+            flex-direction: column!important;
+            background-color: rgba(0,0, 0, 1);
+            text-align: center!important;
+            position: relative;
+            z-index: 6!important;
+            li{
+                a{
+                    text-align: center;
+                    border-bottom: solid 1px white;
+                    &.no-border{
+                        border-bottom: solid 1px transparent!important;
+                    }
+                }
+            }
+        }
+    }
+    }
+    // nav
+    .menu{
+        height: 10vh;
+        .navbar-nav{
+            flex-direction: column!important;
+            background-color: rgba(0,0, 0, 1);
+            text-align: center!important;
+            position: relative;
+            z-index: 5!important;
+            li{
+                a{
+                    text-align: center;
+                    border-bottom: solid 1px white;
+                    &.no-border{
+                        border-bottom: solid 1px transparent!important;
+                    }
+                }
+            }
+        }
+    }
+    // steps
+    .steps{
+        img{
+            width: 100%;
+        }
+    }
+    // servicies
+    .servicies,
+    .faqs{
+        .text-heading{
+            width: auto;
+        }
+    }
+    // main search
+    .main-search{
+        height:60vh;
+        justify-content: flex-start!important;
+        padding-top: 50px;
+        .btn-key{
+            min-width:100%;
+        }
+    }
+    // results
+    .results-page{
+        width: 94%;
+        button.btn-search.btn-results,
+        .btn-key-outline{
+            width: 100%;
+            min-width: 100%;
+        }
+    }
+    // details
+    .details{
+        align-items: flex-start;
+        ul{
+            flex-direction: column;
+            li{
+                width: 100%;
+                height: auto;
+                margin-top: 4px;
+                flex-direction: row;
+                justify-content: flex-start;
+                img{
+                    margin-right: 4px;
+                }
+            }
+        }
+    }
+   
+}

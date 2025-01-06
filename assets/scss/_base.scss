@@ -1,0 +1,147 @@
+// vars color
+$mainColor:#033333;
+$secondaryColor:#424242;
+$darkColor:#111111;
+$keyColor:#FFE600;
+$white:rgb(245, 241, 241);
+$light:#dbdbe3;
+
+// fonts
+// Baskerville
+@import url('https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&display=swap');
+// Halenoir
+@font-face {
+    font-family: 'halenoirtext-regularregular';
+    src: url('../fonts/halenoirtext-regular.woff2') format('woff2'),
+         url('../fonts/halenoirtext-regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+$mainFont:'halenoirtext-regularregular';
+$secondaryFont:"Baskervville", serif;
+// base text
+p,
+a{
+    font-family: $mainFont;
+}
+h1,
+h2,
+h3{
+    font-family:$secondaryFont; 
+}
+
+// Utilities
+
+// fonts
+.main-font{
+    font-family: $mainFont;
+}
+.secondary-font{
+    font-family: $secondaryFont;
+}
+// backgrounds
+.bg-main{
+    background-color: $mainColor;
+}
+.bg-dark{
+    background-color: $darkColor!important;
+}
+.bg-key{
+    background-color: $keyColor;
+    background-image: url(../img/trama.svg);
+    background-repeat: repeat-x;
+}
+.bg-light{
+    background-color: $light!important;
+}
+.bg-degrade{
+    background: linear-gradient(to top, $mainColor,$keyColor);
+}
+.bg-pattern{
+    background-image: url(../img/trama.svg);
+    background-repeat: repeat;
+}
+.bg-alpha{
+    background-image: url(../img/header_alpha.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+// text
+.text-key{
+    color: $keyColor;
+}
+.text-dark{
+    color: $darkColor!important;
+}
+.text-heading{
+    border-bottom: 1px $darkColor solid;
+    width: 30%;
+}
+// containers
+.container-fluid{
+    padding-right:50px;
+    padding-left: 50px;
+}
+// btns
+.btn-main{
+    background-color: $mainColor;
+    color: $white;
+    border-radius: 12px;
+    padding: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 300px;
+    max-width: 320px;
+    text-decoration: none;
+    &:hover{
+        background-color: transparent;
+        border: solid 1px $mainColor;
+        color: $mainColor;
+    }
+}
+.btn-key{
+    @extend .btn-main;
+    background-color: $keyColor;
+    color: $mainColor;
+    &:hover{
+        border: solid 1px $keyColor;
+        background-color: transparent;
+        color: $keyColor;
+    }
+}
+.btn-key-outline{
+    @extend .btn-main;
+    background-color: transparent;
+    color: $keyColor;
+    border:solid 1px $keyColor;
+    &:hover{
+        color:$white;
+        border: solid $white 1px;
+    }
+}
+.btn-search{
+    border: solid 1px $keyColor;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    color: $keyColor;
+    border-radius: 6px;
+    height: 36px;
+    width: 36px;
+    &:hover{
+        border: solid $white 1px;
+    }
+    svg{
+        width:15px;
+        fill: $keyColor;
+        &:hover{
+            fill: $white;
+        }
+    }
+}
+// height
+.hv-80{
+    height: 83vh;
+}
