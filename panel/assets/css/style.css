@@ -281,7 +281,7 @@ h6 {
   font-size: 20px;
 }
 
-/* Close Button */
+/* Buttons */
 .btn-close {
   background-size: 25%;
 }
@@ -289,6 +289,11 @@ h6 {
 .btn-close:focus {
   outline: 0;
   box-shadow: none;
+}
+
+.btn-success {
+  background-color: #033333;
+  border: solid 1px #033333;
 }
 
 .btn-primary,
@@ -389,6 +394,22 @@ h6 {
 
 .text-key {
   color: #FFE600 !important;
+}
+
+.login .card-body {
+  border: solid 1px #FFE600;
+}
+.login .card-body .card-title {
+  color: #FFE600;
+}
+
+table.table.table-borderless {
+  background-color: transparent !important;
+  --bs-table-bg:transparent!important;
+}
+
+.table#dataTable th {
+  color: rgb(245, 241, 241) !important;
 }
 
 /*--------------------------------------------------------------
@@ -889,6 +910,10 @@ h6 {
 .dashboard button.btn-danger.btn-sm:hover,
 .dashboard button.btn-primary.btn-sm:hover {
   background-color: #111111 !important;
+}
+.dashboard .activity .activity-item .activity-badge {
+  border: transparent 1px solid;
+  display: none;
 }
 
 /* Activity */

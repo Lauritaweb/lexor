@@ -91,6 +91,10 @@
         background-color: $black!important;
       }
     }
+    .activity .activity-item .activity-badge{
+      border:transparent 1px solid;
+      display: none;
+    }
   }
   /* Activity */
   .dashboard .activity {

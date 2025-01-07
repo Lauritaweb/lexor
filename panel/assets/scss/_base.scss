@@ -39,24 +39,22 @@ $secondaryFont:"Baskervville", serif;
 .text-main{
   color: $mainColor;
 }
-
-  
+// body
 body {
   font-family: $mainFont;
   background:$black;
   color:$keyColor;
 }
-  
+// links
 a {
   color: $white;
   text-decoration: none;
 }
-  
 a:hover {
   color: $keyColor;
   text-decoration: none;
 }
-  
+// headings
 h1,
 h2,
 h3,
@@ -301,109 +299,118 @@ h6 {
     font-size: 20px;
   }
   
-  /* Close Button */
-  .btn-close {
-    background-size: 25%;
+/* Buttons */
+.btn-close {
+  background-size: 25%;
+}
+.btn-close:focus {
+  outline: 0;
+  box-shadow: none;
+}
+.btn-success{
+  background-color: $mainColor;
+  border: solid 1px $mainColor;
+}
+.btn-primary,
+.btn-submit{
+  background-color: $keyColor!important;
+  color:$black!important;
+  border: none;
+  &:hover{
+    background-color: $mainColor!important;
+    color:$keyColor!important;
   }
-  
-  .btn-close:focus {
-    outline: 0;
-    box-shadow: none;
-  }
-  .btn-primary,
-  .btn-submit{
-    background-color: $keyColor!important;
-    color:$black!important;
-    border: none;
-    &:hover{
-      background-color: $mainColor!important;
-      color:$keyColor!important;
-    }
-  }
-  /* Accordion */
-  .accordion-item {
-    border: 1px solid #ebeef4;
-  }
-  
-  .accordion-button:focus {
-    outline: 0;
-    box-shadow: none;
-  }
-  
-  .accordion-button:not(.collapsed) {
-    color: #012970;
-    background-color: #f6f9ff;
-  }
-  
-  .accordion-flush .accordion-button {
-    padding: 15px 0;
-    background: none;
-    border: 0;
-  }
-  
-  .accordion-flush .accordion-button:not(.collapsed) {
-    box-shadow: none;
-    color: #4154f1;
-  }
-  
-  .accordion-flush .accordion-body {
-    padding: 0 0 15px 0;
-    color: #3e4f6f;
-    font-size: 15px;
-  }
-  
-  /* Breadcrumbs */
-  .breadcrumb {
-    font-size: 14px;
-    font-family: "Nunito", sans-serif;
-    color:$white;
-    font-weight: 600;
-  }
-  
-  .breadcrumb a {
-    color:$white;
-    transition: 0.3s;
-  }
-  
-  .breadcrumb a:hover {
-    color:$keyColor;
-  }
-  
-  .breadcrumb .breadcrumb-item::before {
-    color:$white;
-  }
-  
-  .breadcrumb .active {
-    color:$white;
-    font-weight: 700;
-  }
-  
-  /* Bordered Tabs */
-  .nav-tabs-bordered {
-    border-bottom: 2px solid #ebeef4;
-  }
-  
-  .nav-tabs-bordered .nav-link {
-    margin-bottom: -2px;
-    border: none;
-    color:$white;
-  }
-  
-  .nav-tabs-bordered .nav-link:hover,
-  .nav-tabs-bordered .nav-link:focus {
-    color: $keyColor;
-  }
-  
-  .nav-tabs-bordered .nav-link.active {
-    background-color:$keyColor;
-    color: $black;
-    border-bottom: 2px solid $mainColor;
-  }
+}
+/* Accordion */
+.accordion-item {
+  border: 1px solid #ebeef4;
+}
+.accordion-button:focus {
+  outline: 0;
+  box-shadow: none;
+}
+.accordion-button:not(.collapsed) {
+  color: #012970;
+  background-color: #f6f9ff;
+}
+.accordion-flush .accordion-button {
+  padding: 15px 0;
+  background: none;
+  border: 0;
+}
+.accordion-flush .accordion-button:not(.collapsed) {
+  box-shadow: none;
+  color: #4154f1;
+}
+.accordion-flush .accordion-body {
+  padding: 0 0 15px 0;
+  color: #3e4f6f;
+  font-size: 15px;
+}
+
+/* Breadcrumbs */
+.breadcrumb {
+  font-size: 14px;
+  font-family: "Nunito", sans-serif;
+  color:$white;
+  font-weight: 600;
+}
+.breadcrumb a {
+  color:$white;
+  transition: 0.3s;
+}
+.breadcrumb a:hover {
+  color:$keyColor;
+}
+.breadcrumb .breadcrumb-item::before {
+  color:$white;
+}
+.breadcrumb .active {
+  color:$white;
+  font-weight: 700;
+}
+/* Bordered Tabs */
+.nav-tabs-bordered {
+  border-bottom: 2px solid #ebeef4;
+}
+.nav-tabs-bordered .nav-link {
+  margin-bottom: -2px;
+  border: none;
+  color:$white;
+}
+.nav-tabs-bordered .nav-link:hover,
+.nav-tabs-bordered .nav-link:focus {
+  color: $keyColor;
+}
+.nav-tabs-bordered .nav-link.active {
+  background-color:$keyColor;
+  color: $black;
+  border-bottom: 2px solid $mainColor;
+}
 // borders
 .border-key{
-  border: solid 1px $keyColor;
+border: solid 1px $keyColor;
 }
 // texts
 .text-key{
-  color: $keyColor!important;
+color: $keyColor!important;
+}
+// login
+.login{
+  .card-body{
+    border: solid 1px $keyColor;
+    .card-title{
+      color: $keyColor;
+    }
+  }
+}
+// table
+table.table.table-borderless{
+  background-color: transparent!important;
+  --bs-table-bg:transparent!important;
+}
+.table#dataTable{
+  th{
+    color: $white!important;
+  }
 }

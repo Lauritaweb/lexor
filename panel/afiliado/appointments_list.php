@@ -51,7 +51,7 @@ if ($appointment != null) {
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Gestionar citas | Portal Respaldar Argentina</title>
+  <title>Gestionar citas | Lexor</title>
   <!-- Favicons -->
   <link href="../assets/img/favicon.svg" rel="icon">
   <!-- Google Fonts -->
@@ -101,26 +101,26 @@ if ($appointment != null) {
     
         <table id="dataTable" class="table table-borderless pt-4 mt-4">
             <thead>
-                <tr>
-                <th scope="col">Nombre y Apellido</th>
-                
-                <th scope="col">Urgencia</th>
-                <th scope="col">Estado</th>
-                <th scope="col">Fecha y hora</th>
-                <th scope="col">Acciones</th>
+                <tr class="text-key">
+                    <th scope="col">Nombre y Apellido</th>
+                    
+                    <th scope="col">Urgencia</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Fecha y hora</th>
+                    <th scope="col">Acciones</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="text-white">
                 <?php 
                 
                 foreach($allNextAppointment as $appointment) { 
                 
                     extract($appointment);?>
                 <tr>
-                    <td><?= htmlspecialchars($appointment['name_lastname']) ?></td>
-                    <td><?= htmlspecialchars($appointment['urgency']) ?></td>
-                    <td><?= htmlspecialchars($appointment['status']) ?></td>
-                    <td><?= htmlspecialchars($appointment['date'] . ' ' . $appointment['time']) ?></td>
+                    <td class="text-white"><?= htmlspecialchars($appointment['name_lastname']) ?></td>
+                    <td class="text-white"><?= htmlspecialchars($appointment['urgency']) ?></td>
+                    <td class="text-white"><?= htmlspecialchars($appointment['status']) ?></td>
+                    <td class="text-white"><?= htmlspecialchars($appointment['date'] . ' ' . $appointment['time']) ?></td>
                     <td>          
                     <button type="button" class="btn btn-primary btn-sm btn-edit" data-val="<?= $appointment['id'] ?>" onclick="window.location.href='appointments.php?id_appointment=<?= $appointment['id'] ?>'" ><i class="bi bi-pencil"></i></button>
                     <button type="button" class="btn btn-danger btn-sm btn-delete" data-bs-toggle="modal" data-bs-target="#verticalycentered" data-val="<?= $appointment['id'] ?>"><i class="bi bi-trash"></i></button>
