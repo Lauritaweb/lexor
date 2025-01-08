@@ -112,10 +112,10 @@ if ($appointment != null) {
             </thead>
             <tbody class="text-white">
                 <?php 
+                if ($allNextAppointment != null){        
+                    foreach($allNextAppointment as $appointment) { 
                 
-                foreach($allNextAppointment as $appointment) { 
-                
-                    extract($appointment);?>
+                        extract($appointment);?>
                 <tr>
                     <td class="text-white"><?= htmlspecialchars($appointment['name_lastname']) ?></td>
                     <td class="text-white"><?= htmlspecialchars($appointment['urgency']) ?></td>
@@ -126,7 +126,10 @@ if ($appointment != null) {
                     <button type="button" class="btn btn-danger btn-sm btn-delete" data-bs-toggle="modal" data-bs-target="#verticalycentered" data-val="<?= $appointment['id'] ?>"><i class="bi bi-trash"></i></button>
                     </td>
                 </tr>
-                <?php } ?>
+                <?php 
+                    } 
+                }
+                ?>
             </tbody>
         </table>
 

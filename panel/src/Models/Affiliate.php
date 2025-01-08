@@ -109,14 +109,14 @@ function revisa_login(){
     public function createFull(
         $id_document_type, $id_specialization, $id_province,
         $name, $last_name, $document_number, $about_me, $position,
-        $email, $phone, $address, $gender, $begin_year, $id_consultation_type
+        $email, $phone, $address, $gender, $begin_year, $id_consultation_type,  $urlImageFile
     ) {        
 
         $query = "INSERT INTO affiliates (
             id_document_type, id_specialization, id_province, 
             name, last_name, document_number, about_me, position,
-            email, phone, address, gender, begin_year, id_consultation_type
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            email, phone, address, gender, begin_year, id_consultation_type, url_file_image
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         $stmt = $this->db->prepare($query);
         
@@ -124,10 +124,10 @@ function revisa_login(){
             die('Prepare failed: ' . $this->db->error);              
      
         $stmt->bind_param(
-            "iiisssssssssii",
+            "iiisssssssssiiS",
             $id_document_type, $id_specialization, $id_province,
             $name, $last_name, $document_number, $about_me, $position,
-            $email, $phone, $address, $gender, $begin_year, $id_consultation_type
+            $email, $phone, $address, $gender, $begin_year, $id_consultation_type, $urlImageFile
         );        
 
         if ($result = $stmt->execute()) {
@@ -176,8 +176,6 @@ function revisa_login(){
             $end_time = null;
         }   
             
-                        
-        
         $stmt->bind_param(
             "isssi",
             $id_affiliate, 
@@ -185,7 +183,7 @@ function revisa_login(){
             $start_time,
             $end_time, 
             $is_closed
-        );        
+        );       
 
         if ($stmt->execute()) {
             $stmt->close();
@@ -194,7 +192,17 @@ function revisa_login(){
             $stmt->close();
             return false;
         }       
-    }  
+    }
+    
+    function deleteScheduleDate($id_affiliate){
+        $query = "DELETE FROM affliate_schedule WHERE id_affiliate = $id_affiliate";
+    
+        $stmt = $this->db->prepare($query);
+        if ($stmt === false) 
+            die('Prepare failed: ' . $db->error);        
+        
+        $stmt->execute();
+    }
 
     function getScheduleData($id_affiliate) {
         // Consulta para obtener los horarios de cada día de la semana
@@ -251,12 +259,14 @@ function revisa_login(){
     public function update(
         $id, $id_document_type, $id_force, $id_province,
         $name, $last_name, $document_number, $about_me, 
-        $email, $phone, $address, $gender, $begin_year, $id_consultation_type
+        $email, $phone, $address, $gender, $begin_year, $id_consultation_type,
+        $urlImageFile
     ) {        
         $updateAffiliate = $this->updateAffiliate(
             $id, $id_document_type, $id_force, $id_province,
             $name, $last_name, $document_number, $about_me, 
-            $email, $phone, $address, $gender, $begin_year, $id_consultation_type
+            $email, $phone, $address, $gender, $begin_year, $id_consultation_type,
+            $urlImageFile
         );
 
         return $updateAffiliate;
@@ -266,13 +276,14 @@ function revisa_login(){
     public function updateAffiliate(
         $id, $id_document_type, $id_specialization, $id_province,
         $name, $last_name, $document_number, $about_me, 
-        $email, $phone, $address, $gender, $begin_year, $id_consultation_type
+        $email, $phone, $address, $gender, $begin_year, $id_consultation_type,
+        $urlImageFile
     ) {
         $query = "UPDATE affiliates SET 
             id_document_type = ?, id_specialization = ?, id_province = ?, 
             name = ?, last_name = ?, document_number = ?, about_me = ?, 
             email = ?, phone = ?, address = ?, gender = ?, begin_year = ?,
-            id_consultation_type = ?
+            id_consultation_type = ?, url_file_image = ?
             WHERE id = ?";
     
         $stmt = $this->db->prepare($query);
@@ -282,11 +293,12 @@ function revisa_login(){
         }
     
         $stmt->bind_param(
-            "iiissssssssiii",
+            "iiissssssssiisi",
             $id_document_type, $id_specialization, $id_province,
             $name, $last_name, $document_number, $about_me,
             $email, $phone, $address, $gender, $begin_year, $id_consultation_type,
-             $id
+            $urlImageFile, 
+            $id
         );
     
         if ($stmt->execute()) {
@@ -493,7 +505,8 @@ function revisa_login(){
         YEAR(NOW()) - a.begin_year as experience,
         a.begin_year,
 		act.description as consultantType,
-        a.id_consultation_type
+        a.id_consultation_type,
+        a.url_file_image
         FROM 
             affiliates a
         LEFT JOIN 

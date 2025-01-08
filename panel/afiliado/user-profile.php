@@ -161,7 +161,7 @@ function generateTimeOptions($selectedTime = null) {
                 </li>
               <?php } ?>
               <li class="nav-item">
-                <button id="edit-tab" class="nav-link  <?php echo $isEditing ? "active show" : ""; ?>" data-bs-toggle="tab" data-bs-target="#profile-edit"> <?php echo ($isEditing) ? "Editar" : "Ver"  ?> datos personales</button>
+                <button id="edit-tab" class="nav-link  <?php echo $isEditing ? "active show" : ""; ?>" data-bs-toggle="tab" data-bs-target="#profile-edit"> <?php echo ($isEditing) ? "Editar" : "Editar"  ?> datos personales</button>
               </li>               
               <?php if ($hideBecauseNew){  ?> 
               <li class="nav-item">
@@ -228,7 +228,7 @@ function generateTimeOptions($selectedTime = null) {
                 <div class="tab-pane fade profile-edit pt-3 <?php echo $isEditing ? "show active" : ""; ?> " id="profile-edit">
 
                   <!-- Profile Edit Form -->
-                  <form action="process_form.php" method="post" onsubmit="return validateForm()">
+                  <form action="process_form.php" method="post" onsubmit="return validateForm()" enctype="multipart/form-data">
                   <?php if  ($hideBecauseNew){ ?>
                     <input type="hidden" name="update" value="true">
                   <?php } ?>
@@ -237,18 +237,25 @@ function generateTimeOptions($selectedTime = null) {
                   ?>
                   <input type="hidden" name="id_affiliate" value="<?= $id_affiliate ?>">
                   <?php } ?>
-                    <div class="row mb-3">
-                      <!-- <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Foto de perfil</label>
-                      <div class="col-md-8 col-lg-9">
-                        <img src="../assets/img/avatar.png" alt="Profile"> -->
-                        <!--
-						<div class="pt-2">
-                          <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
-                          <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
-                        </div>
-						-->
-                      <!-- </div> -->
-                    </div>
+                    
+                  <div class="row mb-3">
+    <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Foto de perfil</label>
+    <div class="col-md-8 col-lg-9">
+      <?php 
+      if ($url_file_image != null)
+        $url_file_image = 'uploads/' . $url_file_image;
+      else     
+        $url_file_image = "../assets/img/avatar.png";
+            
+      ?>
+      <img src="<?= $url_file_image ?>" alt="Profile" id="profilePreview" style="max-width: 150px;">
+      <div class="pt-2">
+        <input type="file" name="profile_image" id="profileImage" accept="image/*" class="form-control mb-2" onchange="previewImage(event)">
+        <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+      </div>
+    </div>
+  </div>
+
                     <div class="row mb-3">
                       <label for="name" class="col-md-4 col-lg-3 col-form-label">Nombre
                         <span class="text-danger">*</span>
@@ -471,7 +478,7 @@ function generateTimeOptions($selectedTime = null) {
     <form action="process_form.php" method="post">
           <input type="hidden" name="actionSchedule" value="update">
           <?php 
-          if (isset($_GET['xIZZvbK2khQytHRK5h43HnuRh1aip7'])){                    
+          if (isset($_GET['xIZZvbK2khQytHRK5h43HnuRh1aip7']) || (isset($id_affiliate) && $id_affiliate != null)  ){                    
           ?>
             <input type="hidden" name="id_affiliate" value="<?= $id_affiliate ?>">
           <?php } ?>
@@ -575,7 +582,7 @@ function generateTimeOptions($selectedTime = null) {
 
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-              <img src="../assets/img/avatar.png" alt="Profile" class="rounded-circle">
+              <img src="<?= $url_file_image ?>" alt="Profile" class="rounded-circle">
               <h2 class="text-key"><?= $name ?></h2>
               <h3 class="text-key"><?= $last_name ?></h3>
             </div>
@@ -613,6 +620,17 @@ function generateTimeOptions($selectedTime = null) {
 <!-- Main JS File -->
 <script src="../assets/js/main.js"></script>
 
+
+<script>
+  function previewImage(event) {
+    const reader = new FileReader();
+    reader.onload = function() {
+      const output = document.getElementById('profilePreview');
+      output.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  }
+</script>
 
 <script>
     function validateForm() {
@@ -795,6 +813,7 @@ function generateTimeOptions($selectedTime = null) {
     });
 
 </script>
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

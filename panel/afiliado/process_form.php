@@ -5,10 +5,14 @@ use App\Utils\Utils;
 
 use App\Models\Affiliate;
 $affiliateModelo = new Affiliate();
-
+/*
+echo "<pre>";
+var_dump($_REQUEST);
+// die;
+*/
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     extract($_POST);        
-  
+ 
     if(isset($passAction) && $_POST['passAction'] == "update"){
         $urlComplementary = "";
         if (isset($_SESSION['id_affiliate']))
@@ -20,21 +24,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       
         $affiliateModelo->updatePassword($id_affiliate, $newPassword);
         $destino = " user-profile.php$urlComplementary";
+      
         header("Location: $destino");
-    }else if (isset($_POST['actionSchedule'])){
+    }else if (isset($_POST['actionSchedule']) && $_POST['actionSchedule'] == "update" ){
+        $affiliateModelo->deleteScheduleDate($id_affiliate);
+        
         foreach ($_POST['start_time'] as $day => $start_time) {
             $end_time = $_POST['end_time'][$day];
             $is_closed = isset($_POST['closed'][$day]) ? 1 : 0;
             $affiliateModelo->createScheduleDay($id_affiliate, $day, $start_time, $end_time, $is_closed);
         }
-        die;
+        $destino = " user-profile.php$urlComplementary";      
+        header("Location: $destino"); 
+      
+    } 
+    else if (isset($_POST['actionSchedule'])){        
+        foreach ($_POST['start_time'] as $day => $start_time) {
+            $end_time = $_POST['end_time'][$day];
+            $is_closed = isset($_POST['closed'][$day]) ? 1 : 0;
+            $affiliateModelo->createScheduleDay($id_affiliate, $day, $start_time, $end_time, $is_closed);
+        }        
     } 
     else if (empty($update) ){ 
-       if ((Utils::isAssessorLogged() || Utils::isAdminLogged()) && !isset($id_affiliate)){
-        
+       // ! CREATE
+       if ((Utils::isAssessorLogged() || Utils::isAdminLogged()) && !isset($id_affiliate)){ 
+            $newFileName = uploadImage();
             
             $affiliateModelo->createFull($id_document_type, $id_specialization, $id_province, $name, $last_name, $document_number, $about_me, $position,$email, $phone, $address, 
-                                        $gender, $begin_year, $id_consultation_type);
+                                        $gender, $begin_year, $id_consultation_type, $newFileName);
 
             $destino = "../asesor/users-profiles.php?result=success";
             header("Location: $destino");
@@ -63,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 die("Ya existe este usuario. No deberia llegar aca");
             
         }
-    }else{
+    }else{ // ! UPDATE
         // Obtengo el id_affiliate de acuerdo si esta logueado un usuario o si es el asesor
         $urlComplementary = "";
         if (isset($_SESSION['id_affiliate']))
@@ -81,9 +98,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // ToDo: mejorar esta rta
             }
         }
+
+        $newFileName = uploadImage();
+        
         if ($affiliateModelo->update( $id_affiliate, $id_document_type, $id_specialization, $id_province,
                 $name, $last_name, $document_number, $about_me, 
-                $email, $phone, $address, $gender, $begin_year, $id_consultation_type)) {
+                $email, $phone, $address, $gender, $begin_year, $id_consultation_type, $newFileName)) {
            // echo "User update successfully.";
         } else {
             // echo "Failed to update user.";
@@ -102,4 +122,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $affiliateModelo->activate($_GET['id']);   
         header("Location: ../asesor/users-profiles.php");
     }    
+}
+
+
+
+function uploadImage(){
+    $newFileName = "";
+    // Verificar si se subió una imagen
+    if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] == UPLOAD_ERR_OK) {
+    // Ruta donde se guardarán las imágenes subidas
+    $uploadDir = __DIR__ . '/uploads/';
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0755, true); // Crear directorio si no existe
+    }
+
+    // Obtener información del archivo
+    $fileTmpPath = $_FILES['profile_image']['tmp_name'];
+    $fileName = $_FILES['profile_image']['name'];
+    $fileSize = $_FILES['profile_image']['size'];
+    $fileType = $_FILES['profile_image']['type'];
+    $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
+    // Extensiones permitidas
+    $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+
+    if (in_array($fileExt, $allowedExtensions)) {
+        // Generar un nombre único para el archivo
+        $newFileName = uniqid('profile_', true) . '.' . $fileExt;
+
+        // Mover archivo a la carpeta de destino
+        $destPath = $uploadDir . $newFileName;
+        if (move_uploaded_file($fileTmpPath, $destPath)) {
+            echo "Imagen subida exitosamente: $newFileName";
+        } else {
+            echo "Error al mover el archivo.";
+        }
+    } else {
+        echo "Extensión no permitida. Solo se permiten: " . implode(', ', $allowedExtensions);
+    }
+    } else {
+    echo "No se subió ninguna imagen o hubo un error.";
+    }
+
+    return $newFileName;
+
 }
