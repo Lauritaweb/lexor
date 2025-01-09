@@ -10,7 +10,7 @@ $tipo_abogado = $_POST['tipo_abogado'] ?? null;
 $provincia = $_POST['provincia'] ?? null;
 $localidad = $_POST['localidad'] ?? null;
 
-var_dump($localidad);
+// var_dump($localidad);
 $lawyers = $affiliateModelo->findLawyer($tipo_abogado,$provincia,$localidad);
 header('Content-Type: application/json');
 echo json_encode($lawyers);

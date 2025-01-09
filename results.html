@@ -93,14 +93,14 @@
             </div>
         </div>
         
-        <div class="results">
+        <div class="results" >
             <h1 class="fs-3 main-font text-key mt-3">
                 Resultados de tu búsqueda
             </h1>
             <p class="text-white fs-6">
                 Estos son los abogados que coinciden con tu búsqueda. Filtrá o ajustá los criterios para encontrar el profesional ideal.
             </p>
-            <div class="row">
+            <div class="row" id="resultsContainer">
                 <div class="col-md-3">
                     <figure class="card">
                         <img src="./assets/img/img_lower-1.png" class="card-img-top" alt="...">
@@ -126,6 +126,35 @@
                         </div>
                     </figure>
                 </div><!-- end card -->
+
+
+                <div class="col-md-3">
+                    <figure class="card">
+                        <img src="undefined" class="card-img-top" alt="Imagen de John Doe">
+                        <div class="card-body">
+                            <figcaption class="card-title fs-5">
+                                John Doe
+                            </figcaption>
+                            <ul class="fs-6">
+                                <li>
+                                    <img src="./assets/img/briefcase-fill.svg" alt="">
+                                    Especialista en undefined
+                                </li>
+                                <li>
+                                    <img src="./assets/img/geo-alt-fill.svg" alt="">
+                                    undefined, undefined
+                                </li>
+                                <li class="text-key">
+                                    <img src="./assets/img/clock-history.svg" alt="">
+                                    undefined
+                                </li>
+                            </ul>
+                            <a href="./details.html?id=undefined" class="btn btn-key">Ver perfil</a>
+                        </div>
+                    </figure>
+                </div>
+
+                
                 <div class="col-md-3">
                     <figure class="card">
                         <img src="./assets/img/img_lower-2.png" class="card-img-top" alt="...">
@@ -228,6 +257,8 @@
                 </div><!-- end card -->
             </div><!-- end row -->
         </div>
+     
+        
    </main>
    <!-- end main -->
     <footer class="bg-main text-white py-4">
@@ -339,7 +370,7 @@
             };
 
             // Realizar la búsqueda
-            fetch('search.php', {
+            fetch('buscar_abogados.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -350,6 +381,62 @@
                 .then(data => {
                     console.log('Resultados de búsqueda:', data);
                     // Aquí puedes mostrar los resultados en la página
+
+
+
+
+                    const resultsContainer = document.getElementById('resultsContainer');
+            resultsContainer.innerHTML = ''; // Limpiar resultados previos
+
+            // Verificar si hay resultados
+            if (data.length > 0) {
+                data.forEach(abogado => {
+                    
+                    if (!abogado.image) {
+                        abogado.image = 'panel/assets/img/avatar.png';
+                    }
+
+                    if (abogado.image === undefined || abogado.image === null) {
+                        
+                        abogado.image = 'panel/assets/img/avatar.png';
+                    }
+
+                    // Crear el HTML de la tarjeta para cada resultado
+                    const cardHTML = `
+                        <div class="col-md-3">
+                            <figure class="card">
+                                <img src="${abogado.image}" class="card-img-top" alt="Imagen de ${abogado.name}">
+                                <div class="card-body">
+                                    <figcaption class="card-title fs-5">
+                                        ${abogado.name}
+                                    </figcaption>
+                                    <ul class="fs-6">
+                                        <li>
+                                            <img src="./assets/img/briefcase-fill.svg" alt="">
+                                            Especialista en ${abogado.specialty}
+                                        </li>
+                                        <li>
+                                            <img src="./assets/img/geo-alt-fill.svg" alt="">
+                                            ${abogado.province}, ${abogado.locality}
+                                        </li>
+                                        <li class="text-key">
+                                            <img src="./assets/img/clock-history.svg" alt="">
+                                            ${abogado.availability}
+                                        </li>
+                                    </ul>
+                                    <a href="./details.html?id=${abogado.id}" class="btn btn-key">Ver perfil</a>
+                                </div>
+                            </figure>
+                        </div>
+                    `;
+                    // Insertar la tarjeta en el contenedor
+                    resultsContainer.insertAdjacentHTML('beforeend', cardHTML);
+                });
+            } else {
+                resultsContainer.innerHTML = '<p>No se encontraron resultados.</p>';
+            }
+
+
                 });
             });
         });
