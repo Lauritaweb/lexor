@@ -391,15 +391,9 @@
             // Verificar si hay resultados
             if (data.length > 0) {
                 data.forEach(abogado => {
+                    if (abogado.image === undefined || abogado.image === null)                     
+                        abogado.image = 'panel/assets/img/avatar.png';
                     
-                    if (!abogado.image) {
-                        abogado.image = 'panel/assets/img/avatar.png';
-                    }
-
-                    if (abogado.image === undefined || abogado.image === null) {
-                        
-                        abogado.image = 'panel/assets/img/avatar.png';
-                    }
 
                     // Crear el HTML de la tarjeta para cada resultado
                     const cardHTML = `
