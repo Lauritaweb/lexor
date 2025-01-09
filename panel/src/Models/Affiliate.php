@@ -597,7 +597,70 @@ function revisa_login(){
         return round($affiliate['completion_percentage']);
     }
 
+    /**
+     * 
+     * Find Lawyers
+     * 
+     */
 
+    public function findLawyer($tipo_abogado, $provincia, $localidad ) {        
+        $query = "SELECT name, last_name, id_specialization, id_province, id_locality, url_file_image 
+                FROM affiliates 
+                WHERE active = 1";
+                      
+        $conditions = [];
+        if ($tipo_abogado != 0) {
+            $conditions[] = "id_specialization = " . intval($tipo_abogado);
+        }
+        if ($provincia != 0)  {
+            $conditions[] = "id_province = " . intval($provincia);
+        }
+        if ($localidad != 0) {
+            $conditions[] = "id_locality = " . intval($localidad);
+        }
+
+        if (count($conditions) > 0) {
+            $query .= " AND " . implode(" AND ", $conditions);
+        }
+
+        $stmt = $this->db->prepare($query);
+
+        if ($stmt === false) {
+            die('Prepare failed: ' . $this->db->error);
+        }
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $users = [];
+        while ($row = $result->fetch_assoc()) {
+            $users[] = $row;
+        }
+       
+        $stmt->close();
+        return $users;
+    }
+
+    public function getLocalities($id_province) {        
+        $query = "SELECT id, locality FROM localities WHERE id_province = ?";
+        
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('i', $id_province);
+        if ($stmt === false) {
+            die('Prepare failed: ' . $this->db->error);
+        }
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $localities = [];
+        while ($row = $result->fetch_assoc()) {
+            $localities[] = $row;
+        }
+      
+        $stmt->close();
+        return $localities;
+    }
 
 
 
@@ -684,8 +747,7 @@ function revisa_login(){
         return $this->getGenericTable("affiliate_consultant_type");        
     }
 
-    
-    
+     
 
 
 

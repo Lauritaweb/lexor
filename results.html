@@ -58,70 +58,41 @@
     <section class="container bg-dark p-4 rounded-top mb-5 results-page">
         <div class="row mx-auto border-bottom pb-3">
             <div class="col-md-3 ps-0 mt-2 mt-md-0">
-                <label for="inputState" class="form-label d-none">Tipo de abogado</label>
-                <select id="inputState" class="form-select">
-                    <option selected>Tipo de abogado...</option>
-                    <option>Civil</option>
-                    <option>Penal</option>
-                    <option>Laboral</option>
-                    <option>Comercial</option>
-                    <option>De Familia</option>
-                    <option>Administrativo</option>
-                    <option>Tributario</option>
-                    <option>Ambiental</option>
-                    <option>De Propiedad Intelectual</option>
-                    <option>De Seguridad Social</option>
-                    <option>De Contratos</option>
-                    <option>Internacional</option>
-                    <option>De Derecho Informático</option>
+                <label for="abogadoType" class="form-label d-none">Tipo de abogado</label>
+                <select id="abogadoType" class="form-select">
+                    <option value="" selected>Tipo de abogado...</option>
+                    <option value="Civil">Civil</option>
+                    <option value="Penal">Penal</option>
+                    <option value="Laboral">Laboral</option>
+                    <option value="Comercial">Comercial</option>
+                    <option value="De Familia">De Familia</option>
+                    <option value="Administrativo">Administrativo</option>
+                    <option value="Tributario">Tributario</option>
+                    <option value="Ambiental">Ambiental</option>
+                    <option value="De Propiedad Intelectual">De Propiedad Intelectual</option>
+                    <option value="De Seguridad Social">De Seguridad Social</option>
+                    <option value="De Contratos">De Contratos</option>
+                    <option value="Internacional">Internacional</option>
+                    <option value="De Derecho Informático">De Derecho Informático</option>
                 </select>
-            </div><!-- end col 3 -->
+            </div>
             <div class="col-md-3 ps-0 mt-2 mt-md-0">
-                <label for="inputState" class="form-label d-none">Provincia</label>
-                <select id="inputState" class="form-select">
-                    <option selected>Provincia...</option>
-                    <option>Buenos Aires</option>
-                    <option>Córdoba</option>
-                    <option>Santa Fe</option>
-                    <option>Mendoza</option>
-                    <option>Entre Ríos</option>
-                    <option>Salta</option>
-                    <option>Misiones</option>
-                    <option>Chaco</option>
-                    <option>Corrientes</option>
-                    <option>Santiago del Estero</option>
-                    <option>Tucumán</option>
-                    <option>San Juan</option>
-                    <option>Jujuy</option>
+                <label for="province" class="form-label d-none">Provincia</label>
+                <select id="province" class="form-select">
+                    <option value="" selected>Provincia...</option>
                 </select>
-            </div> <!-- end col 3 -->
+            </div>
             <div class="col-md-3 ps-0 mt-2 mt-md-0">
-                <label for="inputState" class="form-label d-none">Localidad</label>
-                <select id="inputState" class="form-select">
-                    <option selected>Localidad...</option>
-                    <option>La Plata</option>
-                    <option>Mar del Plata</option>
-                    <option>Bahía Blanca</option>
-                    <option>San Nicolás</option>
-                    <option>Tandil</option>
-                    <option>Quilmes</option>
-                    <option>Morón</option>
-                    <option>Avellaneda</option>
-                    <option>San Isidro</option>
-                    <option>Campana</option>
+                <label for="locality" class="form-label d-none">Localidad</label>
+                <select id="locality" class="form-select" disabled>
+                    <option value="" selected>Localidad...</option>
                 </select>
-            </div> <!-- enc col 3 -->
-            <div class="col-md-2 ps-0 mt-2 mt-md-0">
-                <button class="btn-search btn-results">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-search me-1 me-md-0" viewBox="0 0 16 16">
-                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-                    </svg>
-                   <span class="d-block d-md-none">
-                    Buscar
-                   </span>
-                </button>
-            </div><!-- end col 2 -->           
-        </div><!-- end row -->
+            </div>
+            <div class="col-md-3 ps-0 mt-2 mt-md-0">
+                <button type="button" id="searchButton" class="btn btn-primary">Buscar</button>
+            </div>
+        </div>
+        
         <div class="results">
             <h1 class="fs-3 main-font text-key mt-3">
                 Resultados de tu búsqueda
@@ -310,6 +281,81 @@
             });
         });
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        const provinceSelect = document.getElementById('province');
+        const localitySelect = document.getElementById('locality');
+        const searchButton = document.getElementById('searchButton');
+        const abogadoTypeSelect = document.getElementById('abogadoType');
+
+        // Cargar provincias desde la base de datos
+        fetch('getProvinces.php')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(province => {
+                    const option = document.createElement('option');
+                    option.value = province.id;
+                    option.textContent = province.province;
+                    provinceSelect.appendChild(option);
+                });
+            });
+
+        // Escuchar cambios en el selector de provincias
+        provinceSelect.addEventListener('change', function () {
+            const provinceId = provinceSelect.value;
+
+            if (!provinceId) {
+                localitySelect.innerHTML = '<option value="" selected>Localidad...</option>';
+                localitySelect.disabled = true;
+                return;
+            }
+
+            // Cargar localidades según la provincia seleccionada
+            fetch(`getLocalities.php?provinceId=${provinceId}`)
+                .then(response => response.json())
+                .then(data => {
+                    localitySelect.innerHTML = '<option value="" selected>Localidad...</option>';
+                    data.forEach(locality => {
+                        const option = document.createElement('option');
+                        option.value = locality.id;
+                        option.textContent = locality.locality;
+                        localitySelect.appendChild(option);
+                    });
+                    localitySelect.disabled = false;
+                });
+        });
+
+        // Manejar el botón de búsqueda
+        searchButton.addEventListener('click', function () {
+            const abogadoType = abogadoTypeSelect.value;
+            const provinceId = provinceSelect.value;
+            const localityId = localitySelect.value;
+
+            const requestData = {
+                abogadoType,
+                provinceId,
+                localityId,
+            };
+
+            // Realizar la búsqueda
+            fetch('search.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestData),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Resultados de búsqueda:', data);
+                    // Aquí puedes mostrar los resultados en la página
+                });
+            });
+        });
+
+    </script>
+    
 
 </body>
 </html>
