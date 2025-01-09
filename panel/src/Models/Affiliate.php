@@ -604,9 +604,21 @@ function revisa_login(){
      */
 
     public function findLawyer($tipo_abogado, $provincia, $localidad ) {        
-        $query = "SELECT name, last_name, id_specialization, id_province, id_locality, url_file_image 
-                FROM affiliates 
-                WHERE active = 1";
+        $query = "SELECT NAME
+	,
+	last_name,
+	id_specialization,
+	id_province,
+	id_locality,
+	url_file_image,
+	affiliate_specialties.description as specialty,
+		affiliate_provinces.province
+FROM
+	affiliates 
+	INNER JOIN affiliate_specialties on affiliate_specialties.id = affiliates.id_specialization
+	INNER JOIN affiliate_provinces on affiliate_provinces.id = affiliates.id_province
+WHERE
+	active = 1";
                       
         $conditions = [];
         if ($tipo_abogado != 0) {
