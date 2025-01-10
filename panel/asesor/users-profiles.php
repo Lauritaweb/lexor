@@ -133,6 +133,8 @@ $affiliates = $userModel->getAll();
                           <button type="button" class="btn btn-danger btn-sm btn-delete" data-bs-toggle="modal" data-bs-target="#verticalycentered" data-val="<?= $id ?>"><i class="bi bi-trash"></i></button>
                           <?php if ($active == 1) { ?>
                               <button type="button" class="btn btn-danger btn-sm btn-activate" data-bs-toggle="modal" data-bs-target="#verticalycenteredActivate" data-val="<?= $id ?>"><i class="bi bi-check"></i></button>
+                          <?php } else if  ($active == 2) { ?>
+                              <button type="button" class="btn btn-danger btn-sm btn-deactivate" data-bs-toggle="modal" data-bs-target="#verticalycenteredDeactivate" data-val="<?= $id ?>"><i class="bi bi-x-circle"></i></button>
                           <?php } ?> 
                         </td>
                       </tr>
@@ -213,6 +215,28 @@ $affiliates = $userModel->getAll();
 </div>
 <!-- END MODAL ELIMINAR USUARIO -->
 
+<!-- MODAL DESACTIVAR USUARIO -->
+<div class="modal fade" id="verticalycenteredDeactivate" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger">desactivar abogado</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <i class="bi bi-exclamation-circle-fill text-danger mx-auto d-block fs-1"></i>
+        <p class="fw-bold">¿Confirma que desea desactivar al abogado?</p>        
+    
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger btn-confirm-deactivate" data-bs-dismiss="modal">Desactivar abogado</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END MODAL ELIMINAR USUARIO -->
+
 
   <!-- Vendor JS Files -->
   <script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>
@@ -274,6 +298,18 @@ document.querySelectorAll('.btn-activate').forEach(function(button) {
 document.querySelector('.btn-confirm-activate').addEventListener('click', function() {
   if (activateId) {
     window.location.href = '../afiliado/process_form.php?action=ac&id=' + activateId;
+  }
+});
+
+document.querySelectorAll('.btn-deactivate').forEach(function(button) {
+  button.addEventListener('click', function() {
+    activateId = this.getAttribute('data-val');
+  });
+});
+
+document.querySelector('.btn-confirm-deactivate').addEventListener('click', function() {
+  if (activateId) {
+    window.location.href = '../afiliado/process_form.php?action=de&id=' + activateId;
   }
 });
 

@@ -409,6 +409,30 @@ function revisa_login(){
         }
     }
 
+    public function deactivate($id) {
+        $query = "UPDATE affiliates 
+                SET active = 1 
+                WHERE id = ?";
+
+        $stmt = $this->db->prepare($query);
+
+        if ($stmt === false) 
+            die('Prepare failed: ' . $this->db->error);    
+
+        $stmt->bind_param(
+            "i",
+            $id
+        );
+
+        if ($stmt->execute()) {
+            $stmt->close();
+            return true;
+        } else {
+            $stmt->close();
+            return false;
+        }
+    }
+
 /**
  * 
  * Get 
@@ -604,8 +628,7 @@ function revisa_login(){
      */
 
     public function findLawyer($tipo_abogado, $provincia, $localidad ) {        
-        $query = "SELECT NAME
-	,
+        $query = "SELECT name,
 	last_name,
 	id_specialization,
 	id_province,

@@ -417,6 +417,14 @@ function generateTimeOptions($selectedTime = null) {
                         <input name="email" type="email" class="form-control" id="Email" value="<?= $email ?>" required>
                       </div>
                     </div>
+
+                    <div class="pt-2">                        
+                        <input type="file" name="general_file" id="generalFile" class="form-control mb-2" onchange="previewFileName(event)">
+                        <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                    </div>
+                    <div id="filePreview">
+                      
+                    </div>
              
                   
 
@@ -630,6 +638,15 @@ function generateTimeOptions($selectedTime = null) {
     };
     reader.readAsDataURL(event.target.files[0]);
   }
+
+
+  function previewFileName(event) {
+      const fileName = event.target.files[0].name;
+      const filePreview = document.getElementById('filePreview');
+      filePreview.innerHTML = `<p>Archivo seleccionado: ${fileName}</p>`;
+  }
+
+
 </script>
 
 <script>

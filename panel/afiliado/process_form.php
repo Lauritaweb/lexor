@@ -100,6 +100,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         $newFileName = uploadImage();
+
+
+        // Subir archivo general
+        if (isset($_FILES['general_file']) && $_FILES['general_file']['error'] === UPLOAD_ERR_OK) {
+            $generalFile = $_FILES['general_file'];
+            $generalFileName = uniqid() . '-' . basename($generalFile['name']);
+            $uploadDir = __DIR__ . '/uploads/';
+            $generalFilePath = $uploadDir . $generalFileName;
+
+            if (move_uploaded_file($generalFile['tmp_name'], $generalFilePath)) {
+                echo "Archivo subido exitosamente: $generalFileName";
+            } else {
+                echo "Error al subir el archivo.";
+            }
+        }
         
         if ($affiliateModelo->update( $id_affiliate, $id_document_type, $id_specialization, $id_province,
                 $name, $last_name, $document_number, $about_me, 
@@ -121,7 +136,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }else if($_GET['action'] == "ac" ){
         $affiliateModelo->activate($_GET['id']);   
         header("Location: ../asesor/users-profiles.php");
-    }    
+    } else if($_GET['action'] == "de" ){
+        $affiliateModelo->deactivate($_GET['id']);   
+        header("Location: ../asesor/users-profiles.php");
+    }      
 }
 
 
