@@ -109,14 +109,14 @@ function revisa_login(){
     public function createFull(
         $id_document_type, $id_specialization, $id_province,
         $name, $last_name, $document_number, $about_me, $position,
-        $email, $phone, $address, $gender, $begin_year, $id_consultation_type,  $urlImageFile
+        $email, $phone, $address, $gender, $begin_year, $id_consultation_type,  $urlImageFile, $degreeFileName
     ) {        
 
         $query = "INSERT INTO affiliates (
             id_document_type, id_specialization, id_province, 
             name, last_name, document_number, about_me, position,
-            email, phone, address, gender, begin_year, id_consultation_type, url_file_image
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            email, phone, address, gender, begin_year, id_consultation_type, url_file_image, url_file_degree
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         $stmt = $this->db->prepare($query);
         
@@ -124,10 +124,10 @@ function revisa_login(){
             die('Prepare failed: ' . $this->db->error);              
      
         $stmt->bind_param(
-            "iiisssssssssiiS",
+            "iiisssssssssiiss",
             $id_document_type, $id_specialization, $id_province,
             $name, $last_name, $document_number, $about_me, $position,
-            $email, $phone, $address, $gender, $begin_year, $id_consultation_type, $urlImageFile
+            $email, $phone, $address, $gender, $begin_year, $id_consultation_type, $urlImageFile, $degreeFileName
         );        
 
         if ($result = $stmt->execute()) {
@@ -260,13 +260,13 @@ function revisa_login(){
         $id, $id_document_type, $id_force, $id_province,
         $name, $last_name, $document_number, $about_me, 
         $email, $phone, $address, $gender, $begin_year, $id_consultation_type,
-        $urlImageFile
+        $urlImageFile, $degreeFileName
     ) {        
         $updateAffiliate = $this->updateAffiliate(
             $id, $id_document_type, $id_force, $id_province,
             $name, $last_name, $document_number, $about_me, 
             $email, $phone, $address, $gender, $begin_year, $id_consultation_type,
-            $urlImageFile
+            $urlImageFile,$degreeFileName
         );
 
         return $updateAffiliate;
@@ -277,13 +277,13 @@ function revisa_login(){
         $id, $id_document_type, $id_specialization, $id_province,
         $name, $last_name, $document_number, $about_me, 
         $email, $phone, $address, $gender, $begin_year, $id_consultation_type,
-        $urlImageFile
+        $urlImageFile,$degreeFileName
     ) {
         $query = "UPDATE affiliates SET 
             id_document_type = ?, id_specialization = ?, id_province = ?, 
             name = ?, last_name = ?, document_number = ?, about_me = ?, 
             email = ?, phone = ?, address = ?, gender = ?, begin_year = ?,
-            id_consultation_type = ?, url_file_image = ?
+            id_consultation_type = ?, url_file_image = ?, url_file_degree = ?
             WHERE id = ?";
     
         $stmt = $this->db->prepare($query);
@@ -293,11 +293,11 @@ function revisa_login(){
         }
     
         $stmt->bind_param(
-            "iiissssssssiisi",
+            "iiissssssssiissi",
             $id_document_type, $id_specialization, $id_province,
             $name, $last_name, $document_number, $about_me,
             $email, $phone, $address, $gender, $begin_year, $id_consultation_type,
-            $urlImageFile, 
+            $urlImageFile, $degreeFileName,
             $id
         );
     
@@ -464,7 +464,8 @@ function revisa_login(){
         a.datetime,       
         YEAR(NOW()) - a.begin_year as experience,
         a.begin_year,
-		act.description as consultantType
+		act.description as consultantType,
+        a.url_file_degree
     FROM 
         affiliates a
     LEFT JOIN 
@@ -530,7 +531,8 @@ function revisa_login(){
         a.begin_year,
 		act.description as consultantType,
         a.id_consultation_type,
-        a.url_file_image
+        a.url_file_image,
+        a.url_file_degree
         FROM 
             affiliates a
         LEFT JOIN 

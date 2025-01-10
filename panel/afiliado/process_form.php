@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $newFileName = uploadImage();
             
             $affiliateModelo->createFull($id_document_type, $id_specialization, $id_province, $name, $last_name, $document_number, $about_me, $position,$email, $phone, $address, 
-                                        $gender, $begin_year, $id_consultation_type, $newFileName);
+                                        $gender, $begin_year, $id_consultation_type, $newFileName, $degreeFileName);
 
             $destino = "../asesor/users-profiles.php?result=success";
             header("Location: $destino");
@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $bank_account_entity = $BABanco;    
             $affiliateModelo->update( $id_affiliate, $id_document_type, $id_specialization, $id_province,
                                         $name, $last_name, $document_number, $about_me, $position,      
-                                        $email, $phone, $address, $gender, $begin_year, $id_consultation_type);
+                                        $email, $phone, $address, $gender, $begin_year, $id_consultation_type, $newFileName, $degreeFileName);
             $destino = "../asesor/users-profiles.php?result=success";
            
             header("Location: $destino");
@@ -105,12 +105,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Subir archivo general
         if (isset($_FILES['general_file']) && $_FILES['general_file']['error'] === UPLOAD_ERR_OK) {
             $generalFile = $_FILES['general_file'];
-            $generalFileName = uniqid() . '-' . basename($generalFile['name']);
+            $degreeFileName = uniqid() . '-' . basename($generalFile['name']);
             $uploadDir = __DIR__ . '/uploads/';
-            $generalFilePath = $uploadDir . $generalFileName;
+            $generalFilePath = $uploadDir . $degreeFileName;
 
             if (move_uploaded_file($generalFile['tmp_name'], $generalFilePath)) {
-                echo "Archivo subido exitosamente: $generalFileName";
+                echo "Archivo subido exitosamente: $degreeFileName";
             } else {
                 echo "Error al subir el archivo.";
             }
@@ -118,7 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         if ($affiliateModelo->update( $id_affiliate, $id_document_type, $id_specialization, $id_province,
                 $name, $last_name, $document_number, $about_me, 
-                $email, $phone, $address, $gender, $begin_year, $id_consultation_type, $newFileName)) {
+                $email, $phone, $address, $gender, $begin_year, $id_consultation_type, $newFileName, $degreeFileName)) {
            // echo "User update successfully.";
         } else {
             // echo "Failed to update user.";

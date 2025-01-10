@@ -107,7 +107,7 @@ $affiliates = $userModel->getAll();
                         <th scope="col">Especialidad</th>
                         <th scope="col">Provincia</th>
                         <th scope="col">Estado</th>
-                        <th scope="col">Ver</th>
+                        <th scope="col">Acciones</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -128,13 +128,14 @@ $affiliates = $userModel->getAll();
                           <?php }  ?>
                         </td>
                         <td>
-                          <button type="button" class="btn btn-secondary btn-sm btn-view" data-val="<?= $id ?>"><i class="bi bi-search"></i></button>
-                          <button type="button" class="btn btn-primary btn-sm btn-edit" data-val="<?= $id ?>"><i class="bi bi-pencil"></i></button>
-                          <button type="button" class="btn btn-danger btn-sm btn-delete" data-bs-toggle="modal" data-bs-target="#verticalycentered" data-val="<?= $id ?>"><i class="bi bi-trash"></i></button>
+                          <button type="button" class="btn btn-secondary btn-sm btn-view" data-val="<?= $id ?>"><i class="bi bi-search" title="Ver"></i></button>
+                          <button type="button" class="btn btn-primary btn-sm btn-view-degree" data-val="<?= $url_file_degree ?>"><i class="bi bi-book" title="Ver titulo"></i></button>
+                          <button type="button" class="btn btn-primary btn-sm btn-edit" data-val="<?= $id ?>"><i class="bi bi-pencil" title="Editar"></i></button>
+                          <button type="button" class="btn btn-danger btn-sm btn-delete" data-bs-toggle="modal" data-bs-target="#verticalycentered" data-val="<?= $id ?>"><i class="bi bi-trash" title="Eliminar"></i></button>
                           <?php if ($active == 1) { ?>
-                              <button type="button" class="btn btn-danger btn-sm btn-activate" data-bs-toggle="modal" data-bs-target="#verticalycenteredActivate" data-val="<?= $id ?>"><i class="bi bi-check"></i></button>
+                              <button type="button" class="btn btn-danger btn-sm btn-activate" data-bs-toggle="modal" data-bs-target="#verticalycenteredActivate" data-val="<?= $id ?>"><i class="bi bi-check" title="Activar"></i></button>
                           <?php } else if  ($active == 2) { ?>
-                              <button type="button" class="btn btn-danger btn-sm btn-deactivate" data-bs-toggle="modal" data-bs-target="#verticalycenteredDeactivate" data-val="<?= $id ?>"><i class="bi bi-x-circle"></i></button>
+                              <button type="button" class="btn btn-danger btn-sm btn-deactivate" data-bs-toggle="modal" data-bs-target="#verticalycenteredDeactivate" data-val="<?= $id ?>"><i class="bi bi-x-circle" title="Desactivar"></i></button>
                           <?php } ?> 
                         </td>
                       </tr>
@@ -270,6 +271,13 @@ $affiliates = $userModel->getAll();
         button.addEventListener('click', function() {
             var id = this.getAttribute('data-val');
             window.location.href = '../afiliado/user-profile.php?action=edit&xIZZvbK2khQytHRK5h43HnuRh1aip7=' + id;
+        });
+    });
+    document.querySelectorAll('.btn-view-degree').forEach(function(button) {  
+        button.addEventListener('click', function() {
+            var file = this.getAttribute('data-val');
+            if (file != undefined && file != "")
+              window.open('../afiliado/uploads/'+file, '_blank'); 
         });
     });
 

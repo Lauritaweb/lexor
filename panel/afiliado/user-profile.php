@@ -423,10 +423,11 @@ function generateTimeOptions($selectedTime = null) {
                         <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
                     </div>
                     <div id="filePreview">
-                      
+                      <?php
+                        if (isset($url_file_degree))
+                            echo "<a href='uploads/$url_file_degree' target='_blank' > $url_file_degree </a>";
+                       ?>
                     </div>
-             
-                  
 
                     <div class="text-center">
                       <button type="submit" class="btn btn-primary">Guardar cambios</button>
