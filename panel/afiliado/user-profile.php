@@ -223,8 +223,16 @@ function generateTimeOptions($selectedTime = null) {
                     <div class="col-lg-3 col-md-4 label">Email</div>
                     <div class="col-lg-9 col-md-8"><?= $email ?></div>
                   </div>
-             
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Titulo</div>                    
+                    <div class="col-lg-9 col-md-8"><?php
+                        if (isset($url_file_degree))
+                            echo "<a href='uploads/$url_file_degree' target='_blank' > $url_file_degree </a>";
+                       ?></div>
+                  </div>             
                 </div>
+
                 <div class="tab-pane fade profile-edit pt-3 <?php echo $isEditing ? "show active" : ""; ?> " id="profile-edit">
 
                   <!-- Profile Edit Form -->
@@ -418,7 +426,12 @@ function generateTimeOptions($selectedTime = null) {
                       </div>
                     </div>
 
-                    <div class="pt-2">                        
+                    <div class="row mb-3">
+                      <label for="Email" class="col-md-4 col-lg-3 col-form-label">Foto del Título 
+                        <span class="text-danger">*</span>
+                      </label>
+
+                      <div class="col-md-8 col-lg-9">                 
                         <input type="file" name="general_file" id="generalFile" class="form-control mb-2" onchange="previewFileName(event)">
                         <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
                     </div>
