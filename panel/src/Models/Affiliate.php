@@ -643,7 +643,7 @@ FROM
 	INNER JOIN affiliate_specialties on affiliate_specialties.id = affiliates.id_specialization
 	INNER JOIN affiliate_provinces on affiliate_provinces.id = affiliates.id_province
 WHERE
-	active = 1";
+	active = 2 ";
                       
         $conditions = [];
         if ($tipo_abogado != 0) {
@@ -652,7 +652,7 @@ WHERE
         if ($provincia != 0)  {
             $conditions[] = "id_province = " . intval($provincia);
         }
-        if ($localidad != 0) {
+        if ($localidad != 0 && $localidad != '') {
             $conditions[] = "id_locality = " . intval($localidad);
         }
 
@@ -660,6 +660,10 @@ WHERE
             $query .= " AND " . implode(" AND ", $conditions);
         }
 
+/*
+        echo $query;
+        var_dump($tipo_abogado, $provincia, $localidad);
+*/
         $stmt = $this->db->prepare($query);
 
         if ($stmt === false) {

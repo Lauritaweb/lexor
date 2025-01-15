@@ -69,19 +69,7 @@
                 <label for="abogadoType" class="form-label d-none">Tipo de abogado</label>
                 <select id="abogadoType" class="form-select">
                     <option value="" selected>Tipo de abogado...</option>
-                    <option value="Civil">Civil</option>
-                    <option value="Penal">Penal</option>
-                    <option value="Laboral">Laboral</option>
-                    <option value="Comercial">Comercial</option>
-                    <option value="De Familia">De Familia</option>
-                    <option value="Administrativo">Administrativo</option>
-                    <option value="Tributario">Tributario</option>
-                    <option value="Ambiental">Ambiental</option>
-                    <option value="De Propiedad Intelectual">De Propiedad Intelectual</option>
-                    <option value="De Seguridad Social">De Seguridad Social</option>
-                    <option value="De Contratos">De Contratos</option>
-                    <option value="Internacional">Internacional</option>
-                    <option value="De Derecho Informático">De Derecho Informático</option>
+                   
                 </select>
             </div>
             <div class="col-md-3 ps-0 mt-2 mt-md-0">
@@ -365,6 +353,19 @@
                 });
         });
 
+        // Cargar provincias desde la base de datos
+        fetch('getSpecialties.php')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(specialty => {
+                    const option = document.createElement('option');
+                    option.value = specialty.id;
+                    option.textContent = specialty.description;
+                    console.log(specialty.description);
+                    abogadoType.appendChild(option);
+                });
+            });
+
         // Manejar el botón de búsqueda
         searchButton.addEventListener('click', function () {
             const abogadoType = abogadoTypeSelect.value;
@@ -376,6 +377,8 @@
                 provinceId,
                 localityId,
             };
+
+            console.log(requestData);
 
             // Realizar la búsqueda
             fetch('buscar_abogados.php', {
