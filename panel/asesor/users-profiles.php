@@ -17,7 +17,7 @@ $affiliates = $userModel->getAll();
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Portal Asesor | Gestión de Abogados | Respaldar Argentina</title>
+  <title>Portal del administrador | Lexor abogados</title>
   <!-- Favicons -->
   <link href="../assets/img/favicon.svg" rel="icon">
   <!-- Google Fonts -->
@@ -80,9 +80,9 @@ $affiliates = $userModel->getAll();
                   </ul>
                 </div>
 -->
-                <div class="card-body pb-3">
+                <div class="card-body pb-3 account-statement">
 
-                  <div class="d-flex mt-3">
+                  <div class="d-flex my-3">
                     <button type="button" class="btn btn-success" id="btn-add">
                       <i class="bi bi-plus-circle"></i> Agregar abogado
                     </button>
@@ -112,7 +112,7 @@ $affiliates = $userModel->getAll();
                     </thead>
                     <tbody>
                       <?php foreach($affiliates as $affiliate) { extract($affiliate); ?>
-                      <tr>
+                      <tr style="text-align:left">
                         <td><?= $name ?></td>
                         <td><?= $last_name ?></td>
                         <!-- <td><?= Utils::formatDateUser($datetime); ?></td> -->
@@ -127,11 +127,11 @@ $affiliates = $userModel->getAll();
                             <span class="badge bg-danger">Inactivo</span>
                           <?php }  ?>
                         </td>
-                        <td>
-                          <button type="button" class="btn btn-secondary btn-sm btn-view" data-val="<?= $id ?>"><i class="bi bi-search" title="Ver"></i></button>
-                          <button type="button" class="btn btn-primary btn-sm btn-view-degree" data-val="<?= $url_file_degree ?>"><i class="bi bi-book" title="Ver titulo"></i></button>
-                          <button type="button" class="btn btn-primary btn-sm btn-edit" data-val="<?= $id ?>"><i class="bi bi-pencil" title="Editar"></i></button>
-                          <button type="button" class="btn btn-danger btn-sm btn-delete" data-bs-toggle="modal" data-bs-target="#verticalycentered" data-val="<?= $id ?>"><i class="bi bi-trash" title="Eliminar"></i></button>
+                        <td class="btns-actions d-flex g-1">
+                          <button type="button" class="btn btn-secondary btn-sm btn-view me-1" data-val="<?= $id ?>"><i class="bi bi-search" title="Ver"></i></button>
+                          <button type="button" class="btn btn-primary btn-sm btn-view-degree me-1" data-val="<?= $url_file_degree ?>"><i class="bi bi-book" title="Ver titulo"></i></button>
+                          <button type="button" class="btn btn-primary btn-sm btn-edit me-1" data-val="<?= $id ?>"><i class="bi bi-pencil" title="Editar"></i></button>
+                          <button type="button" class="btn btn-danger btn-sm btn-delete me-1" data-bs-toggle="modal" data-bs-target="#verticalycentered" data-val="<?= $id ?>"><i class="bi bi-trash" title="Eliminar"></i></button>
                           <?php if ($active == 1) { ?>
                               <button type="button" class="btn btn-danger btn-sm btn-activate" data-bs-toggle="modal" data-bs-target="#verticalycenteredActivate" data-val="<?= $id ?>"><i class="bi bi-check" title="Activar"></i></button>
                           <?php } else if  ($active == 2) { ?>

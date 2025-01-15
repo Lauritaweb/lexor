@@ -236,3 +236,17 @@
   }
 }
 
+.account-statement{
+  .card-title{
+    color: white;
+  }
+  .dataTable_length{
+    label{
+      color: white;
+    }
+  }
+  tr{
+    background-color: transparent!important;
+    color: $keyColor;
+  }
+}

@@ -29,7 +29,9 @@ $secondaryFont:"Signika", sans-serif;
 .text-main{
   color: $mainColor;
 }
-
+.text-key{
+  color: $keyColor;
+}
   
   body {
     font-family: $mainFont;

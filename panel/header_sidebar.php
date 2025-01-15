@@ -53,8 +53,8 @@ if (Utils::isAssessorLogged() || Utils::isAdminLogged()){
   <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
 
-      <li class="nav-item">
-        <a href="../asesor/index.php" class="text-success fw-bold">
+      <li class="nav-item ">
+        <a href="../asesor/index.php" class="text-key fw-bold">
           <i class="bi bi-grid"></i>
           <span>Portal <?= $perfil ?> Lexor </span>
         </a>
@@ -67,7 +67,7 @@ if (Utils::isAssessorLogged() || Utils::isAdminLogged()){
         </a>
       </li>
 
-      <li class="nav-item">
+      <li class="nav-item d-none">
         <a class="nav-link collapsed" href="../asesor/dashboard-appointments.php">
           <i class="bi bi-calendar2-check"></i>
           <span>Gestión de citas - Solo Perfil Abogado</span>

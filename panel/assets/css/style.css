@@ -28,6 +28,14 @@
   color: #033333;
 }
 
+.text-key {
+  color: #FFE600;
+}
+
+.border-key {
+  border: solid 1px #FFE600;
+}
+
 body {
   font-family: "halenoirtext-regularregular";
   background: #111111;
@@ -281,7 +289,7 @@ h6 {
   font-size: 20px;
 }
 
-/* Buttons */
+/* Close Button */
 .btn-close {
   background-size: 25%;
 }
@@ -289,11 +297,6 @@ h6 {
 .btn-close:focus {
   outline: 0;
   box-shadow: none;
-}
-
-.btn-success {
-  background-color: #033333;
-  border: solid 1px #033333;
 }
 
 .btn-primary,
@@ -394,22 +397,6 @@ h6 {
 
 .text-key {
   color: #FFE600 !important;
-}
-
-.login .card-body {
-  border: solid 1px #FFE600;
-}
-.login .card-body .card-title {
-  color: #FFE600;
-}
-
-table.table.table-borderless {
-  background-color: transparent !important;
-  --bs-table-bg:transparent!important;
-}
-
-.table#dataTable th {
-  color: rgb(245, 241, 241) !important;
 }
 
 /*--------------------------------------------------------------
@@ -901,19 +888,17 @@ table.table.table-borderless {
 .dashboard button.btn-sm {
   color: rgb(245, 241, 241);
 }
+.dashboard button.btn-secondary.btn-sm,
 .dashboard button.btn-danger.btn-sm,
 .dashboard button.btn-primary.btn-sm {
   background-color: transparent !important;
   border: solid 1px rgb(245, 241, 241) !important;
   color: rgb(245, 241, 241) !important;
 }
+.dashboard button.btn-secondary.btn-sm:hover,
 .dashboard button.btn-danger.btn-sm:hover,
 .dashboard button.btn-primary.btn-sm:hover {
   background-color: #111111 !important;
-}
-.dashboard .activity .activity-item .activity-badge {
-  border: transparent 1px solid;
-  display: none;
 }
 
 /* Activity */
@@ -1072,6 +1057,82 @@ table.table.table-borderless {
   background-color: transparent;
   border: none;
   color: #033333;
+}
+
+.account-statement label {
+  color: white;
+}
+.account-statement label select {
+  color: #FFE600;
+}
+.account-statement .dataTables_wrapper .dataTables_filter input {
+  color: #FFE600;
+  margin-bottom: 20px;
+}
+.account-statement .dataTables_info {
+  color: white !important;
+}
+.account-statement table.dataTable tbody tr {
+  background-color: transparent;
+}
+.account-statement table.dataTable tbody tr td,
+.account-statement table.dataTable tbody tr th {
+  border-bottom: solid 1px white !important;
+}
+.account-statement .table > :not(caption) > * > * {
+  background-color: transparent !important;
+  color: white !important;
+}
+.account-statement table#dataTable.table thead {
+  background: transparent !important;
+  color: #FFE600 !important;
+  text-transform: uppercase !important;
+  text-align: left !important;
+}
+.account-statement .account-statement .table > :not(caption) > * > * {
+  color: #FFE600 !important;
+}
+.account-statement .dataTables_wrapper .dataTables_paginate .paginate_button.disabled,
+.account-statement .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover,
+.account-statement .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active,
+.account-statement .dataTables_wrapper .dataTables_paginate .paginate_button {
+  color: white !important;
+}
+.account-statement .account-statement table.dataTable tbody tr.odd {
+  color: #FFE600 !important;
+}
+
+.dashboard button.btn-secondary.btn-sm,
+.dashboard button.btn-danger.btn-sm,
+.dashboard button.btn-primary.btn-sm {
+  border: solid #FFE600 1px !important;
+}
+.dashboard button.btn-secondary.btn-sm i,
+.dashboard button.btn-danger.btn-sm i,
+.dashboard button.btn-primary.btn-sm i {
+  color: #FFE600 !important;
+}
+.dashboard button.btn-secondary.btn-sm:hover,
+.dashboard button.btn-danger.btn-sm:hover,
+.dashboard button.btn-primary.btn-sm:hover {
+  border: solid white 1px !important;
+  background-color: red;
+}
+.dashboard button.btn-secondary.btn-sm:hover i,
+.dashboard button.btn-danger.btn-sm:hover i,
+.dashboard button.btn-primary.btn-sm:hover i {
+  color: white !important;
+}
+
+.modal {
+  --bs-modal-bg: black!important;
+  --bs-modal-border-color:#FFE600!important;
+}
+.modal .modal-footer {
+  border-top: #FFE600 solid 1px;
+}
+.modal .modal-header {
+  border-bottom: #FFE600 solid 1px;
 }
 
 /*--------------------------------------------------------------

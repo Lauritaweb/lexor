@@ -28,7 +28,7 @@ $payments = $assessorModel->getPaymentsEverybody();
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Portal Asesor | Respaldar Argentina</title>
+  <title>Portal del administrador | Lexor abogados</title>
   <!-- Favicons -->
   <link href="../assets/img/favicon.svg" rel="icon">
   <!-- Google Fonts -->
@@ -58,7 +58,7 @@ $payments = $assessorModel->getPaymentsEverybody();
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Portal del Asesor</h1>
+      <h1>Portal del administrador</h1>
       <nav>
         <ol class="breadcrumb mt-4">
           <li class="breadcrumb-item"><a href="<?= $home ?>">Inicio</a></li>
@@ -71,7 +71,7 @@ $payments = $assessorModel->getPaymentsEverybody();
       <div class="row">
 
         <!-- Left side columns -->
-        <div class="col-lg-9">
+        <div class="col-lg-12">
           <div class="row">
 
             <!-- AFILIADOS 
@@ -119,7 +119,7 @@ $payments = $assessorModel->getPaymentsEverybody();
                 </div> -->
 
                 <div class="card-body">
-                  <h5 class="card-title">Estados de cuentas <span>| Este mes</span></h5>
+                  <h5 class="card-title text-key">Estados de cuentas <span>| Este mes</span></h5>
                   <section class="d-flex align-items-start">
                     
                     <div class="d-flex align-items-start me-3 border-end pe-3">
@@ -128,7 +128,7 @@ $payments = $assessorModel->getPaymentsEverybody();
                       </div>
                       <div class="ps-3">
                         <h6 class="text-primary"><?= $deudores + $no_deudores?></h6>
-                        <span class="text-primary small pt-1 fw-bold">Afiliados</span> 
+                        <span class="text-primary small pt-1 fw-bold">Abogados</span> 
                       </div>
                     </div>
 
@@ -138,7 +138,7 @@ $payments = $assessorModel->getPaymentsEverybody();
                       </div>
                       <div class="ps-3">
                         <h6 class="text-success"><?= $no_deudores  ?></h6>
-                        <span class="text-success small pt-1 fw-bold">Afiliados al día</span> 
+                        <span class="text-success small pt-1 fw-bold">Abogados al día</span> 
                       </div>
                     </div>
 
@@ -148,7 +148,7 @@ $payments = $assessorModel->getPaymentsEverybody();
                       </div>
                       <div class="ps-3">
                         <h6 class="text-danger"><?= $deudores ?></h6>
-                        <span class="text-danger small pt-1 fw-bold">Afiliados en mora</span> 
+                        <span class="text-danger small pt-1 fw-bold">Abogados en mora</span> 
                       </div>
                     </div>
 
@@ -175,18 +175,18 @@ $payments = $assessorModel->getPaymentsEverybody();
                   </ul>
                 </div>-->
 
-                <div class="card-body">
-                  <h5 class="card-title">Estado de cuenta <span>| Este mes</span></h5>
+                <div class="card-body bg-transparent account-statement">
+                  <h5 class="card-title text-key d-none">Estado de cuenta <span>| Este mes</span></h5>
 
-                  <table id="dataTable" class="table table-borderless">
+                  <table id="dataTable" class="table table-borderless bg-transparent w-100">                   
                     <thead>
                       <tr>
-                        <th scope="col">Afiliado</th>
-                        <th scope="col">Comprobante</th>
-                        <th scope="col">Fecha</th>
-                        <th scope="col">Concepto</th>
-                        <th scope="col">Importe solicitado</th>
-                        <th scope="col">Importe debitado</th>
+                        <th scope="col" class="text-key">Nombre</th>
+                        <th scope="col" class="text-key">DNI</th>
+                        <th scope="col" class="text-key">Alta</th>
+                        <th scope="col"class="text-key">Tipo</th>
+                        <!-- <th scope="col">Dirección</th>
+                        <th scope="col">Ciudad</th> -->
                         <th scope="col">Estado</th>
                       </tr>
                     </thead>
@@ -203,10 +203,10 @@ $payments = $assessorModel->getPaymentsEverybody();
                         <th><?= $name . ' ' . $last_name?></th>
                         <td><?= $id ?> </td>
                         <td><?= Utils::formatDateUser($payment_date) ?> </td>
-                        <td>FACTURA</td>
+                        <td>CIVIL</td>
                       
-                        <td> <?= $amount_requested ?> </td>
-                       <td> <?= $amount?> </td>
+                        <!-- <td> <?= $amount_requested ?> </td>
+                       <td> <?= $amount?> </td> -->
                        <td><?= $estado  ?></td>
                       </tr>
                       <?php } ?>
@@ -224,7 +224,7 @@ $payments = $assessorModel->getPaymentsEverybody();
         </div><!-- End Left side columns -->
 
         <!-- Right side columns -->
-        <div class="col-lg-3">
+        <div class="col-lg-3 d-none">
 
           <!-- HISTORIAL DE CITAS -->
           <div class="card">
@@ -242,7 +242,7 @@ $payments = $assessorModel->getPaymentsEverybody();
             </div>
 
             <div class="card-body">
-              <h5 class="card-title">Agenda de citas</h5>
+              <h5 class="card-title text-key">Agenda de citas</h5>
 
               <div class="activity">
                 <?php foreach($appointments as $appointment){
