@@ -507,11 +507,7 @@ function revisa_login(){
         a.id,
         adt.document_type,
         asp.description as specialization,
-        ap.province,
-        aba.bank_account_owner,
-        aba.cbu,
-        aba.bank_account_entity,
-        abt.bank_account_type,
+        ap.province,        
         a.name,
         a.last_name,
         a.document_number,
@@ -526,7 +522,8 @@ function revisa_login(){
         adt.id as id_document_type,
         asp.id as id_specialization,
         ap.id as id_province,
-		abt.id as id_account_type,
+				localities.locality,
+		
         YEAR(NOW()) - a.begin_year as experience,
         a.begin_year,
 		act.description as consultantType,
@@ -540,13 +537,11 @@ function revisa_login(){
         LEFT JOIN 
             affiliate_specialties asp ON a.id_specialization = asp.id
         LEFT JOIN 
-            affiliate_provinces ap ON a.id_province = ap.id
+            affiliate_provinces ap ON a.id_province = ap.id               
         LEFT JOIN 
-            affiliate_bank_account aba ON a.id = aba.id_affiliate
-        LEFT JOIN 
-            affiliate_bank_account_types abt ON aba.id_bank_account_type = abt.id
-        LEFT JOIN 
-            affiliate_consultant_type act ON act.id= a.id_consultation_type        
+            affiliate_consultant_type act ON act.id= a.id_consultation_type   
+				LEFT JOIN 
+							localities on localities.id = a.id_locality
         WHERE a.id = ?";
         
         $stmt = $this->db->prepare($query);
@@ -630,7 +625,8 @@ function revisa_login(){
      */
 
     public function findLawyer($tipo_abogado, $provincia, $localidad ) {        
-        $query = "SELECT name,
+        $query = "SELECT affiliates.id, 
+        name,
 	last_name,
 	id_specialization,
 	id_province,
