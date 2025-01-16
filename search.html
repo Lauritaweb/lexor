@@ -63,61 +63,27 @@
         <div class="row mx-auto">
             <h1 class="fs-3 text-center lh-3 secondary-font text-key mb-3">Encuentra el abogado ideal para resolver tu caso</h1>
                 <div class="col-md-4 mb-2 mb-md-0">
-                    <label for="inputState" class="form-label d-none">Tipo de abogado</label>
-                    <select id="inputState" class="form-select">
-                        <option selected>Tipo de abogado...</option>
-                        <option>Civil</option>
-                        <option>Penal</option>
-                        <option>Laboral</option>
-                        <option>Comercial</option>
-                        <option>De Familia</option>
-                        <option>Administrativo</option>
-                        <option>Tributario</option>
-                        <option>Ambiental</option>
-                        <option>De Propiedad Intelectual</option>
-                        <option>De Seguridad Social</option>
-                        <option>De Contratos</option>
-                        <option>Internacional</option>
-                        <option>De Derecho Informático</option>
+                    <label for="abogadoType" class="form-label d-none">Tipo de abogado</label>
+                    <select id="abogadoType" class="form-select">
+                        <option selected>Tipo de abogado...</option>                        
                     </select>
                 </div>
                 <div class="col-md-4 mb-2 mb-md-0">
-                    <label for="inputState" class="form-label d-none">Provincia</label>
-                    <select id="inputState" class="form-select">
+                    <label for="province" class="form-label d-none">Provincia</label>
+                    <select id="province" class="form-select">
                         <option selected>Provincia...</option>
-                        <option>Buenos Aires</option>
-                        <option>Córdoba</option>
-                        <option>Santa Fe</option>
-                        <option>Mendoza</option>
-                        <option>Entre Ríos</option>
-                        <option>Salta</option>
-                        <option>Misiones</option>
-                        <option>Chaco</option>
-                        <option>Corrientes</option>
-                        <option>Santiago del Estero</option>
-                        <option>Tucumán</option>
-                        <option>San Juan</option>
-                        <option>Jujuy</option>
+                        
                     </select>
                 </div> 
                 <div class="col-md-4 mb-2 mb-md-0">
-                    <label for="inputState" class="form-label d-none">Localidad</label>
-                    <select id="inputState" class="form-select">
+                    <label for="locality" class="form-label d-none">Localidad</label>
+                    <select id="locality" class="form-select">
                         <option selected>Localidad...</option>
-                        <option>La Plata</option>
-                        <option>Mar del Plata</option>
-                        <option>Bahía Blanca</option>
-                        <option>San Nicolás</option>
-                        <option>Tandil</option>
-                        <option>Quilmes</option>
-                        <option>Morón</option>
-                        <option>Avellaneda</option>
-                        <option>San Isidro</option>
-                        <option>Campana</option>
+                       
                     </select>
                 </div> 
                 <div class="col-12 mt-3">
-                    <a href="./results.html" class="btn btn-key mx-auto">
+                    <a class="btn btn-key mx-auto" id="searchButton">
                         Buscar
                     </a>
                 </div>           
@@ -177,6 +143,90 @@
             });
             });
         });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        const provinceSelect = document.getElementById('province');
+        const localitySelect = document.getElementById('locality');
+        const searchButton = document.getElementById('searchButton');
+        const abogadoTypeSelect = document.getElementById('abogadoType');
+
+        // Cargar provincias desde la base de datos
+        fetch('getProvinces.php')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(province => {
+                    const option = document.createElement('option');
+                    option.value = province.id;
+                    option.textContent = province.province;
+                    provinceSelect.appendChild(option);
+                });
+            });
+
+        // Escuchar cambios en el selector de provincias
+        provinceSelect.addEventListener('change', function () {
+            const provinceId = provinceSelect.value;
+
+            if (!provinceId) {
+                localitySelect.innerHTML = '<option value="" selected>Localidad...</option>';
+                localitySelect.disabled = true;
+                return;
+            }
+
+            // Cargar localidades según la provincia seleccionada
+            fetch(`getLocalities.php?provinceId=${provinceId}`)
+                .then(response => response.json())
+                .then(data => {
+                    localitySelect.innerHTML = '<option value="" selected>Localidad...</option>';
+                    data.forEach(locality => {
+                        const option = document.createElement('option');
+                        option.value = locality.id;
+                        option.textContent = locality.locality;
+                        localitySelect.appendChild(option);
+                    });
+                    localitySelect.disabled = false;
+                });
+        });
+
+        // Cargar provincias desde la base de datos
+        fetch('getSpecialties.php')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(specialty => {
+                    const option = document.createElement('option');
+                    option.value = specialty.id;
+                    option.textContent = specialty.description;
+                    console.log(specialty.description);
+                    abogadoType.appendChild(option);
+                });
+            });
+
+        // Manejar el botón de búsqueda
+        searchButton.addEventListener('click', function () {
+            const abogadoType = abogadoTypeSelect.value;
+            const provinceId = provinceSelect.value;
+            const localityId = provinceSelect.value;
+            const flag = true;
+
+            // Crear la URL con los parámetros
+            const queryParams = new URLSearchParams({
+                abogadoType,
+                provinceId,
+                localityId,
+                flag
+            }).toString();
+
+            // Redirigir a results.php con los parámetros en la URL
+            window.location.href = `results.php?${queryParams}`;
+
+            
+
+
+               
+            });
+        });
+
     </script>
 
 </body>

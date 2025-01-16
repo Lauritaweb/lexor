@@ -1,3 +1,14 @@
+<?php
+// Recuperar valores enviados por POST
+$abogadoType = $_GET['abogadoType'] ?? '';
+$provinceId = $_GET['provinceId'] ?? '';
+$localityId = $_GET['localityId'] ?? '';
+$flag = $_GET['flag'] ?? '';
+
+// Convertir el flag a booleano
+$triggerSearch = ($flag === 'true') ? 'true' : 'false';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,11 +20,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- main css -->
     <link rel="stylesheet" href="./assets/css/main.css">
+    
 </head>
 <body class="bg-alpha bg-dark">
    <div class="top-marquee bg-dark text-key main-font sticky-top">
         <p>
-            Tu conexión directa con el abogado que necesitás
+            Tu conexión directa con el abogado que necesitás           
         </p>
    </div><!-- end marquee -->
    <header>
@@ -426,7 +438,7 @@
                                         </li>
                                         <li class="text-key">
                                             <img src="./assets/img/clock-history.svg" alt="">
-                                            ${abogado.availability}
+                                            Disponible consultas urgentes
                                         </li>
                                     </ul>
                                     <a href="./details.php?id=${abogado.id}" class="btn btn-key">Ver perfil</a>
@@ -448,6 +460,37 @@
 
     </script>
     
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+// 2000 milisegundos = 2 segundos
+
+            // Recuperar los valores de PHP
+            const abogadoType = "<?php echo $abogadoType; ?>";
+            const provinceId = "<?php echo $provinceId; ?>";
+            const localityId = "<?php echo $localityId; ?>";
+            const triggerSearch = <?php echo $triggerSearch; ?>;
+            console.log("busco al tipo" + abogadoType);
+
+            setTimeout(() => {
+                document.getElementById('abogadoType').value = abogadoType;
+                document.getElementById('province').value = provinceId;
+                document.getElementById('locality').value = localityId;
+                
+
+                if (triggerSearch) {                    
+                    // Trigger manual del evento 'change'
+                    const provinceSelect = document.getElementById('province');
+                    const changeEvent = new Event('change');
+                    provinceSelect.dispatchEvent(changeEvent);    
+                    document.getElementById('searchButton').click(); // Simular un clic en el botón de búsqueda
+                  
+                }
+                console.log('Este mensaje aparece después de 2 segundos');
+            }, 2000); 
+            // Setear los valores de los desplegables
+            
+        });
+    </script>
 
 </body>
 </html>

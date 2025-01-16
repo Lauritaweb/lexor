@@ -629,15 +629,17 @@ function revisa_login(){
         name,
 	last_name,
 	id_specialization,
-	id_province,
+	affiliates.id_province,
 	id_locality,
 	url_file_image,
 	affiliate_specialties.description as specialty,
-		affiliate_provinces.province
+	affiliate_provinces.province,
+    localities.locality
 FROM
 	affiliates 
 	INNER JOIN affiliate_specialties on affiliate_specialties.id = affiliates.id_specialization
 	INNER JOIN affiliate_provinces on affiliate_provinces.id = affiliates.id_province
+    LEFT JOIN localities on localities.id = affiliates.id_locality
 WHERE
 	active = 2 ";
                       
@@ -646,7 +648,7 @@ WHERE
             $conditions[] = "id_specialization = " . intval($tipo_abogado);
         }
         if ($provincia != 0)  {
-            $conditions[] = "id_province = " . intval($provincia);
+            $conditions[] = "affiliates.id_province = " . intval($provincia);
         }
         if ($localidad != 0 && $localidad != '') {
             $conditions[] = "id_locality = " . intval($localidad);
