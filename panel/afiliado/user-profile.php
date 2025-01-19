@@ -466,21 +466,15 @@ function generateTimeOptions($selectedTime = null)
                
                 <!--Schedule / Horarios Pane -->
                 <div class="tab-pane fade pt-3" id="profile-schedule">
-
-
-
                   <div class="container mt-4">
                     <h2 class="mb-4 text-center">Editar Horarios</h2>
                     <form action="process_form.php" method="post">
                       <input type="hidden" name="actionSchedule" value="update">
-                      <?php
-                      if (isset($_GET['xIZZvbK2khQytHRK5h43HnuRh1aip7']) || (isset($id_affiliate) && $id_affiliate != null)) {
-                      ?>
+                      <?php if (isset($_GET['xIZZvbK2khQytHRK5h43HnuRh1aip7']) || (isset($id_affiliate) && $id_affiliate != null)): ?>
                         <input type="hidden" name="id_affiliate" value="<?= $id_affiliate ?>">
-                      <?php } ?>
+                      <?php endif; ?>
 
-                      <?php
-                      foreach ($scheduleData as $day => $data):
+                      <?php foreach ($scheduleData as $day => $data): 
                         $dayName = ucfirst($day);
                         $isClosed = $data['closed'];
                         $startTime = $data['start_time'];
@@ -490,25 +484,24 @@ function generateTimeOptions($selectedTime = null)
                           <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center mb-3">
                               <h5 class="card-title"><?= $dayName ?></h5>
-                              <!-- Checkbox de cerrado -->
                               <div class="form-check form-switch">
-                                <input type="checkbox" class="form-check-input" id="closed_<?= $day ?>"
-                                  name="closed[<?= $day ?>]" <?= $isClosed ? 'checked' : '' ?>
-                                  onchange="toggleTimeSelects('<?= $day ?>')">
+                                <input type="checkbox" class="form-check-input" id="closed_<?= $day ?>" 
+                                      name="closed[<?= $day ?>]" <?= $isClosed ? 'checked' : '' ?>
+                                      onchange="toggleTimeSelects('<?= $day ?>')">
                                 <label class="form-check-label closed-checkbox" for="closed_<?= $day ?>">Cerrado</label>
                               </div>
                             </div>
-                            <!-- Selects de horario -->
                             <div id="time-selects-<?= $day ?>" class="time-selects row g-2" style="display: <?= $isClosed ? 'none' : 'flex' ?>;">
                               <div class="col">
                                 <label>Desde:</label>
-                                <select name="start_time[<?= $day ?>]" class="form-select">
+                                <select id="start_time_<?= $day ?>" name="start_time[<?= $day ?>]" class="form-select" 
+                                        onchange="updateEndTimeOptions('<?= $day ?>')">
                                   <?= generateTimeOptions($startTime); ?>
                                 </select>
                               </div>
                               <div class="col">
                                 <label>Hasta:</label>
-                                <select name="end_time[<?= $day ?>]" class="form-select">
+                                <select id="end_time_<?= $day ?>" name="end_time[<?= $day ?>]" class="form-select">
                                   <?= generateTimeOptions($endTime); ?>
                                 </select>
                               </div>
@@ -519,14 +512,8 @@ function generateTimeOptions($selectedTime = null)
                       <button type="submit" class="btn btn-submit w-100">Guardar Cambios</button>
                     </form>
                   </div>
-
-
-
-
-
-
-
                 </div>
+
                 <!-- END Schedule / Horarios Pane -->
 
                 <div class="tab-pane fade pt-3" id="profile-change-password">
@@ -634,6 +621,8 @@ function generateTimeOptions($selectedTime = null)
       filePreview.innerHTML = `<p>Archivo seleccionado: ${fileName}</p>`;
     }
   </script>
+
+  
 
   <script>
     function validateForm() {
@@ -798,6 +787,7 @@ function generateTimeOptions($selectedTime = null)
       }
 
       return isValid;
+    }
 
       document.addEventListener('DOMContentLoaded', function() {
         const tabs = document.querySelectorAll('.nav-link');
@@ -814,6 +804,41 @@ function generateTimeOptions($selectedTime = null)
           document.getElementById('profile-overview').classList.add('active', 'show');
         }
       });
+
+      function updateEndTimeOptions(day) {
+        const startTimeSelect = document.getElementById(`start_time_${day}`);
+        const endTimeSelect = document.getElementById(`end_time_${day}`);
+        const selectedStartTime = startTimeSelect.value;
+
+        // Convertir el valor seleccionado a minutos
+        const [startHour, startMinutes] = selectedStartTime.split(':').map(Number);
+        const startTimeInMinutes = startHour * 60 + startMinutes;
+
+        // Iterar sobre las opciones de "Hasta" para deshabilitar las no válidas
+        Array.from(endTimeSelect.options).forEach(option => {
+          const [endHour, endMinutes] = option.value.split(':').map(Number);
+          const endTimeInMinutes = endHour * 60 + endMinutes;
+
+          if (endTimeInMinutes <= startTimeInMinutes) {
+            option.disabled = true;
+          } else {
+            option.disabled = false;
+          }
+        });
+
+        // Si el valor seleccionado en "Hasta" es inválido, ajustarlo
+        if (endTimeSelect.value && endTimeSelect.value.split(':').map(Number).reduce((h, m) => h * 60 + m) <= startTimeInMinutes) {
+          endTimeSelect.value = "";
+        }
+      }
+
+      function toggleTimeSelects(day) {
+        const closedCheckbox = document.getElementById(`closed_${day}`);
+        const timeSelects = document.getElementById(`time-selects-${day}`);
+        timeSelects.style.display = closedCheckbox.checked ? 'none' : 'flex';
+      }
+
+
   </script>
 
 
