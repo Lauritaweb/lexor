@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $affiliateModelo->createFull($id_document_type, $id_specialization, $id_province, $name, $last_name, $document_number, $about_me, $position,$email, $phone, $address, 
                                         $gender, $begin_year, $id_consultation_type, $newFileName, $degreeFileName);
 
-            $destino = "../admin/users-profiles.php?result=success";
+            $destino = "../admin/index.php?result=success";
             header("Location: $destino");
             exit();
        }else if ((Utils::isAssessorLogged() || Utils::isAdminLogged()) && isset($id_affiliate)){
@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $affiliateModelo->update( $id_affiliate, $id_document_type, $id_specialization, $id_province,
                                         $name, $last_name, $document_number, $about_me, $position,      
                                         $email, $phone, $address, $gender, $begin_year, $id_consultation_type, $newFileName, $degreeFileName);
-            $destino = "../admin/users-profiles.php?result=success";
+            $destino = "../admin/index.php?result=success";
            
             header("Location: $destino");
             exit();          
@@ -132,13 +132,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }else if ($_SERVER["REQUEST_METHOD"] == "GET") {
     if($_GET['action'] == "rm" ){
         $affiliateModelo->delete($_GET['id']);   
-        header("Location: ../admin/users-profiles.php");
+        header("Location: ../admin/index.php");
     }else if($_GET['action'] == "ac" ){
         $affiliateModelo->activate($_GET['id']);   
-        header("Location: ../admin/users-profiles.php");
+        header("Location: ../admin/index.php");
     } else if($_GET['action'] == "de" ){
         $affiliateModelo->deactivate($_GET['id']);   
-        header("Location: ../admin/users-profiles.php");
+        header("Location: ../admin/index.php");
     }      
 }
 

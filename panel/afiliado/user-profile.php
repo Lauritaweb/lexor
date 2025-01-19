@@ -5,9 +5,14 @@ use App\Utils\Utils;
 
 use App\Models\Affiliate;
 $userModel = new Affiliate();
+$sidebarHide = '';
 
 if (Utils::isAssessorLogged() || Utils::isAdminLogged()){
-  $action = $_REQUEST['action'];
+  $action = null;
+  $sidebarHide = 'class="toggle-sidebar"';
+  if (isset($_REQUEST['action']))
+    $action = $_REQUEST['action'];  
+    
 	if (isset($_GET['xIZZvbK2khQytHRK5h43HnuRh1aip7'])){
       $id_affiliate = $_GET['xIZZvbK2khQytHRK5h43HnuRh1aip7']; // Gestor logueado y desde pantalla listado afiliados
       $_SESSION['id_affiliate_edit'] = $id_affiliate;
@@ -76,7 +81,6 @@ function generateTimeOptions($selectedTime = null) {
   return $options;
 }
 ?>
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -129,7 +133,7 @@ function generateTimeOptions($selectedTime = null) {
     </style>
 
 
-<body>
+<body <?= $sidebarHide ?>>
   
 <?php  include('../header_sidebar.php');?>
 

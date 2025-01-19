@@ -4,18 +4,20 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use App\Utils\Utils;
 
-Utils::validateLoggedAssessor();
+Utils::validateLoggedAdmin();
 
 use App\Models\Affiliate;
 $userModel = new Affiliate();
 $activos = count($userModel->getLawyers(2));
 $pendientes = count($userModel->getLawyers(1));
 $deshabilitados = count($userModel->getLawyers(0));
+
+$affiliates = $userModel->getAll();
 ?>
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="utf-8">
@@ -43,7 +45,7 @@ $deshabilitados = count($userModel->getLawyers(0));
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 </head>
-<body>
+<body class="toggle-sidebar">
 
 <?php include('../header_sidebar.php');?>
 
@@ -54,7 +56,7 @@ $deshabilitados = count($userModel->getLawyers(0));
       <nav>
         <ol class="breadcrumb mt-4">
           <li class="breadcrumb-item"><a href="./index.php">Inicio</a></li>
-          <li class="breadcrumb-item active">Portal</li>
+          <li class="breadcrumb-item active">Portal></li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -99,7 +101,7 @@ $deshabilitados = count($userModel->getLawyers(0));
                         <i class="bi bi-check-circle text-success"></i>
                       </div>
                       <div class="ps-3">
-                        <h6 class="text-success"><?= $activos  ?></h6>
+                        <h6 class="text-success"><?= $activos ?></h6>
                         <span class="text-success small pt-1 fw-bold">Activos</span> 
                       </div>
                     </div>
@@ -144,6 +146,83 @@ $deshabilitados = count($userModel->getLawyers(0));
 
       </div>
     </section>
+    <section class="section dashboard">
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-12">
+          <div class="row">
+
+            <!-- ESTADO DE CUENTA LISTADO -->
+            <div class="col-12">
+              <div class="card recent-sales overflow-auto">
+
+                <div class="card-body pb-3 account-statement">
+
+                  <div class="d-flex my-3">
+                    <button type="button" class="btn btn-success" id="btn-add">
+                      <i class="bi bi-plus-circle"></i> Agregar abogado
+                    </button>
+                    
+
+                  </div>
+
+                  <table id="dataTable" class="table table-borderless pt-4 mt-4">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                      <!--  <th scope="col">Fecha de alta</th> -->
+                        <th scope="col">Especialidad</th>
+                        <th scope="col">Provincia</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php foreach($affiliates as $affiliate) { extract($affiliate); ?>
+                      <tr style="text-align:left">
+                        <td><?= $name ?></td>
+                        <td><?= $last_name ?></td>
+                        <!-- <td><?= Utils::formatDateUser($datetime); ?></td> -->
+                        <td><?= $specialiation ?></td>
+                        <td><?= $province ?></td>
+                        <td>
+                          <?php if ($active == 2) { ?>
+                            <span class="badge bg-success">Activo</span>
+                          <?php } else if ($active == 1) { ?>
+                            <span class="badge bg-info">Pendiente</span>
+                          <?php } else{ ?>
+                            <span class="badge bg-danger">Inactivo</span>
+                          <?php }  ?>
+                        </td>
+                        <td class="btns-actions d-flex g-1">
+                          <button type="button" class="btn btn-secondary btn-sm btn-view me-1" data-val="<?= $id ?>"><i class="bi bi-search" title="Ver"></i></button>
+                          <button type="button" class="btn btn-primary btn-sm btn-view-degree me-1" data-val="<?= $url_file_degree ?>"><i class="bi bi-book" title="Ver titulo"></i></button>
+                          <button type="button" class="btn btn-primary btn-sm btn-edit me-1" data-val="<?= $id ?>"><i class="bi bi-pencil" title="Editar"></i></button>
+                          <button type="button" class="btn btn-danger btn-sm btn-delete me-1" data-bs-toggle="modal" data-bs-target="#verticalycentered" data-val="<?= $id ?>"><i class="bi bi-trash" title="Eliminar"></i></button>
+                          <?php if ($active == 1) { ?>
+                              <button type="button" class="btn btn-danger btn-sm btn-activate" data-bs-toggle="modal" data-bs-target="#verticalycenteredActivate" data-val="<?= $id ?>"><i class="bi bi-check" title="Activar"></i></button>
+                          <?php } else if  ($active == 2) { ?>
+                              <button type="button" class="btn btn-danger btn-sm btn-deactivate" data-bs-toggle="modal" data-bs-target="#verticalycenteredDeactivate" data-val="<?= $id ?>"><i class="bi bi-x-circle" title="Desactivar"></i></button>
+                          <?php } ?> 
+                        </td>
+                      </tr>
+                      <?php } ?>
+                    </tbody>
+                  </table>
+
+
+                </div>
+
+              </div>
+            </div><!-- END ESTADO DE CUENTA LISTADO -->
+
+          </div>
+        </div><!-- End Left side columns -->
+
+      </div>
+    </section>
 
   </main><!-- End #main -->
 
@@ -171,6 +250,146 @@ $deshabilitados = count($userModel->getLawyers(0));
 
   <!-- Main JS File -->
   <script src="../assets/js/main.js?v=1"></script>
+
+  
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+
+
+<!-- MODAL activar usuario -->
+<div class="modal fade" id="verticalycenteredActivate" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-success">Activar abogado</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <i class="bi bi-exclamation-circle-fill text-success mx-auto d-block fs-1"></i>
+        <p class="fw-bold">¿Confirma que desea activar al abogado?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success btn-confirm-activate" data-bs-dismiss="modal">Activar abogado</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END MODAL activar usuario -->
+
+
+<!-- MODAL ELIMINAR USUARIO -->
+<div class="modal fade" id="verticalycentered" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger">Eliminar abogado</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <i class="bi bi-exclamation-circle-fill text-danger mx-auto d-block fs-1"></i>
+        <p class="fw-bold">¿Confirma que desea eliminar al abogado?</p>
+        <p class="fw-bold">Esta operación no se puede deshacer</p>
+    
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger btn-confirm-delete" data-bs-dismiss="modal">Eliminar abogado</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END MODAL ELIMINAR USUARIO -->
+
+<!-- MODAL DESACTIVAR USUARIO -->
+<div class="modal fade" id="verticalycenteredDeactivate" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger">desactivar abogado</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <i class="bi bi-exclamation-circle-fill text-danger mx-auto d-block fs-1"></i>
+        <p class="fw-bold">¿Confirma que desea desactivar al abogado?</p>        
+    
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger btn-confirm-deactivate" data-bs-dismiss="modal">Desactivar abogado</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END MODAL ELIMINAR USUARIO -->
+
+  <script>
+    document.getElementById('btn-add').onclick = function() {
+        window.location.href = '../afiliado/user-profile.php?action=new'; 
+    };
+    document.querySelectorAll('.btn-view').forEach(function(button) {  
+        button.addEventListener('click', function() {
+            var id = this.getAttribute('data-val');
+            window.location.href = '../afiliado/user-profile.php?action=view&xIZZvbK2khQytHRK5h43HnuRh1aip7=' + id;
+        });
+    });
+    document.querySelectorAll('.btn-edit').forEach(function(button) {  
+        button.addEventListener('click', function() {
+            var id = this.getAttribute('data-val');
+            window.location.href = '../afiliado/user-profile.php?action=edit&xIZZvbK2khQytHRK5h43HnuRh1aip7=' + id;
+        });
+    });
+    document.querySelectorAll('.btn-view-degree').forEach(function(button) {  
+        button.addEventListener('click', function() {
+            var file = this.getAttribute('data-val');
+            if (file != undefined && file != "")
+              window.open('../afiliado/uploads/'+file, '_blank'); 
+        });
+    });
+
+    let deleteId;
+
+document.querySelectorAll('.btn-delete').forEach(function(button) {
+  button.addEventListener('click', function() {
+    deleteId = this.getAttribute('data-val');
+  });
+});
+
+document.querySelector('.btn-confirm-delete').addEventListener('click', function() {
+  if (deleteId) {
+    window.location.href = '../afiliado/process_form.php?action=rm&id=' + deleteId;
+  }
+});
+
+let activateId;
+
+document.querySelectorAll('.btn-activate').forEach(function(button) {
+  button.addEventListener('click', function() {
+    activateId = this.getAttribute('data-val');
+  });
+});
+
+document.querySelector('.btn-confirm-activate').addEventListener('click', function() {
+  if (activateId) {
+    window.location.href = '../afiliado/process_form.php?action=ac&id=' + activateId;
+  }
+});
+
+document.querySelectorAll('.btn-deactivate').forEach(function(button) {
+  button.addEventListener('click', function() {
+    activateId = this.getAttribute('data-val');
+  });
+});
+
+document.querySelector('.btn-confirm-deactivate').addEventListener('click', function() {
+  if (activateId) {
+    window.location.href = '../afiliado/process_form.php?action=de&id=' + activateId;
+  }
+});
+
+
+  </script>
+
 
 </body>
 

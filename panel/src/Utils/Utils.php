@@ -41,7 +41,11 @@ class Utils
         if(!Utils::isAssessorLogged())
             header('../salir.php');
     }
-
+    
+    public static function validateLoggedAdmin(){
+        if(!Utils::isAdminLogged())
+            header('Location: ../salir.php');            
+    }
     
     public static function validateLoggedAffiliate(){
         if(!Utils::isAffiliateLogged())

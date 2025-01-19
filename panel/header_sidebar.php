@@ -9,17 +9,17 @@ if (Utils::isAssessorLogged() || Utils::isAdminLogged()){
  <header id="header" class="header fixed-top d-flex align-items-center">
 
 <div class="d-flex align-items-center justify-content-between">
-  <a href="./index.php" class="logo d-flex align-items-center">
+  <a href="<?= $home; ?>index.php" class="logo d-flex align-items-center">
     <img src="../assets/img/logo.svg" alt="">
   </a>
   <i class="bi bi-list toggle-sidebar-btn"></i>
 </div><!-- End Logo -->
 
-<nav  class="header-nav ms-auto">  
+<nav class="header-nav ms-auto">  
   <ul>
     <li class="nav-item dropdown pe-3">
       <!-- users avatar -->
-      <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+      <a class="nav-link nav-profile d-flex align-items-centheader_sidebarer pe-0" href="#" data-bs-toggle="dropdown">
         <img src="../assets/img/avatar.png" alt="Profile" class="rounded-circle">
         <span class="d-none d-md-block dropdown-toggle ps-2"><?= $_SESSION['name'] ?></span>
       </a><!-- End Profile Iamge Icon -->
@@ -33,7 +33,7 @@ if (Utils::isAssessorLogged() || Utils::isAdminLogged()){
           <hr class="dropdown-divider">
         </li>
         <li>
-          <a class="dropdown-item d-flex align-items-center" href="https://lexorabogados.com.ar/">
+          <a class="dropdown-item d-flex align-items-center" href="../salir.php">
               <i class="bi bi-box-arrow-right"></i>
               <span>Cerrar sesión</span>
             </a>
@@ -43,30 +43,7 @@ if (Utils::isAssessorLogged() || Utils::isAdminLogged()){
   </ul>
 </nav><!-- End Icons Navigation -->
 </header><!-- End Header -->
-  <!-- ======= Sidebar ======= -->
-  <aside id="sidebar" class="sidebar">
-    <ul class="sidebar-nav" id="sidebar-nav">
-
-      <li class="nav-item ">
-        <a href="../admin/index.php" class="text-key fw-bold">
-          <i class="bi bi-grid"></i>
-          <span>Portal <?= $perfil ?> Lexor </span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="../admin/users-profiles.php">
-          <i class="bi bi-person"></i>
-          <span>Gestión de abogados</span>
-        </a>
-      </li>
-
-      <li class="nav-item d-none">
-        <a class="nav-link collapsed" href="../admin/dashboard-appointments.php">
-          <i class="bi bi-calendar2-check"></i>
-          <span>Gestión de citas - Solo Perfil Abogado</span>
-        </a>
-      </li>      
+  
 
 <?php } else if (Utils::isAffiliateLogged()){ ?>
   <!-- ======= Header ======= -->
@@ -134,7 +111,7 @@ if (Utils::isAssessorLogged() || Utils::isAdminLogged()){
         </a>
       </li>    
 
-  <?php } ?>
+<?php } ?>
       <li class="nav-item">
         <a class="nav-link collapsed" href="../salir.php">
           <i class="bi bi-box-arrow-in-right"></i>
