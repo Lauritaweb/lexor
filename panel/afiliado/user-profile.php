@@ -250,7 +250,7 @@ function generateTimeOptions($selectedTime = null) {
     <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Foto de perfil</label>
     <div class="col-md-8 col-lg-9">
       <?php 
-      if ($url_file_image != null)
+      if (isset($url_file_image) && $url_file_image != null)
         $url_file_image = 'uploads/' . $url_file_image;
       else     
         $url_file_image = "../assets/img/avatar.png";
