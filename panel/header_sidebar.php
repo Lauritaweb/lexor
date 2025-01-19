@@ -1,15 +1,9 @@
 <?php 
 use App\Utils\Utils;
 
-if (Utils::isAssessorLogged() || Utils::isAdminLogged()){
-  if (Utils::isAssessorLogged()){
-    $perfil = "Asesor";
-    $home = "../asesor/";
-  }    
-  if (Utils::isAdminLogged()){
+if (Utils::isAssessorLogged() || Utils::isAdminLogged()){ 
     $perfil = "Admin";
     $home = "../admin/";    
-  }
 ?>
  <!-- ======= Header ======= -->
  <header id="header" class="header fixed-top d-flex align-items-center">
