@@ -22,7 +22,7 @@ class Affiliate
     FROM 	affiliates
     WHERE 	email 		 = ?   
     AND 	password 	 = (SELECT AES_ENCRYPT(?, ?))    
-    AND 	active		= 1";	
+    AND 	active		in (1,2)";	
     
     $stmt = $this->db->prepare($query);
         
