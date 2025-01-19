@@ -13,7 +13,7 @@ var_dump($_REQUEST);
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     extract($_POST);        
  
-    if(isset($passAction) && $_POST['passAction'] == "update"){
+    if(isset($passAction) && $_POST['passAction'] == "update"){ // Actualizacion de contraseña
         $urlComplementary = "";
         if (isset($_SESSION['id_affiliate']))
             $id_affiliate = $_SESSION['id_affiliate'];            
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $destino = " user-profile.php$urlComplementary";
       
         header("Location: $destino");
-    }else if (isset($_POST['actionSchedule']) && $_POST['actionSchedule'] == "update" ){
+    }else if (isset($_POST['actionSchedule']) && $_POST['actionSchedule'] == "update" ){ // Actualizacion de horarios
         $affiliateModelo->deleteScheduleDate($id_affiliate);
         
         foreach ($_POST['start_time'] as $day => $start_time) {
@@ -47,11 +47,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } 
     else if (empty($update) ){ 
        // ! CREATE
+
+       var_dump($_POST);
        if ((Utils::isAssessorLogged() || Utils::isAdminLogged()) && !isset($id_affiliate)){ 
             $newFileName = uploadImage();
             
-            $affiliateModelo->createFull($id_document_type, $id_specialization, $id_province, $name, $last_name, $document_number, $about_me, $position,$email, $phone, $address, 
+            $id_affiliate = $affiliateModelo->createFull($id_document_type, $id_specialization, $id_province, $name, $last_name, $document_number, $about_me, $position,$email, $phone, $address, 
                                         $gender, $begin_year, $id_consultation_type, $newFileName, $degreeFileName);
+
+            // $affiliateModelo->deleteSpecialization($id_affiliate);
+        
+            foreach ($_POST['id_specialization'] as $id_specialization_actual) {                
+                $affiliateModelo->createSpecialization($id_affiliate, $id_specialization_actual);
+            }
 
             $destino = "../admin/index.php?result=success";
             header("Location: $destino");
@@ -81,6 +89,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
         }
     }else{ // ! UPDATE
+        var_dump($_POST);
+       
         // Obtengo el id_affiliate de acuerdo si esta logueado un usuario o si es el asesor
         $urlComplementary = "";
         if (isset($_SESSION['id_affiliate']))
@@ -97,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // die('Por favor, complete todos los campos.');
                 // ToDo: mejorar esta rta
             }
-        }
+        }      
 
         $newFileName = uploadImage();
 
@@ -110,15 +120,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $generalFilePath = $uploadDir . $degreeFileName;
 
             if (move_uploaded_file($generalFile['tmp_name'], $generalFilePath)) {
-                echo "Archivo subido exitosamente: $degreeFileName";
+                // echo "Archivo subido exitosamente: $degreeFileName";
             } else {
-                echo "Error al subir el archivo.";
+               // echo "Error al subir el archivo.";
             }
         }
         
         if ($affiliateModelo->update( $id_affiliate, $id_document_type, $id_specialization, $id_province,
                 $name, $last_name, $document_number, $about_me, 
                 $email, $phone, $address, $gender, $begin_year, $id_consultation_type, $newFileName, $degreeFileName)) {
+            
+            $affiliateModelo->deleteSpecialization($id_affiliate);
+            foreach ($_POST['id_specialization'] as $id_specialization_actual) {                
+                $affiliateModelo->createSpecialization($id_affiliate, $id_specialization_actual);
+            }
+           
            // echo "User update successfully.";
         } else {
             // echo "Failed to update user.";
@@ -130,13 +146,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    
    header("Location: $destino");
 }else if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    if($_GET['action'] == "rm" ){
+    if(isset($_GET['action']) && $_GET['action'] == "rm" ){
         $affiliateModelo->delete($_GET['id']);   
         header("Location: ../admin/index.php");
-    }else if($_GET['action'] == "ac" ){
+    }else if(isset($_GET['action']) &&  $_GET['action'] == "ac" ){
         $affiliateModelo->activate($_GET['id']);   
         header("Location: ../admin/index.php");
-    } else if($_GET['action'] == "de" ){
+    } else if(isset($_GET['action']) &&  $_GET['action'] == "de" ){
         $affiliateModelo->deactivate($_GET['id']);   
         header("Location: ../admin/index.php");
     }      
@@ -171,15 +187,15 @@ function uploadImage(){
         // Mover archivo a la carpeta de destino
         $destPath = $uploadDir . $newFileName;
         if (move_uploaded_file($fileTmpPath, $destPath)) {
-            echo "Imagen subida exitosamente: $newFileName";
+           // echo "Imagen subida exitosamente: $newFileName";
         } else {
-            echo "Error al mover el archivo.";
+           // echo "Error al mover el archivo.";
         }
     } else {
-        echo "Extensión no permitida. Solo se permiten: " . implode(', ', $allowedExtensions);
+        // echo "Extensión no permitida. Solo se permiten: " . implode(', ', $allowedExtensions);
     }
     } else {
-    echo "No se subió ninguna imagen o hubo un error.";
+        // echo "No se subió ninguna imagen o hubo un error.";
     }
 
     return $newFileName;

@@ -27,8 +27,11 @@ if (Utils::isAssessorLogged() || Utils::isAdminLogged()) {
   $id_affiliate = $_SESSION['id_affiliate']; // me guardo el usuario logueado
   $affiliate = $userModel->get($id_affiliate);
   $scheduleData = $userModel->getScheduleData($id_affiliate);
-
   extract($affiliate);
+
+  $id_specialization = $userModel->getSpecialties($id_affiliate);  
+  $selectedSpecializations = array_column($id_specialization, 'description'); //  Extraer las descripciones de las especialidades seleccionadas y Cambia 'description' a 'id'
+  
 } else
   $name = "";
 
@@ -41,10 +44,10 @@ if ((Utils::isAssessorLogged() || Utils::isAdminLogged()) && $action == "view")
   $isViewing = true;
 
 $isEditing = false;
-if ((Utils::isAssessorLogged() || Utils::isAdminLogged()) && ($action == "edit" || $action == "new"))
+if ((Utils::isAssessorLogged() || Utils::isAdminLogged()) && isset($action) && ($action == "edit" || $action == "new"))
   $isEditing = true;
 
-if (Utils::isAffiliateLogged() && $_GET['result'] == "createSuccess") // Para que luego del createLight sigas editando
+if (Utils::isAffiliateLogged() && isset($_GET['result']) && $_GET['result'] == "createSuccess") // Para que luego del createLight sigas editando
   $isEditing = true;
 
 $document_types = $userModel->getAllDocumentTypes();
@@ -109,6 +112,10 @@ function generateTimeOptions($selectedTime = null)
   <link href="../assets/vendor/simple-datatables/style.css" rel="stylesheet">
   <!-- Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
+
+  <!-- Para el multiselect -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 
@@ -208,7 +215,11 @@ function generateTimeOptions($selectedTime = null)
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Especializacion</div>
-                    <div class="col-lg-9 col-md-8"><?= $specialization ?></div>
+                    <div class="col-lg-9 col-md-8"><?php 
+                    foreach ($selectedSpecializations as $specialtiesActual){
+                      echo " - $specialtiesActual";
+                    }
+                    ?></div>
                   </div>
 
                   <div class="row">
@@ -345,24 +356,38 @@ function generateTimeOptions($selectedTime = null)
                       </div>
                     </div>
 
+                   
+
                     <div class="row mb-3">
                       <label for="Specialization" class="col-md-4 col-lg-3 col-form-label">Especialidad
                         <span class="text-danger">*</span>
                       </label>
                       <div class="col-md-8 col-lg-9">
-                        <select id="id_specialization" name="id_specialization" class="form-select">
-                          <?php
-                          foreach ($specialties as $registry) {
-                            if (isset($id_specialization) && $registry['id'] == $id_specialization)
-                              $selected = "selected";
-                            else
-                              $selected = "";
-                          ?>
-                            <option value="<?= $registry['id'] ?>" <?= $selected ?>><?= $registry['description'] ?></option>
-                          <?php } ?>
-                        </select>
+                        <div class="dropdown">
+                          <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="specializationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            Seleccione Especialidades
+                          </button>
+                          <ul class="dropdown-menu w-100" aria-labelledby="specializationDropdown">
+                            <?php foreach ($specialties as $registry): ?>
+                              <li>
+                                <label class="dropdown-item" onclick="event.stopPropagation()">
+                                  <input 
+                                    type="checkbox" 
+                                    name="id_specialization[]" 
+                                    value="<?= $registry['id'] ?>" 
+                                    <?= in_array($registry['description'], $selectedSpecializations) ? "checked" : "" ?>
+                                  >
+                                  <?= $registry['description'] ?>
+                                </label>
+                              </li>
+                            <?php endforeach; ?>
+                          </ul>
+                        </div>
                       </div>
                     </div>
+
+
+
 
                     <div class="row mb-3">
                       <label for="begin_year" class="col-md-4 col-lg-3 col-form-label">Año de inicio

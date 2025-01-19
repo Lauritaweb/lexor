@@ -131,13 +131,53 @@ function revisa_login(){
         );        
 
         if ($result = $stmt->execute()) {
+            $lastId = $this->db->insert_id;
+            $stmt->close();
+            return $lastId;
+        } else {
+            $stmt->close();
+            return false;
+        }       
+    }  
+
+
+    public function createSpecialization($id_affiliate, $id_specialization
+    ) { 
+        $query = "
+        INSERT INTO affiliate_specilities_assigned (id_affiliate, id_speciality)
+        VALUES(?, ?)
+        ";
+
+        $stmt = $this->db->prepare($query);
+    
+        if ($stmt === false) 
+            die('Prepare failed: ' . $this->db->error);  
+        
+      
+        $stmt->bind_param(
+            "ii",
+            $id_affiliate, 
+            $id_specialization
+        );       
+
+        if ($stmt->execute()) {
             $stmt->close();
             return true;
         } else {
             $stmt->close();
             return false;
         }       
-    }  
+    }
+
+    function deleteSpecialization($id_affiliate){
+        $query = "DELETE FROM affiliate_specilities_assigned WHERE id_affiliate = $id_affiliate";
+    
+        $stmt = $this->db->prepare($query);
+        if ($stmt === false) 
+            die('Prepare failed: ' . $this->db->error);        
+        
+        $stmt->execute();
+    }
 
     public function emailExists($email) {
         $query = "SELECT * FROM `affiliates` WHERE email = ?";
@@ -199,7 +239,7 @@ function revisa_login(){
     
         $stmt = $this->db->prepare($query);
         if ($stmt === false) 
-            die('Prepare failed: ' . $db->error);        
+            die('Prepare failed: ' . $this->db->error);        
         
         $stmt->execute();
     }
@@ -567,6 +607,39 @@ function revisa_login(){
         $stmt->close();
 
         return $affiliate;
+    }
+
+    public function getSpecialties($id) {
+        $query = "SELECT affiliate_specilities_assigned.id_affiliate,
+                        affiliate_specialties.description
+                        from affiliate_specilities_assigned
+                        INNER JOIN affiliate_specialties on affiliate_specilities_assigned.id_speciality = affiliate_specialties.id
+                        where affiliate_specilities_assigned.id_affiliate = ?";
+        
+        $stmt = $this->db->prepare($query);
+
+        if ($stmt === false) {
+            die('Prepare failed: ' . $this->db->error);
+        }
+
+        $stmt->bind_param("i", $id);
+
+        if (!$stmt->execute()) {
+            die('Execute failed: ' . $stmt->error);
+        }
+
+        $result = $stmt->get_result();
+
+        $specialties = [];
+        while ($row = $result->fetch_assoc()) {
+            $specialties[] = $row;
+        }
+       
+        
+
+        $stmt->close();
+
+        return $specialties;
     }
 
 
