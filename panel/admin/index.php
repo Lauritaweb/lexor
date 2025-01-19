@@ -6,8 +6,11 @@ use App\Utils\Utils;
 
 Utils::validateLoggedAssessor();
 
-$activos = $inactivos = 0;
-
+use App\Models\Affiliate;
+$userModel = new Affiliate();
+$activos = count($userModel->getLawyers(2));
+$pendientes = count($userModel->getLawyers(1));
+$deshabilitados = count($userModel->getLawyers(0));
 ?>
 
 
@@ -17,7 +20,7 @@ $activos = $inactivos = 0;
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Portal Admin | Respaldar Argentina</title>
+  <title>Portal Admin | Lexor Abogados</title>
   <!-- Favicons -->
   <link href="../assets/img/favicon.svg" rel="icon">
   <!-- Google Fonts -->
@@ -86,7 +89,7 @@ $activos = $inactivos = 0;
                         <i class="bi bi-people text-primary"></i>
                       </div>
                       <div class="ps-3">
-                        <h6 class="text-primary"><?= $activos + $inactivos?></h6>
+                        <h6 class="text-primary"><?= $activos + $pendientes + $deshabilitados ?></h6>
                         <span class="text-primary small pt-1 fw-bold">Total</span> 
                       </div>
                     </div>
@@ -103,11 +106,21 @@ $activos = $inactivos = 0;
 
                     <div class="d-flex align-items-start">
                       <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                        <i class="bi bi-exclamation-triangle text-danger"></i>
+                        <i class="bi bi-exclamation-triangle text-warning"></i>
                       </div>
                       <div class="ps-3">
-                        <h6 class="text-danger"><?= $inactivos ?></h6>
-                        <span class="text-danger small pt-1 fw-bold">Inactivos</span> 
+                        <h6 class="text-warning"><?= $pendientes ?></h6>
+                        <span class="text-warning small pt-1 fw-bold">Pendientes</span> 
+                      </div>
+                    </div>
+
+                    <div class="d-flex align-items-start">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi  bi-x-octagon-fill text-danger"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6 class="text-danger"><?= $deshabilitados ?></h6>
+                        <span class="text-danger small pt-1 fw-bold">Deshabilitados</span> 
                       </div>
                     </div>
 

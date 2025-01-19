@@ -624,7 +624,7 @@ function revisa_login(){
      * 
      */
 
-    public function findLawyer($tipo_abogado, $provincia, $localidad ) {        
+    public function findLawyer($tipo_abogado, $provincia, $localidad, $status = 2 ) {        
         $query = "SELECT affiliates.id, 
         name,
 	last_name,
@@ -637,11 +637,11 @@ function revisa_login(){
     localities.locality
 FROM
 	affiliates 
-	INNER JOIN affiliate_specialties on affiliate_specialties.id = affiliates.id_specialization
-	INNER JOIN affiliate_provinces on affiliate_provinces.id = affiliates.id_province
+	LEFT JOIN affiliate_specialties on affiliate_specialties.id = affiliates.id_specialization
+	LEFT JOIN affiliate_provinces on affiliate_provinces.id = affiliates.id_province
     LEFT JOIN localities on localities.id = affiliates.id_locality
 WHERE
-	active = 2 ";
+	active = $status ";
                       
         $conditions = [];
         if ($tipo_abogado != 0) {
@@ -699,6 +699,10 @@ WHERE
       
         $stmt->close();
         return $localities;
+    }
+
+    public function getLawyers($active = 2){
+        return $this->findLawyer(null, null, null, $active);
     }
 
 
