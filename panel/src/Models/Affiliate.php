@@ -520,7 +520,7 @@ function revisa_login(){
         affiliate_bank_account_types abt ON aba.id_bank_account_type = abt.id
 	LEFT JOIN 
         affiliate_consultant_type act ON act.id= a.id_consultation_type        
-        where active != 0
+        -- where active != 0
         order by last_name asc
         ";
         $stmt = $this->db->prepare($query);
