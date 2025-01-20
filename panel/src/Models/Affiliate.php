@@ -250,7 +250,7 @@ function revisa_login(){
     
         $stmt = $this->db->prepare($query);
         if ($stmt === false) {
-            die('Prepare failed: ' . $db->error);
+            die('Prepare failed: ' . $this->db->error);
         }
     
         $stmt->execute();
