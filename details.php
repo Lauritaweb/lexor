@@ -60,6 +60,8 @@
   use App\Models\Affiliate;
   $affiliateModelo = new Affiliate(); 
   $lawyer = $affiliateModelo->get($_GET['id']);
+  $id_specialization = $affiliateModelo->getSpecialties($_GET['id']);  
+  $selectedSpecializations = array_column($id_specialization, 'description'); //  Extraer las descripciones de las especialidades seleccionadas y Cambia 'description' a 'id'
   /*
   echo "<pre>";
   var_dump($lawyer);
@@ -162,7 +164,9 @@
                 <ul class="fs-6 d-flex text-white w-100">
                     <li>
                         <img src="./assets/img/briefcase-fill.svg" alt="">
-                        <?= $specialization ?>
+                        <?php  foreach ($selectedSpecializations as $specialtiesActual){
+                      echo " $specialtiesActual <br>";
+                    } ?>
                     </li>
                     <li>
                         <img src="./assets/img/geo-alt-fill.svg" alt="">
