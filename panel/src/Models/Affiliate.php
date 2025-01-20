@@ -699,26 +699,24 @@ function revisa_login(){
 
     public function findLawyer($tipo_abogado, $provincia, $localidad, $status = 2 ) {        
         $query = "SELECT affiliates.id, 
-        name,
-	last_name,
-	id_specialization,
-	affiliates.id_province,
-	id_locality,
-	url_file_image,
-	affiliate_specialties.description as specialty,
-	affiliate_provinces.province,
-    localities.locality
-FROM
-	affiliates 
-	LEFT JOIN affiliate_specialties on affiliate_specialties.id = affiliates.id_specialization
-	LEFT JOIN affiliate_provinces on affiliate_provinces.id = affiliates.id_province
-    LEFT JOIN localities on localities.id = affiliates.id_locality
-WHERE
-	active = $status ";
-                      
+                name,
+                last_name,                
+                affiliates.id_province,
+                id_locality,
+                url_file_image,       
+                GROUP_CONCAT(assigned_specialties.description SEPARATOR ', ') AS specialty,
+                affiliate_provinces.province,
+                localities.locality
+                FROM affiliates 
+                LEFT JOIN affiliate_specilities_assigned ON affiliate_specilities_assigned.id_affiliate = affiliates.id
+                LEFT JOIN affiliate_specialties AS assigned_specialties ON affiliate_specilities_assigned.id_speciality = assigned_specialties.id
+                LEFT JOIN affiliate_provinces ON affiliate_provinces.id = affiliates.id_province
+                LEFT JOIN localities ON localities.id = affiliates.id_locality
+                WHERE active = $status
+";                    
         $conditions = [];
         if ($tipo_abogado != 0) {
-            $conditions[] = "id_specialization = " . intval($tipo_abogado);
+            $conditions[] = "affiliate_specilities_assigned.id_speciality = " . intval($tipo_abogado);
         }
         if ($provincia != 0)  {
             $conditions[] = "affiliates.id_province = " . intval($provincia);
@@ -731,6 +729,7 @@ WHERE
             $query .= " AND " . implode(" AND ", $conditions);
         }
 
+        $query .= " GROUP BY affiliates.id";       
 /*
         echo $query;
         var_dump($tipo_abogado, $provincia, $localidad);
