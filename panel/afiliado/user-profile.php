@@ -21,6 +21,8 @@ if (Utils::isAssessorLogged() || Utils::isAdminLogged()) {
     $affiliate = $userModel->get($id_affiliate);
     $scheduleData = $userModel->getScheduleData($id_affiliate);
     extract($affiliate);
+    $id_specialization = $userModel->getSpecialties($id_affiliate);  
+  $selectedSpecializations = array_column($id_specialization, 'description'); //  Extraer las descripciones de las especialidades seleccionadas y Cambia 'description' a 'id'
   } else
     $name = $last_name = $document_number = $position =  $force = $province = $address = $phone = $email = $bank_account_owner =  $cbu = $bank_account_entity = $bank_account_type = $about_me = null;
 } else if (Utils::isAffiliateLogged()) {
