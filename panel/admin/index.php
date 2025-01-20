@@ -200,10 +200,12 @@ $affiliates = $userModel->getAll();
                           <button type="button" class="btn btn-secondary btn-sm btn-view me-1" data-val="<?= $id ?>"><i class="bi bi-search" title="Ver"></i></button>
                           <button type="button" class="btn btn-primary btn-sm btn-view-degree me-1" data-val="<?= $url_file_degree ?>"><i class="bi bi-book" title="Ver titulo"></i></button>
                           <button type="button" class="btn btn-primary btn-sm btn-edit me-1" data-val="<?= $id ?>"><i class="bi bi-pencil" title="Editar"></i></button>
+                          <?php if ($active == 1 || $active == 2) { ?>
                           <button type="button" class="btn btn-danger btn-sm btn-delete me-1" data-bs-toggle="modal" data-bs-target="#verticalycentered" data-val="<?= $id ?>"><i class="bi bi-trash" title="Eliminar"></i></button>
-                          <?php if ($active == 1) { ?>
+                          <?php } ?>
+                          <?php if ($active == 1 || $active == 0) { ?>
                               <button type="button" class="btn btn-danger btn-sm btn-activate" data-bs-toggle="modal" data-bs-target="#verticalycenteredActivate" data-val="<?= $id ?>"><i class="bi bi-check" title="Activar"></i></button>
-                          <?php } else if  ($active == 2) { ?>
+                          <?php } else if  ($active == 2 || $active == 0) { ?>
                               <button type="button" class="btn btn-danger btn-sm btn-deactivate" data-bs-toggle="modal" data-bs-target="#verticalycenteredDeactivate" data-val="<?= $id ?>"><i class="bi bi-x-circle" title="Desactivar"></i></button>
                           <?php } ?> 
                         </td>
