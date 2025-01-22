@@ -100,7 +100,7 @@ if (Utils::isAssessorLogged() || Utils::isAdminLogged()){
       <li class="nav-item">
         <a class="nav-link collapsed" href="./user-profile.php">
           <i class="bi bi-person"></i>
-          <span>Datos Personales</span>
+          <span>Datos personales</span>
         </a>
       </li>
 
