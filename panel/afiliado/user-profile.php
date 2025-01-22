@@ -153,7 +153,7 @@ function generateTimeOptions($selectedTime = null)
 
   <?php include('../header_sidebar.php'); ?>
 
-  <main id="main" class="main">
+  <main id="main" class="main bg-black">
 
     <div class="pagetitle">
       <h1>Datos del abogado</h1>
@@ -161,7 +161,6 @@ function generateTimeOptions($selectedTime = null)
         <ol class="breadcrumb mt-4">
           <li class="breadcrumb-item"><a href="./index.php">Home</a></li>
           <li class="breadcrumb-item active">Datos del abogado</li>
-
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -197,27 +196,27 @@ function generateTimeOptions($selectedTime = null)
 
                 <div class="tab-pane fade <?php echo (Utils::isAffiliateLogged() && !$isEditing) || (Utils::isAssessorLogged() || Utils::isAdminLogged()) && $action == "view" ? "show active" : ""; ?> profile-overview" id="profile-overview">
                   <h5 class="card-title"> Breve biografía y educación</h5>
-                  <p class="small fst-italic"><?= $about_me ?></p>
+                  <p class="small fst-italic text-white"><?= $about_me ?></p>
 
                   <h5 class="card-title">Datos personales</h5>
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">Nombre</div>
-                    <div class="col-lg-9 col-md-8"><?= $name ?></div>
+                    <div class="col-lg-9 col-md-8 text-white"><?= $name ?></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">Apellido</div>
-                    <div class="col-lg-9 col-md-8"><?= $last_name ?></div>
+                    <div class="col-lg-9 col-md-8 text-white"><?= $last_name ?></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">DNI</div>
-                    <div class="col-lg-9 col-md-8"><?= $document_number ?></div>
+                    <div class="col-lg-9 col-md-8 text-white"><?= $document_number ?></div>
                   </div>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Especializacion</div>
-                    <div class="col-lg-9 col-md-8"><?php 
+                    <div class="col-lg-3 col-md-4 label">Especialización</div>
+                    <div class="col-lg-9 col-md-8 text-white"><?php 
                     foreach ($selectedSpecializations as $specialtiesActual){
                       echo " - $specialtiesActual";
                     }
@@ -226,32 +225,32 @@ function generateTimeOptions($selectedTime = null)
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Años experiencia</div>
-                    <div class="col-lg-9 col-md-8"><?= $experience ?></div>
+                    <div class="col-lg-9 col-md-8 text-white"><?= $experience ?></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Provincia</div>
-                    <div class="col-lg-9 col-md-8"><?= $province ?></div>
+                    <div class="col-lg-9 col-md-8 text-white"><?= $province ?></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Dirección</div>
-                    <div class="col-lg-9 col-md-8"><?= $address ?></div>
+                    <div class="col-lg-9 col-md-8 text-white"><?= $address ?></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Teléfono</div>
-                    <div class="col-lg-9 col-md-8"><?= $phone ?></div>
+                    <div class="col-lg-9 col-md-8 text-white"><?= $phone ?></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Email</div>
-                    <div class="col-lg-9 col-md-8"><?= $email ?></div>
+                    <div class="col-lg-9 col-md-8 text-white"><?= $email ?></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Titulo</div>
-                    <div class="col-lg-9 col-md-8">
+                    <div class="col-lg-9 col-md-8 text-white">
                       <?php
                                                     if (isset($url_file_degree))
                                                       echo "<a href='uploads/$url_file_degree' target='_blank' > $url_file_degree </a>";
@@ -369,10 +368,10 @@ function generateTimeOptions($selectedTime = null)
                           <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="specializationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                             Seleccione Especialidades
                           </button>
-                          <ul class="dropdown-menu w-100" aria-labelledby="specializationDropdown">
+                          <ul class="dropdown-menu w-100 bg-black text-white" aria-labelledby="specializationDropdown">
                             <?php foreach ($specialties as $registry): ?>
                               <li>
-                                <label class="dropdown-item" onclick="event.stopPropagation()">
+                                <label class="dropdown-item bg-black text-white" onclick="event.stopPropagation()">
                                   <input 
                                     type="checkbox" 
                                     name="id_specialization[]" 
@@ -494,7 +493,7 @@ function generateTimeOptions($selectedTime = null)
                 <!--Schedule / Horarios Pane -->
                 <div class="tab-pane fade pt-3" id="profile-schedule">
                   <div class="container mt-4">
-                    <h2 class="mb-4 text-center">Editar Horarios</h2>
+                    <h2 class="mb-4 text-center text-white">Editar Horarios</h2>
                     <form action="process_form.php" method="post">
                       <input type="hidden" name="actionSchedule" value="update">
                       <?php if (isset($_GET['xIZZvbK2khQytHRK5h43HnuRh1aip7']) || (isset($id_affiliate) && $id_affiliate != null)): ?>
@@ -520,14 +519,14 @@ function generateTimeOptions($selectedTime = null)
                             </div>
                             <div id="time-selects-<?= $day ?>" class="time-selects row g-2" style="display: <?= $isClosed ? 'none' : 'flex' ?>;">
                               <div class="col">
-                                <label>Desde:</label>
+                                <label class="text-white">Desde:</label>
                                 <select id="start_time_<?= $day ?>" name="start_time[<?= $day ?>]" class="form-select" 
                                         onchange="updateEndTimeOptions('<?= $day ?>')">
                                   <?= generateTimeOptions($startTime); ?>
                                 </select>
                               </div>
                               <div class="col">
-                                <label>Hasta:</label>
+                                <label class="text-white">Hasta:</label>
                                 <select id="end_time_<?= $day ?>" name="end_time[<?= $day ?>]" class="form-select">
                                   <?= generateTimeOptions($endTime); ?>
                                 </select>
@@ -558,7 +557,7 @@ function generateTimeOptions($selectedTime = null)
                     -->
 
                     <div class="row mb-3">
-                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Nueva contraseña</label>
+                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label text-white">Nueva contraseña</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="newPassword" type="password" class="form-control" id="newPassword">
                         <span id="newPasswordError" class="text-danger"></span>
@@ -566,7 +565,7 @@ function generateTimeOptions($selectedTime = null)
                     </div>
 
                     <div class="row mb-3">
-                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Repetir nueva contraseña</label>
+                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label text-white">Repetir nueva contraseña</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="renewPassword" type="password" class="form-control" id="renewPassword">
                         <span id="renewPasswordError" class="text-danger"></span>
