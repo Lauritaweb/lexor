@@ -56,7 +56,7 @@ ini_set('display_errors', 1);
 
 <?php  include('../header_sidebar.php');?>
 
-  <main id="main" class="main">
+  <main id="main" class="main bg-black">
 
     <div class="pagetitle">
       <h1>Tablero</h1>

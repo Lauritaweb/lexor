@@ -1406,4 +1406,17 @@ h6 {
   color: rgb(245, 241, 241);
 }
 
-/*# sourceMappingURL=style.css.map */
+/* fixies 20-01-25 */
+.footer,
+body{
+  background-color: black!important;
+}
+nav .breadcrumb-item + .breadcrumb-item::before,
+nav .breadcrumb-item li.breadcrumb-item.active,
+nav .breadcrumb-item.active{
+  color:white!important;
+}
+.dropdown-menu{
+  --bs-dropdown-bg:black;
+  --bs-dropdown-color:white;
+}
