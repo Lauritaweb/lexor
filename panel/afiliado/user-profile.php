@@ -376,7 +376,12 @@ function generateTimeOptions($selectedTime = null)
                                     type="checkbox" 
                                     name="id_specialization[]" 
                                     value="<?= $registry['id'] ?>" 
-                                    <?= in_array($registry['description'], $selectedSpecializations) ? "checked" : "" ?>
+                                    <?php 
+                                    if (isset($selectedSpecializations)){
+                                      echo in_array($registry['description'], $selectedSpecializations) ? "checked" : "" ;
+                                    }
+                                    ?>
+                                    
                                   >
                                   <?= $registry['description'] ?>
                                 </label>
