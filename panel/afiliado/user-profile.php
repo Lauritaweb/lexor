@@ -176,7 +176,7 @@ function generateTimeOptions($selectedTime = null)
               <ul class="nav nav-tabs nav-tabs-bordered">
                 <?php if ($hideBecauseNew) {  ?>
                   <li class="nav-item">
-                    <button id="overview-tab" class="nav-link   <?php echo (Utils::isAffiliateLogged() && !$isEditing) || (Utils::isAssessorLogged() || Utils::isAdminLogged()) && $action == "view" ? "show active" : ""; ?>" data-bs-toggle="tab" data-bs-target="#profile-overview"> Ver Datos personales</button>
+                    <button id="overview-tab" class="nav-link   <?php echo (Utils::isAffiliateLogged() && !$isEditing) || (Utils::isAssessorLogged() || Utils::isAdminLogged()) && $action == "view" ? "show active" : ""; ?>" data-bs-toggle="tab" data-bs-target="#profile-overview"> Ver datos personales</button>
                   </li>
                 <?php } ?>
                 <li class="nav-item">
@@ -285,7 +285,7 @@ function generateTimeOptions($selectedTime = null)
                         <img src="<?= $url_file_image ?>" alt="Profile" id="profilePreview" style="max-width: 150px;">
                         <div class="pt-2">
                           <input type="file" name="profile_image" id="profileImage" accept="image/*" class="form-control mb-2" onchange="previewImage(event)">
-                          <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                          <a href="#" class="btn btn-danger btn-sm" title="Remover mi imagen de perfil"><i class="bi bi-trash"></i></a>
                         </div>
                       </div>
                     </div>
