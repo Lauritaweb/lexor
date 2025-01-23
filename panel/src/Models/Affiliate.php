@@ -484,7 +484,7 @@ function revisa_login(){
         $query = "SELECT 
         a.id,
         adt.document_type,
-        asp.description as specialiation,
+        GROUP_CONCAT(assigned_specialties.description SEPARATOR ', ') AS specialiation,
         ap.province,
         aba.bank_account_owner,
         aba.cbu,
@@ -510,8 +510,7 @@ function revisa_login(){
         affiliates a
     LEFT JOIN 
         affiliate_document_types adt ON a.id_document_type = adt.id
-    LEFT JOIN 
-        affiliate_specialties asp ON a.id_specialization = asp.id
+
     LEFT JOIN 
         affiliate_provinces ap ON a.id_province = ap.id
     LEFT JOIN 
@@ -519,9 +518,13 @@ function revisa_login(){
     LEFT JOIN 
         affiliate_bank_account_types abt ON aba.id_bank_account_type = abt.id
 	LEFT JOIN 
-        affiliate_consultant_type act ON act.id= a.id_consultation_type        
-        -- where active != 0
-        order by last_name asc
+        affiliate_consultant_type act ON act.id= a.id_consultation_type       
+	LEFT JOIN 
+				affiliate_specilities_assigned ON affiliate_specilities_assigned.id_affiliate = a.id
+	LEFT JOIN 
+				affiliate_specialties AS assigned_specialties ON affiliate_specilities_assigned.id_speciality = assigned_specialties.id 
+	GROUP BY a.id
+    ORDER BY last_name asc
         ";
         $stmt = $this->db->prepare($query);
 
@@ -698,22 +701,37 @@ function revisa_login(){
      */
 
     public function findLawyer($tipo_abogado, $provincia, $localidad, $status = 2 ) {        
-        $query = "SELECT affiliates.id, 
-                name,
-                last_name,                
-                affiliates.id_province,
-                id_locality,
-                url_file_image,       
-                GROUP_CONCAT(assigned_specialties.description SEPARATOR ', ') AS specialty,
-                affiliate_provinces.province,
-                localities.locality
+        $query = "SELECT 
+                    affiliates.id, 
+                    name,
+                    last_name,                
+                    affiliates.id_province,
+                    id_locality,
+                    url_file_image,       
+                    GROUP_CONCAT(DISTINCT assigned_specialties.description SEPARATOR ', ') AS specialty,
+                    affiliate_provinces.province,
+                    localities.locality,
+                    (
+                        SELECT GROUP_CONCAT(
+                            CASE 
+                                WHEN cerrado = 1 THEN CONCAT(dia, ': Cerrado')
+                                ELSE CONCAT(dia, ': ', TIME_FORMAT(hora_inicio, '%H:%i'), ' - ', TIME_FORMAT(hora_fin, '%H:%i'))
+                            END
+                            SEPARATOR '<br>'
+                        )
+                        FROM affliate_schedule
+                        WHERE affliate_schedule.id_affiliate = affiliates.id
+                    ) AS schedule
                 FROM affiliates 
                 LEFT JOIN affiliate_specilities_assigned ON affiliate_specilities_assigned.id_affiliate = affiliates.id
                 LEFT JOIN affiliate_specialties AS assigned_specialties ON affiliate_specilities_assigned.id_speciality = assigned_specialties.id
                 LEFT JOIN affiliate_provinces ON affiliate_provinces.id = affiliates.id_province
                 LEFT JOIN localities ON localities.id = affiliates.id_locality
+                
                 WHERE active = $status
+                
 ";                    
+
         $conditions = [];
         if ($tipo_abogado != 0) {
             $conditions[] = "affiliate_specilities_assigned.id_speciality = " . intval($tipo_abogado);

@@ -191,9 +191,9 @@ $affiliates = $userModel->getAll();
                           <?php if ($active == 2) { ?>
                             <span class="badge bg-success">Activo</span>
                           <?php } else if ($active == 1) { ?>
-                            <span class="badge bg-info">Pendiente</span>
+                            <span class="badge bg-warning">Pendiente</span>
                           <?php } else{ ?>
-                            <span class="badge bg-danger">Inactivo</span>
+                            <span class="badge bg-danger">Deshabilitado</span>
                           <?php }  ?>
                         </td>
                         <td class="btns-actions d-flex g-1">
@@ -207,7 +207,7 @@ $affiliates = $userModel->getAll();
                               <button type="button" class="btn btn-danger btn-sm btn-activate" data-bs-toggle="modal" data-bs-target="#verticalycenteredActivate" data-val="<?= $id ?>"><i class="bi bi-check" title="Activar"></i></button>
                           <?php } 
                               if ($active == 2 || $active == 0) { ?>
-                              <button type="button" class="btn btn-danger btn-sm btn-deactivate" data-bs-toggle="modal" data-bs-target="#verticalycenteredDeactivate" data-val="<?= $id ?>"><i class="bi bi-x-circle" title="Desactivar"></i></button>
+                              <button type="button" class="btn btn-danger btn-sm btn-deactivate" data-bs-toggle="modal" data-bs-target="#verticalycenteredDeactivate" data-val="<?= $id ?>"><i class="bi bi-x-circle" title="Pendiente"></i></button>
                           <?php } ?> 
                         </td>
                       </tr>
