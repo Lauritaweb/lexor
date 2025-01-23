@@ -59,9 +59,12 @@
   require __DIR__ . '/panel/vendor/autoload.php';
   use App\Models\Affiliate;
   $affiliateModelo = new Affiliate(); 
-  $lawyer = $affiliateModelo->get($_GET['id']);
-  $id_specialization = $affiliateModelo->getSpecialties($_GET['id']);  
+  $idAffiliate = $_GET['id'];
+  $lawyer = $affiliateModelo->get($idAffiliate);
+  $id_specialization = $affiliateModelo->getSpecialties($idAffiliate);  
   $selectedSpecializations = array_column($id_specialization, 'description'); //  Extraer las descripciones de las especialidades seleccionadas y Cambia 'description' a 'id'
+  $scheduleData = $affiliateModelo->getScheduleData($idAffiliate);
+  
   /*
   echo "<pre>";
   var_dump($lawyer);
@@ -165,12 +168,34 @@
                     <li>
                         <img src="./assets/img/briefcase-fill.svg" alt="">
                         <?php  foreach ($selectedSpecializations as $specialtiesActual){
-                      echo " $specialtiesActual <br>";
-                    } ?>
+                            echo " $specialtiesActual <br>";
+                        } ?>
                     </li>
                     <li>
                         <img src="./assets/img/geo-alt-fill.svg" alt="">
                         <?= $province . ', ' . $locality;  ?>
+                    </li>
+                    <li>
+                    
+                        <img src="./assets/img/clock-history.svg" alt="">
+                        <?php 
+                    //  var_dump($scheduleData);
+                    //  die;
+                        foreach($scheduleData as $key => $value){
+                        echo "$key: ";
+                        if ($value['closed'])
+                            echo "Cerrado";
+                        else
+                            echo $value['start_time'] . ' a ' . $value['end_time'];
+                        echo "<br>";
+                        }
+
+                        ?>
+                    </li>
+                  
+                    <li>
+                        <img src="./assets/img/geo-alt-fill.svg" alt="">
+                        <?= $consultantType;  ?>
                     </li>
                     <li>
                         <img src="./assets/img/clock-history.svg" alt="">

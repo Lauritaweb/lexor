@@ -408,7 +408,7 @@ $triggerSearch = ($flag === 'true') ? 'true' : 'false';
 
 
 
-                    const resultsContainer = document.getElementById('resultsContainer');
+            const resultsContainer = document.getElementById('resultsContainer');
             resultsContainer.innerHTML = ''; // Limpiar resultados previos
 
             // Verificar si hay resultados
@@ -435,7 +435,7 @@ $triggerSearch = ($flag === 'true') ? 'true' : 'false';
                                         <li>
                                             <img src="./assets/img/geo-alt-fill.svg" alt="">
                                             ${abogado.province}, ${abogado.locality}
-                                        </li>
+                                        </li>                                        
                                         <li class="text-key">
                                             <img src="./assets/img/clock-history.svg" alt="">
                                             Disponible consultas urgentes
