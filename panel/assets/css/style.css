@@ -1409,14 +1409,29 @@ h6 {
 /* fixies 20-01-25 */
 .footer,
 body{
-  background-color: black!important;
+  background-color: #111111!important;
 }
+/* breadcrumbs */
 nav .breadcrumb-item + .breadcrumb-item::before,
 nav .breadcrumb-item li.breadcrumb-item.active,
 nav .breadcrumb-item.active{
   color:white!important;
 }
+/* register dropdown */
 .dropdown-menu{
-  --bs-dropdown-bg:black;
+  --bs-dropdown-bg:#111111
   --bs-dropdown-color:white;
+}
+/* profile picture */
+.profile .profile-card img{
+  width:120px;
+  height: 120px;
+  object-fit: cover;
+}
+/* table gestion de citas  */
+.table{
+  --bs-table-color:white!important;
+}
+.table > :not(caption) > * > *{
+  background-color: transparent;
 }
