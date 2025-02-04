@@ -109,14 +109,15 @@ function revisa_login(){
     public function createFull(
         $id_document_type, $id_specialization, $id_province,
         $name, $last_name, $document_number, $about_me, $position,
-        $email, $phone, $address, $gender, $begin_year, $id_consultation_type,  $urlImageFile, $degreeFileName
+        $email, $phone, $address, $gender, $begin_year, $id_consultation_type,  
+        $urlImageFile, $degreeFileName, $id_locality
     ) {        
 
         $query = "INSERT INTO affiliates (
             id_document_type, id_specialization, id_province, 
             name, last_name, document_number, about_me, position,
-            email, phone, address, gender, begin_year, id_consultation_type, url_file_image, url_file_degree
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            email, phone, address, gender, begin_year, id_consultation_type, url_file_image, url_file_degree, id_locality
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         $stmt = $this->db->prepare($query);
         
@@ -124,10 +125,11 @@ function revisa_login(){
             die('Prepare failed: ' . $this->db->error);              
      
         $stmt->bind_param(
-            "iiisssssssssiiss",
+            "iiisssssssssiissi",
             $id_document_type, $id_specialization, $id_province,
             $name, $last_name, $document_number, $about_me, $position,
-            $email, $phone, $address, $gender, $begin_year, $id_consultation_type, $urlImageFile, $degreeFileName
+            $email, $phone, $address, $gender, $begin_year, $id_consultation_type, 
+            $urlImageFile, $degreeFileName, $id_locality
         );        
 
         if ($result = $stmt->execute()) {
@@ -300,13 +302,13 @@ function revisa_login(){
         $id, $id_document_type, $id_force, $id_province,
         $name, $last_name, $document_number, $about_me, 
         $email, $phone, $address, $gender, $begin_year, $id_consultation_type,
-        $urlImageFile, $degreeFileName
+        $urlImageFile, $degreeFileName, $id_locality
     ) {        
         $updateAffiliate = $this->updateAffiliate(
             $id, $id_document_type, $id_force, $id_province,
             $name, $last_name, $document_number, $about_me, 
             $email, $phone, $address, $gender, $begin_year, $id_consultation_type,
-            $urlImageFile,$degreeFileName
+            $urlImageFile,$degreeFileName, $id_locality
         );
 
         return $updateAffiliate;
@@ -317,13 +319,14 @@ function revisa_login(){
         $id, $id_document_type, $id_specialization, $id_province,
         $name, $last_name, $document_number, $about_me, 
         $email, $phone, $address, $gender, $begin_year, $id_consultation_type,
-        $urlImageFile,$degreeFileName
+        $urlImageFile,$degreeFileName, $id_locality
     ) {
         $query = "UPDATE affiliates SET 
             id_document_type = ?, id_specialization = ?, id_province = ?, 
             name = ?, last_name = ?, document_number = ?, about_me = ?, 
             email = ?, phone = ?, address = ?, gender = ?, begin_year = ?,
-            id_consultation_type = ?, url_file_image = ?, url_file_degree = ?
+            id_consultation_type = ?, url_file_image = ?, url_file_degree = ?, 
+            id_locality = ?
             WHERE id = ?";
     
         $stmt = $this->db->prepare($query);
@@ -333,11 +336,11 @@ function revisa_login(){
         }
     
         $stmt->bind_param(
-            "iiissssssssiissi",
+            "iiissssssssiissii",
             $id_document_type, $id_specialization, $id_province,
             $name, $last_name, $document_number, $about_me,
             $email, $phone, $address, $gender, $begin_year, $id_consultation_type,
-            $urlImageFile, $degreeFileName,
+            $urlImageFile, $degreeFileName, $id_locality,
             $id
         );
     
@@ -565,14 +568,14 @@ function revisa_login(){
         adt.id as id_document_type,
         asp.id as id_specialization,
         ap.id as id_province,
-				localities.locality,
-		
+        localities.locality,		
         YEAR(NOW()) - a.begin_year as experience,
         a.begin_year,
 		act.description as consultantType,
         a.id_consultation_type,
         a.url_file_image,
-        a.url_file_degree
+        a.url_file_degree,
+        a.id_locality
         FROM 
             affiliates a
         LEFT JOIN 
@@ -583,8 +586,8 @@ function revisa_login(){
             affiliate_provinces ap ON a.id_province = ap.id               
         LEFT JOIN 
             affiliate_consultant_type act ON act.id= a.id_consultation_type   
-				LEFT JOIN 
-							localities on localities.id = a.id_locality
+        LEFT JOIN 
+            localities on localities.id = a.id_locality
         WHERE a.id = ?";
         
         $stmt = $this->db->prepare($query);

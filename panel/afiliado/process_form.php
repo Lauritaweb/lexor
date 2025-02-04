@@ -8,8 +8,9 @@ $affiliateModelo = new Affiliate();
 /*
 echo "<pre>";
 var_dump($_REQUEST);
-// die;
 */
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     extract($_POST);        
  
@@ -48,15 +49,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     else if (empty($update) ){ 
        // ! CREATE
 
-       var_dump($_POST);
+      
+      // die;
        if ((Utils::isAssessorLogged() || Utils::isAdminLogged()) && !isset($id_affiliate)){ 
             $newFileName = uploadImage();
             
             $id_affiliate = $affiliateModelo->createFull($id_document_type, $id_specialization, $id_province, $name, $last_name, $document_number, $about_me, $position,$email, $phone, $address, 
-                                        $gender, $begin_year, $id_consultation_type, $newFileName, $degreeFileName);
+                                        $gender, $begin_year, $id_consultation_type, $newFileName, $degreeFileName, $id_locality);
 
             // $affiliateModelo->deleteSpecialization($id_affiliate);
-        
+            die;
             foreach ($_POST['id_specialization'] as $id_specialization_actual) {                
                 $affiliateModelo->createSpecialization($id_affiliate, $id_specialization_actual);
             }
@@ -64,14 +66,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $destino = "../admin/index.php?result=success";
             header("Location: $destino");
             exit();
-       }else if ((Utils::isAssessorLogged() || Utils::isAdminLogged()) && isset($id_affiliate)){
+       }else if ((Utils::isAssessorLogged() || Utils::isAdminLogged()) && isset($id_affiliate)){ // Cuando el admin edita a un usuario
+            // ! Update desde admin
             $id_bank_account_type = $BACuentaT;
             $bank_account_owner = $BANombre;
             $cbu = $BACvu;
             $bank_account_entity = $BABanco;    
             $affiliateModelo->update( $id_affiliate, $id_document_type, $id_specialization, $id_province,
                                         $name, $last_name, $document_number, $about_me, $position,      
-                                        $email, $phone, $address, $gender, $begin_year, $id_consultation_type, $newFileName, $degreeFileName);
+                                        $email, $phone, $address, $gender, $begin_year, $id_consultation_type, $newFileName, $degreeFileName, $id_locality);
+            die;
             $destino = "../admin/index.php?result=success";
            
             header("Location: $destino");
@@ -89,7 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
         }
     }else{ // ! UPDATE
-        var_dump($_POST);
+        // var_dump($_POST);
        
         // Obtengo el id_affiliate de acuerdo si esta logueado un usuario o si es el asesor
         $urlComplementary = "";
@@ -128,7 +132,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         if ($affiliateModelo->update( $id_affiliate, $id_document_type, $id_specialization, $id_province,
                 $name, $last_name, $document_number, $about_me, 
-                $email, $phone, $address, $gender, $begin_year, $id_consultation_type, $newFileName, $degreeFileName)) {
+                $email, $phone, $address, $gender, $begin_year, $id_consultation_type, $newFileName, $degreeFileName,  $id_locality)) {
             
             $affiliateModelo->deleteSpecialization($id_affiliate);
             foreach ($_POST['id_specialization'] as $id_specialization_actual) {                

@@ -234,6 +234,11 @@ function generateTimeOptions($selectedTime = null)
                   </div>
 
                   <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Localidad</div>
+                    <div class="col-lg-9 col-md-8 text-white"><?= $locality ?></div>
+                  </div>
+
+                  <div class="row">
                     <div class="col-lg-3 col-md-4 label">Dirección</div>
                     <div class="col-lg-9 col-md-8 text-white"><?= $address ?></div>
                   </div>
@@ -392,9 +397,7 @@ function generateTimeOptions($selectedTime = null)
                       </div>
                     </div>
 
-
-
-
+            
                     <div class="row mb-3">
                       <label for="begin_year" class="col-md-4 col-lg-3 col-form-label">Año de inicio
                         <span class="text-danger">*</span>
@@ -423,26 +426,29 @@ function generateTimeOptions($selectedTime = null)
                       </div>
                     </div>
 
-                    <div class="row mb-3">
-                      <label for="Province" class="col-md-4 col-lg-3 col-form-label">Provincia
+                  <div class="row mb-3">
+                      <label for="province" class="col-md-4 col-lg-3 col-form-label">Provincia
                         <span class="text-danger">*</span>
                       </label>
                       <div class="col-md-8 col-lg-9">
-                        <select id="id_province" name="id_province" class="form-select">
-                          <?php
-                          foreach ($provinces as $registry) {
-                            if (isset($id_province) && $registry['id'] == $id_province)
-                              $selected = "selected";
-                            else
-                              $selected = "";
-                          ?>
-                            <option value="<?= $registry['id'] ?>" <?= $selected ?>><?= $registry['province'] ?></option>
-                          <?php } ?>
+                        <select id="province" class="form-select" name="id_province">
+                            <option value="" selected>Provincia...</option>
                         </select>
-
                       </div>
-                    </div>
+                  </div>
 
+                  <div class="row mb-3">
+                      <label for="province" class="col-md-4 col-lg-3 col-form-label">Localidad
+                        <span class="text-danger">*</span>
+                      </label>
+                      <div class="col-md-8 col-lg-9">
+                        <select id="locality" class="form-select" disabled name="id_locality">
+                            <option value="" selected>Localidad...</option>
+                        </select>
+                    </div>
+                  </div>
+
+                    
                     <div class="row mb-3">
                       <label for="Address" class="col-md-4 col-lg-3 col-form-label">Dirección
                         <span class="text-danger">*</span>
@@ -869,8 +875,90 @@ function generateTimeOptions($selectedTime = null)
         timeSelects.style.display = closedCheckbox.checked ? 'none' : 'flex';
       }
 
+      
+
 
   </script>
+
+<script>
+        document.addEventListener('DOMContentLoaded', function () {
+        const provinceSelect = document.getElementById('province');
+        const localitySelect = document.getElementById('locality');
+
+
+        // Cargar provincias desde la base de datos
+        fetch('../../getProvinces.php')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(province => {
+                    const option = document.createElement('option');
+                    option.value = province.id;
+                    option.textContent = province.province;
+                    provinceSelect.appendChild(option);
+                });
+            });
+
+        // Escuchar cambios en el selector de provincias
+        provinceSelect.addEventListener('change', function () {
+            const provinceId = provinceSelect.value;
+
+            if (!provinceId) {
+                localitySelect.innerHTML = '<option value="" selected>Localidad...</option>';
+                localitySelect.disabled = true;
+                return;
+            }
+
+            // Cargar localidades según la provincia seleccionada
+            fetch(`../../getLocalities.php?provinceId=${provinceId}`)
+                .then(response => response.json())
+                .then(data => {
+                    localitySelect.innerHTML = '<option value="" selected>Localidad...</option>';
+                    data.forEach(locality => {
+                        const option = document.createElement('option');
+                        option.value = locality.id;
+                        option.textContent = locality.locality;
+                        localitySelect.appendChild(option);
+                    });
+                    localitySelect.disabled = false;
+                });
+          });
+        });
+       
+
+        
+
+    </script>
+
+<script>
+        document.addEventListener('DOMContentLoaded', function () { 
+    const provinceId = "<?php if (isset($id_province)) echo  $id_province;  else echo "null";?>";
+    const localityId = "<?php if (isset($id_locality)) echo  $id_locality;  else echo "null";?>";
+    const triggerSearch = <?php echo "true"; ?>;
+
+    setTimeout(() => {  
+        if (provinceId !== "null") {
+            const provinceSelect = document.getElementById('province');
+            const localitySelect = document.getElementById('locality');
+
+            provinceSelect.value = provinceId;
+            
+            // Disparar manualmente el evento 'change' en la provincia
+            const changeEvent = new Event('change');
+            provinceSelect.dispatchEvent(changeEvent);
+
+            // Esperar un poco a que se carguen las localidades antes de establecer su valor
+            setTimeout(() => {
+                if (localityId !== "null") {
+                    localitySelect.value = localityId;
+                }
+            }, 1000); // Ajusta el tiempo si es necesario
+
+            console.log('Provincia y localidad seteadas después de un retraso');
+        }
+    }, 500);
+});
+    </script>
+
 
 
 
