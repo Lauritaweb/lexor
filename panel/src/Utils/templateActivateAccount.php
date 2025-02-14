@@ -33,7 +33,7 @@ $html = '
         </p>
 
         <p style="color:#033333; font-family: Encode Sans, sans-serif; line-height: 22px;">
-            <strong>Usuario:</strong> [Tu correo electrónico] <br>
+            <strong>Usuario:</strong> '.$email.' <br>
             <strong>Contraseña:</strong> La que definiste al registrarte
         </p>
 
