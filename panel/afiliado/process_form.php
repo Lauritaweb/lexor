@@ -87,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['id_affiliate'] = $id_affiliate;
                 $_SESSION['name'] = $name;
                 $urlComplementary = "?result=createSuccess";
-                Utils::mailCreate($email, $name);                
+                Utils::mailSenderCreatedAccount($email, $name);                
             }else
                 die("Ya existe este usuario. No deberia llegar aca");
             
@@ -154,10 +154,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $affiliateModelo->delete($_GET['id']);   
         header("Location: ../admin/index.php");
     }else if(isset($_GET['action']) &&  $_GET['action'] == "ac" ){
-        $affiliateModelo->activate($_GET['id']);   
+        $affiliateModelo->activate($_GET['id']);
+        $user = $affiliateModelo->get($_GET['id']);
+        Utils::mailSenderActivatedAccount($user['email'], $user['name']);   
         header("Location: ../admin/index.php");
     } else if(isset($_GET['action']) &&  $_GET['action'] == "de" ){
         $affiliateModelo->deactivate($_GET['id']);   
+        $user = $affiliateModelo->get($_GET['id']);
+        Utils::mailSenderDeactivatedAccount($user['email'], $user['name']);   
         header("Location: ../admin/index.php");
     }      
 }

@@ -2,8 +2,8 @@
 
 namespace App\Utils;
 
-define('MAIL_ADDRESS_CONTACT', 'no-reply@respaldarargentina.com '); 
-define('MAIL_NAME_CONTACT', 'Respaldar');
+define('MAIL_ADDRESS_CONTACT', 'no-reply@lexorabogados.com.ar'); 
+define('MAIL_NAME_CONTACT', 'Lexor Abogados');
 define('MAILJET_API_KEY', 'c90ee4c8e3dd0f14a4e6338a970fa1db:8c8d0fac35d91213d2201d32daaa40f3');
 
 define('JWT_IO_KEY', 'y8QJpX9hlykbSRJi00ttHeEfsXbMD9nWM6xXpRsi');
@@ -52,9 +52,19 @@ class Utils
             header('../salir.php');
     }
 
-    public static function mailCreate($email, $name){
+    public static function mailSenderCreatedAccount($email, $name){
         include('templateCreateAccount.php');
-        Utils::mandarMail($email, "Bienvenido a Respaldar", $html, $name);
+        Utils::mandarMail($email, "Bienvenido a Lexor Abogados", $html, $name);
+    }
+
+    public static function mailSenderActivatedAccount($email, $name){
+        include('templateActivateAccount.php');
+        Utils::mandarMail($email, "Lexor Abogados - Su cuenta ha sido activada", $html, $name);
+    }
+
+    public static function mailSenderDeactivatedAccount($email, $name){
+        include('templateActivateAccount.php');
+        Utils::mandarMail($email, "Lexor Abogados - Su cuenta ha sido activada", $html, $name);
     }
 
     public static function mailForgotPassword($email){
