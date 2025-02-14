@@ -18,7 +18,7 @@ $html = '
     </div>
     <div style="width: 80%; margin: auto; padding: 6px;">
         <h1 style="color:#033333; font-size:20px; font-family: Encode Sans, sans-serif; font-weight: 600;">
-            ¿Olvidaste tu contraseña, [Nombre del Abogado]?
+            ¿Olvidaste tu contraseña, '.$email.'?
         </h1>
         <p style="color:#033333; font-family: Encode Sans, sans-serif; line-height: 22px;">
             No te preocupes, te ayudaremos a restablecerla. Para crear una nueva contraseña, haz clic en el siguiente botón:
