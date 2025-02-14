@@ -18,37 +18,39 @@ $html = '
     </div>
     <div style="width: 80%; margin: auto; padding: 6px;">
         <h1 style="color:#033333; font-size:20px; font-family: Encode Sans, sans-serif; font-weight: 600;">
-            ¿Olvidaste tu contraseña, [Nombre del Abogado]?
+            ¡Tu cuenta ha sido activada, '.$name.'!
         </h1>
         <p style="color:#033333; font-family: Encode Sans, sans-serif; line-height: 22px;">
-            No te preocupes, te ayudaremos a restablecerla. Para crear una nueva contraseña, haz clic en el siguiente botón:
+            Nos complace informarte que hemos validado tu registro y tu cuenta en Lexor ya está activa. 
+            Ahora puedes acceder a la plataforma utilizando los mismos datos con los que te registraste.
         </p>
-
-        <p>
-            <a href="https://www.lexorabogados.com.ar/panel/update-password.php?'.$tokenUrl.'" 
-               style="display: inline-block; padding: 10px 20px; color: #ffffff; background-color: #F58634; text-decoration: none; font-weight: 600; border-radius: 5px; font-family: Encode Sans, sans-serif;">
-                Restablecer Contraseña
-            </a>
+        
+        <img src="https://www.lexorabogados.com.ar/panel/assets/img/lines-reverse.svg" alt="" style="width: 200px;">
+        
+        <h2 style="color:#033333; font-size:20px; font-family: Encode Sans, sans-serif; font-weight: 600;">Inicia sesión en Lexor</h2>
+        <p style="color:#033333; font-family: Encode Sans, sans-serif; line-height: 22px;">
+            Para ingresar, usa el correo y la contraseña que estableciste durante el registro.
         </p>
 
         <p style="color:#033333; font-family: Encode Sans, sans-serif; line-height: 22px;">
-            Si no solicitaste este cambio, puedes ignorar este mensaje. Tu contraseña actual seguirá siendo la misma.
+            <strong>Usuario:</strong> [Tu correo electrónico] <br>
+            <strong>Contraseña:</strong> La que definiste al registrarte
+        </p>
+
+        <p style="color:#033333; font-family: Encode Sans, sans-serif; line-height: 22px;">
+            <a href="https://lexorabogados.com.ar/panel/login.html" 
+               style="display: inline-block; padding: 10px 20px; color: #ffffff; background-color: #033333; text-decoration: none; font-weight: 600; border-radius: 5px;">
+                Iniciar sesión
+            </a>
         </p>
 
         <img src="https://www.lexorabogados.com.ar/panel/assets/img/lines-reverse.svg" alt="" style="width: 200px;">
-
+        
         <h2 style="color:#033333; font-size:20px; font-family: Encode Sans, sans-serif; font-weight: 600;">¿Necesitas ayuda?</h2>
         <p style="color:#033333; font-family: Encode Sans, sans-serif; line-height: 22px;">
-            Si tienes problemas para restablecer tu contraseña, contáctanos y nuestro equipo de soporte te ayudará.
+            Si tienes alguna consulta o necesitas asistencia, nuestro equipo está disponible para ayudarte.
         </p>
-
-        <p>
-            <a href="https://wa.me/5491171009227" 
-               style="display: inline-block; padding: 10px 20px; color: #ffffff; background-color: #25D366; text-decoration: none; font-weight: 600; border-radius: 5px; font-family: Encode Sans, sans-serif;">
-                Contactar por WhatsApp
-            </a>
-        </p>
-
+        
         <img src="https://www.lexorabogados.com.ar/panel/assets/img/shield.svg" alt="" style="width: 100px;">
         <p style="color:#033333; font-family: Encode Sans, sans-serif; font-style: italic; line-height: 20px; font-weight: 500;">
             <i>Un cordial saludo,</i>
@@ -60,6 +62,4 @@ $html = '
     </div>
 </body>
 </html>
-
 ';
-
