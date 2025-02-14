@@ -328,6 +328,13 @@ footer a:hover {
     padding-left: 20px;
     padding-right: 20px;
   }
+  .top-marquee p {
+    font-size: 0.6em;
+    text-align: center;
+  }
+  .top-header, .top-header-alpha {
+    background-position: center center;
+  }
   .top-header .overlay, .top-header-alpha .overlay {
     background-color: rgba(0, 0, 0, 0.5);
   }

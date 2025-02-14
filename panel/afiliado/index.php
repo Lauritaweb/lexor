@@ -74,9 +74,8 @@ ini_set('display_errors', 1);
         <!-- Left side columns -->
         <div class="col-lg-8">
           <div class="row">
-
             <!-- DATOS PERSONALES -->
-            <div class="col-xxl-3 col-md-6">
+            <div class="col-lg-6">
               <div class="card info-card sales-card">
                 <div class="filter">
                   <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
@@ -108,7 +107,7 @@ ini_set('display_errors', 1);
             
 
             <!-- CITAS -->
-            <div class="col-xxl-7 col-xl-12">
+            <div class="col-lg-6">
 
               <div class="card info-card customers-card">
 
@@ -159,7 +158,7 @@ ini_set('display_errors', 1);
         </div><!-- End Left side columns -->
 
         <!-- Right side columns -->
-        <div class="col-lg-4">
+        <div class="col-lg-4>
 
           <!-- HISTORIAL DE CITAS -->
           <div class="card border-key text-key">
