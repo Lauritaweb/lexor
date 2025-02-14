@@ -63,7 +63,7 @@ class Utils
     }
 
     public static function mailSenderDeactivatedAccount($email, $name){
-        include('templateDeactivateAccount.php.php');
+        include('templateDeactivateAccount.php');
         Utils::mandarMail($email, "Lexor Abogados - Su cuenta ha sido desactivada", $html, $name);
     }
 
