@@ -10,7 +10,7 @@ use App\Models\Affiliate;
 $affiliateModel = new Affiliate();
 
 $id_affiliate = $_SESSION['id_affiliate']; 
-$allNextAppointment = $appointmentModel->getNextAppointment($id_affiliate, true);
+$allNextAppointment = $appointmentModel->getNextAppointment($id_affiliate, true, true);
 
 
 
@@ -121,7 +121,11 @@ if ($appointment != null) {
                     <td class="text-white"><?= htmlspecialchars($appointment['urgency']) ?></td>
                     <td class="text-white"><?= htmlspecialchars($appointment['status']) ?></td>
                     <td class="text-white"><?= htmlspecialchars($appointment['date'] . ' ' . $appointment['time']) ?></td>
-                    <td>          
+                    <td>    
+                    <?php  
+                        if ($id_status == 3 ) { ?>
+                              <button type="button" class="btn btn-success btn-sm btn-activate" data-bs-toggle="modal" data-bs-target="#verticalycenteredActivate" data-val="<?= $appointment['id'] ?>"><i class="bi bi-check" title="Activar"></i></button>
+                    <?php }  ?>      
                     <button type="button" class="btn btn-primary btn-sm btn-edit" data-val="<?= $appointment['id'] ?>" onclick="window.location.href='appointments.php?id_appointment=<?= $appointment['id'] ?>'" ><i class="bi bi-pencil"></i></button>
                     <button type="button" class="btn btn-danger btn-sm btn-delete" data-bs-toggle="modal" data-bs-target="#verticalycentered" data-val="<?= $appointment['id'] ?>"><i class="bi bi-trash"></i></button>
                     </td>
@@ -247,6 +251,85 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     </script>
 
+
+
+<!-- MODAL activar cita -->
+<div class="modal fade" id="verticalycenteredActivate" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-success">Activar la cita</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <i class="bi bi-exclamation-circle-fill text-success mx-auto d-block fs-1"></i>
+        <p class="fw-bold">¿Confirma que desea activar la cita?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success btn-confirm-activate" data-bs-dismiss="modal">Activar la cita</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END MODAL activar cita -->
+
+
+<!-- MODAL ELIMINAR cita -->
+<div class="modal fade" id="verticalycentered" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger">Eliminar cita</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <i class="bi bi-exclamation-circle-fill text-danger mx-auto d-block fs-1"></i>
+        <p class="fw-bold">¿Confirma que desea eliminar al cita?</p>
+        <p class="fw-bold">Esta operación no se puede deshacer</p>
+    
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger btn-confirm-delete" data-bs-dismiss="modal">Eliminar cita</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END MODAL ELIMINAR cita -->
+
 </body>
+
+<script>
+let deleteId;
+
+document.querySelectorAll('.btn-delete').forEach(function(button) {
+  button.addEventListener('click', function() {
+    deleteId = this.getAttribute('data-val');
+  });
+});
+
+document.querySelector('.btn-confirm-delete').addEventListener('click', function() {
+  if (deleteId) {
+    window.location.href = '../afiliado/processAppointment.php?action=rm&id=' + deleteId;
+  }
+});
+
+let activateId;
+
+document.querySelectorAll('.btn-activate').forEach(function(button) {
+  button.addEventListener('click', function() {
+    activateId = this.getAttribute('data-val');
+  });
+});
+
+document.querySelector('.btn-confirm-activate').addEventListener('click', function() {
+  if (activateId) {
+    window.location.href = '../afiliado/processAppointment.php?action=ac&id=' + activateId;
+  }
+});
+
+
+</script>
 
 </html>

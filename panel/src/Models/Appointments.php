@@ -69,7 +69,11 @@ class Appointments
     
 
 
-    public function getNextAppointment($id_affiliate, $all = false){
+    public function getNextAppointment($id_affiliate, $all = false, $noCanceladas = null){
+        if ($noCanceladas != null )
+            $queryStatus = " and id_status != 2 ";
+        else 
+            $queryStatus = "";
         $query = "SELECT
         appointments.*,
         appointments_type.type,
@@ -85,8 +89,11 @@ class Appointments
         INNER JOIN appointments_status on appointments_status.id = appointments.id_status
         WHERE affiliates.id = ?
         and date > NOW()
+        $queryStatus
         ORDER BY date 
         ";
+
+       
         if (!$all)
             $query .= " limit 1 ";
 

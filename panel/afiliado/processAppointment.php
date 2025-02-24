@@ -28,12 +28,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }else if ($_SERVER["REQUEST_METHOD"] == "GET") {
     if($_GET['action'] == "rm" )
         $appointmentModel->delete($_GET['id']);
-    if($_GET['action'] == "confirm" )
+    if($_GET['action'] == "ac" )
         $appointmentModel->confirm($_GET['id']);
     
-    header("Location: ../asesor/dashboard-appointments.php");
+    header("Location: ../afiliado/appointments_list.php");
 
 }
+
 
 
 function manageFileUpload(){
@@ -59,8 +60,6 @@ function manageFileUpload(){
             echo "Hubo un error al subir el archivo.";
             //header("Location: bank-reconciliation.php?success=false");
         }
-    
-        
     }else         
         return null; // "No se subió ningún archivo o hubo un error en la subida.";
         
