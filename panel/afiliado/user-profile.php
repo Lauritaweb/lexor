@@ -159,7 +159,7 @@ function generateTimeOptions($selectedTime = null)
       <h1>Datos del abogado</h1>
       <nav>
         <ol class="breadcrumb mt-4">
-          <li class="breadcrumb-item"><a href="./index.php">Home</a></li>
+          <li class="breadcrumb-item"><a href="<?= $home ?>index.php">Home</a></li>
           <li class="breadcrumb-item active">Datos del abogado</li>
         </ol>
       </nav>

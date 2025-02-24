@@ -333,7 +333,7 @@ $triggerSearch = ($flag === 'true') ? 'true' : 'false';
                     document.getElementById('searchButton').click(); // Simular un clic en el botón de búsqueda
                   
                 }
-                console.log('Este mensaje aparece después de 2 segundos');
+               
             }, 2000); 
             // Setear los valores de los desplegables
             
