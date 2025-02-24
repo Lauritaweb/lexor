@@ -261,9 +261,10 @@ $triggerSearch = ($flag === 'true') ? 'true' : 'false';
             // Verificar si hay resultados
             if (data.length > 0) {
                 data.forEach(abogado => {
-                    if (abogado.image === undefined || abogado.image === null)                     
+                    if (abogado.url_file_image === undefined || abogado.url_file_image === null)                     
                         abogado.image = 'panel/assets/img/avatar.png';
-                    
+                    else
+                        abogado.image = 'panel/afiliado/uploads/' + abogado.url_file_image;
 
                     // Crear el HTML de la tarjeta para cada resultado
                     const cardHTML = `
