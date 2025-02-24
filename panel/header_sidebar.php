@@ -45,7 +45,10 @@ if (Utils::isAssessorLogged() || Utils::isAdminLogged()){
 </header><!-- End Header -->
   
 
-<?php } else if (Utils::isAffiliateLogged()){ ?>
+<?php } else if (Utils::isAffiliateLogged()){ 
+  $perfil = "Affiliate";
+  $home = "../afiliado/";
+  ?>
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
