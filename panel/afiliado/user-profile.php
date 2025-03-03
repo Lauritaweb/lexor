@@ -491,7 +491,7 @@ function generateTimeOptions($selectedTime = null)
                     </div>
 
                     <div class="row mb-3">
-                      <label for="Email" class="col-md-4 col-lg-3 col-form-label">Foto del Título
+                      <label for="Email" class="col-md-4 col-lg-3 col-form-label">Foto de la credencial
                         <span class="text-danger">*</span>
                       </label>
 

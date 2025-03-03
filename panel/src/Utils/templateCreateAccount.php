@@ -30,6 +30,8 @@ $html = '
         <p style="color:#033333; font-family: Encode Sans, sans-serif; line-height: 22px;">
             Para completar el proceso de alta, es necesario que realices el pago correspondiente. 
             Escanea el siguiente código QR para efectuar el pago de manera rápida y segura.
+            <br>
+            Luego enviar el comprobante de pago a info@lexorabogados.com.ar.
         </p>
         
         <img src="https://www.lexorabogados.com.ar/panel/assets/img/qr.png" alt="QR de Pago" style="width: 200px; margin-bottom: 20px;">
