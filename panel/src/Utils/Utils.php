@@ -21,8 +21,11 @@ class Utils
     }
 
     public static function formatDateUser($date){
-        $dateObject = new \DateTime($date);
-        return $dateObject->format('d/m/Y');
+        if ($date != null){
+            $dateObject = new \DateTime($date);
+            return $dateObject->format('d/m/Y');
+        }
+        
     }
 
     public static function isAdminLogged(){
