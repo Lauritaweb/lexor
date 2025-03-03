@@ -224,6 +224,11 @@ function generateTimeOptions($selectedTime = null)
                   </div>
 
                   <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Fecha expiracion matricula</div>
+                    <div class="col-lg-9 col-md-8 text-white"><?= Utils::formatDateUser($degree_expiration_data)  ?></div>
+                  </div>
+
+                  <div class="row">
                     <div class="col-lg-3 col-md-4 label">Años experiencia</div>
                     <div class="col-lg-9 col-md-8 text-white"><?= $experience ?></div>
                   </div>
@@ -394,6 +399,15 @@ function generateTimeOptions($selectedTime = null)
                             <?php endforeach; ?>
                           </ul>
                         </div>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="degree_expiration_data" class="col-md-4 col-lg-3 col-form-label">Fecha expiración matricula
+                        <span class="text-danger">*</span>
+                      </label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="degree_expiration_data" type="date" class="form-control" id="fullName" value="<?= $degree_expiration_data ?>" required max="2024" min="1924">
                       </div>
                     </div>
 

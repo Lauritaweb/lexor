@@ -116,8 +116,9 @@ function revisa_login(){
         $query = "INSERT INTO affiliates (
             id_document_type, id_specialization, id_province, 
             name, last_name, document_number, about_me, position,
-            email, phone, address, gender, begin_year, id_consultation_type, url_file_image, url_file_degree, id_locality
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            email, phone, address, gender, begin_year, id_consultation_type, url_file_image, 
+            url_file_degree, id_locality, degree_expiration_data
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         $stmt = $this->db->prepare($query);
         
@@ -125,11 +126,11 @@ function revisa_login(){
             die('Prepare failed: ' . $this->db->error);              
      
         $stmt->bind_param(
-            "iiisssssssssiissi",
+            "iiisssssssssiissis",
             $id_document_type, $id_specialization, $id_province,
             $name, $last_name, $document_number, $about_me, $position,
             $email, $phone, $address, $gender, $begin_year, $id_consultation_type, 
-            $urlImageFile, $degreeFileName, $id_locality
+            $urlImageFile, $degreeFileName, $id_locality, $degree_expiration_data
         );        
 
         if ($result = $stmt->execute()) {
@@ -302,13 +303,13 @@ function revisa_login(){
         $id, $id_document_type, $id_force, $id_province,
         $name, $last_name, $document_number, $about_me, 
         $email, $phone, $address, $gender, $begin_year, $id_consultation_type,
-        $urlImageFile, $degreeFileName, $id_locality
+        $urlImageFile, $degreeFileName, $id_locality, $degree_expiration_data
     ) {        
         $updateAffiliate = $this->updateAffiliate(
             $id, $id_document_type, $id_force, $id_province,
             $name, $last_name, $document_number, $about_me, 
             $email, $phone, $address, $gender, $begin_year, $id_consultation_type,
-            $urlImageFile,$degreeFileName, $id_locality
+            $urlImageFile,$degreeFileName, $id_locality, $degree_expiration_data
         );
 
         return $updateAffiliate;
@@ -319,14 +320,14 @@ function revisa_login(){
         $id, $id_document_type, $id_specialization, $id_province,
         $name, $last_name, $document_number, $about_me, 
         $email, $phone, $address, $gender, $begin_year, $id_consultation_type,
-        $urlImageFile,$degreeFileName, $id_locality
+        $urlImageFile,$degreeFileName, $id_locality, $degree_expiration_data
     ) {
         $query = "UPDATE affiliates SET 
             id_document_type = ?, id_specialization = ?, id_province = ?, 
             name = ?, last_name = ?, document_number = ?, about_me = ?, 
             email = ?, phone = ?, address = ?, gender = ?, begin_year = ?,
             id_consultation_type = ?, url_file_image = ?, url_file_degree = ?, 
-            id_locality = ?
+            id_locality = ?, degree_expiration_data = ?
             WHERE id = ?";
     
         $stmt = $this->db->prepare($query);
@@ -336,11 +337,11 @@ function revisa_login(){
         }
     
         $stmt->bind_param(
-            "iiissssssssiissii",
+            "iiissssssssiissisi",
             $id_document_type, $id_specialization, $id_province,
             $name, $last_name, $document_number, $about_me,
             $email, $phone, $address, $gender, $begin_year, $id_consultation_type,
-            $urlImageFile, $degreeFileName, $id_locality,
+            $urlImageFile, $degreeFileName, $id_locality, $degree_expiration_data,
             $id
         );
     
@@ -508,7 +509,8 @@ function revisa_login(){
         YEAR(NOW()) - a.begin_year as experience,
         a.begin_year,
 		act.description as consultantType,
-        a.url_file_degree
+        a.url_file_degree,
+        a.degree_expiration_data
     FROM 
         affiliates a
     LEFT JOIN 
@@ -575,7 +577,8 @@ function revisa_login(){
         a.id_consultation_type,
         a.url_file_image,
         a.url_file_degree,
-        a.id_locality
+        a.id_locality,
+        a.degree_expiration_data
         FROM 
             affiliates a
         LEFT JOIN 

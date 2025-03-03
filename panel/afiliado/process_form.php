@@ -132,7 +132,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         if ($affiliateModelo->update( $id_affiliate, $id_document_type, $id_specialization, $id_province,
                 $name, $last_name, $document_number, $about_me, 
-                $email, $phone, $address, $gender, $begin_year, $id_consultation_type, $newFileName, $degreeFileName,  $id_locality)) {
+                $email, $phone, $address, $gender, $begin_year, $id_consultation_type, $newFileName, 
+                $degreeFileName,  $id_locality, $degree_expiration_data)) {
             
             $affiliateModelo->deleteSpecialization($id_affiliate);
             foreach ($_POST['id_specialization'] as $id_specialization_actual) {                
