@@ -309,8 +309,14 @@ function revisa_login(){
             $id, $id_document_type, $id_force, $id_province,
             $name, $last_name, $document_number, $about_me, 
             $email, $phone, $address, $gender, $begin_year, $id_consultation_type,
-            $urlImageFile,$degreeFileName, $id_locality, $degree_expiration_data
+            $id_locality, $degree_expiration_data
         );
+       
+        if ($urlImageFile != null && $urlImageFile != '')
+            $this->updateAffiliateProfileImage($id, $urlImageFile);
+        
+        if($degreeFileName != null && $degreeFileName != '')
+            $this->updateAffiliateDegreeImage($id, $degreeFileName);
 
         return $updateAffiliate;
     }
@@ -320,13 +326,13 @@ function revisa_login(){
         $id, $id_document_type, $id_specialization, $id_province,
         $name, $last_name, $document_number, $about_me, 
         $email, $phone, $address, $gender, $begin_year, $id_consultation_type,
-        $urlImageFile,$degreeFileName, $id_locality, $degree_expiration_data
+        $id_locality, $degree_expiration_data
     ) {
         $query = "UPDATE affiliates SET 
             id_document_type = ?, id_specialization = ?, id_province = ?, 
             name = ?, last_name = ?, document_number = ?, about_me = ?, 
             email = ?, phone = ?, address = ?, gender = ?, begin_year = ?,
-            id_consultation_type = ?, url_file_image = ?, url_file_degree = ?, 
+            id_consultation_type = ?,
             id_locality = ?, degree_expiration_data = ?
             WHERE id = ?";
     
@@ -337,11 +343,67 @@ function revisa_login(){
         }
     
         $stmt->bind_param(
-            "iiissssssssiissisi",
+            "iiissssssssiiisi",
             $id_document_type, $id_specialization, $id_province,
             $name, $last_name, $document_number, $about_me,
             $email, $phone, $address, $gender, $begin_year, $id_consultation_type,
-            $urlImageFile, $degreeFileName, $id_locality, $degree_expiration_data,
+            $id_locality, $degree_expiration_data,
+            $id
+        );
+    
+        if ($stmt->execute()) {
+            $stmt->close();
+            return true;
+        } else {
+            $stmt->close();
+            return false;
+        }
+    }
+
+    public function updateAffiliateDegreeImage(
+        $id, $degreeFileName
+    ) {
+        $query = "UPDATE affiliates SET 
+          url_file_degree = ?
+           WHERE id = ?";
+    
+        $stmt = $this->db->prepare($query);
+    
+        if ($stmt === false) {
+            die('Prepare failed: ' . $this->db->error);
+        }
+    
+        $stmt->bind_param(
+            "si",           
+            $degreeFileName, 
+            $id
+        );
+    
+        if ($stmt->execute()) {
+            $stmt->close();
+            return true;
+        } else {
+            $stmt->close();
+            return false;
+        }
+    }
+
+    public function updateAffiliateProfileImage(
+        $id,  $urlImageFile
+    ) {
+        $query = "UPDATE affiliates SET 
+          url_file_image = ?
+           WHERE id = ?";
+    
+        $stmt = $this->db->prepare($query);
+    
+        if ($stmt === false) {
+            die('Prepare failed: ' . $this->db->error);
+        }
+    
+        $stmt->bind_param(
+            "si",           
+            $urlImageFile, 
             $id
         );
     
