@@ -53,12 +53,12 @@ $affiliates = $userModel->getAll();
 
     <div class="pagetitle">
       <h1>Portal del Administrador</h1>
-      <nav>
+      <!-- <nav>
         <ol class="breadcrumb mt-4">
           <li class="breadcrumb-item"><a href="./index.php">Inicio</a></li>
           <li class="breadcrumb-item active">Portal></li>
         </ol>
-      </nav>
+      </nav> -->
     </div><!-- End Page Title -->
 
     <section class="section dashboard">
@@ -72,18 +72,8 @@ $affiliates = $userModel->getAll();
             <div class="col-xxl-12">
               <div class="card info-card revenue-card">
 
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Abogados</h6>
-                    </li>
-                    <li><a class="dropdown-item" href="#">Gestion de abogados</a></li>
-                  </ul>
-                </div>
-
                 <div class="card-body">
-                  <h5 class="card-title">Total de abogados</span></h5>
+                  <h5 class="card-title text-white">Total de abogados</span></h5>
                   <section class="d-flex align-items-start">
                     
                     <div class="d-flex align-items-start me-3 border-end pe-3">

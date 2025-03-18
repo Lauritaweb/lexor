@@ -61,8 +61,8 @@ ini_set('display_errors', 1);
     <div class="pagetitle">
       <h1>Tablero</h1>
       <nav>
-        <ol class="breadcrumb mt-4">
-          <li class="breadcrumb-item"><a href="./index.ph">Inicio</a></li>
+        <ol class="breadcrumb mt-4 d-none">
+          <li class="breadcrumb-item">Inicio</li>
           <li class="breadcrumb-item active">Portal</li>
         </ol>
       </nav>
@@ -111,16 +111,6 @@ ini_set('display_errors', 1);
 
               <div class="card info-card customers-card">
 
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                     <h6>Tus citas</h6>
-                    </li>
-                    <li><a class="dropdown-item" href="./appointments.php">Gestionar citas</a></li>
-                  </ul>
-                </div>
-
                 <div class="card-body">
                   <h5 class="card-title"> <a href="appointments_list.php">Tus Citas  </a> <span>| próxima </span></h5>
 
@@ -158,10 +148,10 @@ ini_set('display_errors', 1);
         </div><!-- End Left side columns -->
 
         <!-- Right side columns -->
-        <div class="col-lg-4>
+        <div class="col-lg-4">
 
           <!-- HISTORIAL DE CITAS -->
-          <div class="card border-key text-key">
+          <div class="card border-key text-key d-none">
 
             <div class="card-body">
               <h5 class="card-title text-white">Historial de citas</h5>

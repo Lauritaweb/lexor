@@ -1406,9 +1406,27 @@ h6 {
   color: rgb(245, 241, 241);
 }
 
-/* fixies 20-01-25 */
+/* fixies 05-03-25 */
+.header-nav .profile .dropdown-item,
+.header-nav .profile .dropdown-header,
+.header-nav .profile .dropdown-header h6,
+.dropdown-header,
+.dropdown-item{
+  background-color: #111111!important;
+  color: white!important;
+}
+.dropdown-menu {
+  --bs-dropdown-bg: #111111!important;
+  --bs-dropdown-color:white!important;
+}
+.header-nav .profile .dropdown-item,
+.header-nav .profile .dropdown-header{
+  border: solid 1px white;
+}
 .footer,
-body{
+body,
+.bg-black,
+main.bg-black{
   background-color: #111111!important;
 }
 /* breadcrumbs */

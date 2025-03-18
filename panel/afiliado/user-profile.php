@@ -165,6 +165,8 @@ function generateTimeOptions($selectedTime = null)
       </nav>
     </div><!-- End Page Title -->
 
+    <div id="alertContainer"></div>
+    
     <section class="section profile">
       <div class="row">
 
@@ -259,7 +261,7 @@ function generateTimeOptions($selectedTime = null)
                   </div>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Titulo</div>
+                    <div class="col-lg-3 col-md-4 label">Matrícula</div>
                     <div class="col-lg-9 col-md-8 text-white">
                       <?php
                                                     if (isset($url_file_degree))
@@ -569,7 +571,7 @@ function generateTimeOptions($selectedTime = null)
 
                 <div class="tab-pane fade pt-3" id="profile-change-password">
                   <!-- Change Password Form -->
-                  <form action="process_form.php" method="post" onsubmit="return validateFormPassword()">
+                  <form action="process_form.php" method="post" onsubmit="validateFormPassword(event)">
                     <input type="hidden" name="passAction" value="update">
 
                     <!-- 
@@ -580,6 +582,8 @@ function generateTimeOptions($selectedTime = null)
                       </div>
                     </div>
                     -->
+                    <!-- Contenedor donde aparecerán los mensajes de éxito -->
+                    
 
                     <div class="row mb-3">
                       <label for="newPassword" class="col-md-4 col-lg-3 col-form-label text-white">Nueva contraseña</label>
@@ -985,7 +989,95 @@ function generateTimeOptions($selectedTime = null)
     }
   </script>
 
+  <script>
+    function validateFormPassword(event) {
+  event.preventDefault();  // Evita que el formulario se envíe y recargue la página
 
+  let isValid = true;
+
+  // Limpiar los mensajes de error anteriores
+  document.getElementById('newPasswordError').textContent = '';
+  document.getElementById('renewPasswordError').textContent = '';
+
+  const newPassword = document.getElementById('newPassword').value;
+  const renewPassword = document.getElementById('renewPassword').value;
+
+  // Validación de la nueva contraseña
+  if (newPassword === '') {
+    document.getElementById('newPasswordError').textContent = 'Nueva contraseña es un campo requerido.';
+    isValid = false;
+  }
+
+  // Validación de la contraseña repetida
+  if (renewPassword === '') {
+    document.getElementById('renewPasswordError').textContent = 'Repetir nueva contraseña es un campo requerido.';
+    isValid = false;
+  }
+
+  // Verificar que las contraseñas coincidan
+  if (newPassword !== renewPassword) {
+    // Mostrar el mensaje de error si las contraseñas no coinciden
+    const errorAlert = document.createElement('div');
+    errorAlert.classList.add('alert', 'alert-danger');
+    errorAlert.textContent = 'Las contraseñas no coinciden.';
+
+    // Añadir el alert de error al DOM
+    const alertContainer = document.getElementById('alertContainer');
+    if (alertContainer) {
+      alertContainer.appendChild(errorAlert);
+    } else {
+      document.body.appendChild(errorAlert); // Si no existe el contenedor, lo añade al body
+    }
+
+    // Desaparecer el alert de error después de 5 segundos (5000 milisegundos)
+    setTimeout(() => {
+      errorAlert.remove();
+    }, 5000); // 5 segundos
+
+    isValid = false;
+  }
+
+  // Si el formulario es válido, mostrar el mensaje de éxito
+  if (isValid && newPassword === renewPassword) {
+    // Crear el alert de éxito
+    const successAlert = document.createElement('div');
+    successAlert.classList.add('alert', 'alert-success');
+    successAlert.textContent = '¡Contraseña cambiada exitosamente!';
+
+    // Añadir el alert de éxito al DOM
+    const alertContainer = document.getElementById('alertContainer');
+    if (alertContainer) {
+      alertContainer.appendChild(successAlert);
+    } else {
+      document.body.appendChild(successAlert); // Si no existe el contenedor, lo añade al body
+    }
+
+    // Desaparecer el alert de éxito después de 10 segundos (10000 milisegundos)
+    setTimeout(() => {
+      successAlert.remove();
+    }, 10000); // 10 segundos
+  }
+
+}
+
+  // select 2
+  document.addEventListener("DOMContentLoaded", function () {
+    const checkboxes = document.querySelectorAll('input[name="id_specialization[]"]');
+    
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function () {
+            const checkedBoxes = document.querySelectorAll('input[name="id_specialization[]"]:checked');
+            
+            if (checkedBoxes.length > 2) {
+                this.checked = false; // Desmarcar la opción si ya hay dos seleccionadas
+                alert("Solo puedes seleccionar hasta dos especialidades.");
+            }
+        });
+    });
+});
+
+
+  </script>
 
 </body>
 

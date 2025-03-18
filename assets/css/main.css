@@ -192,6 +192,12 @@ h3 {
   margin-right: 0;
 }
 
+.banner-2 {
+  background-image: url(../img/bg-reverse.png);
+  background-repeat: no-repeat;
+  background-position: bottom left;
+}
+
 .servicies figure > div {
   background-color: rgb(245, 241, 241);
   border-radius: 12px;

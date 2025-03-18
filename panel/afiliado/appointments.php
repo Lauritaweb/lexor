@@ -47,7 +47,7 @@ if ($appointment != null) {
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Gestionar citas | Portal Respaldar Argentina</title>
+  <title>Gestionar citas | Lexor Abogados</title>
   <!-- Favicons -->
   <link href="../assets/img/favicon.svg" rel="icon">
   <!-- Google Fonts -->
@@ -158,7 +158,7 @@ if ($appointment != null) {
             <span class="text-danger">*</span>
           </label>
           <div class="col-sm-10">
-            <textarea class="form-control" style="height: 100px" placeholder="Comenta brevemente el caso por el cual nos queres contactar" required  name="purpose" id="purpose"><?php echo isset($appointment) ? $purpose : "" ?></textarea>
+            <textarea class="form-control" style="height: 100px" placeholder="Motivo de la cita" required  name="purpose" id="purpose"><?php echo isset($appointment) ? $purpose : "" ?></textarea>
           </div>
         </div>
         

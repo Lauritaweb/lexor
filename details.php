@@ -20,7 +20,7 @@
         <!-- nav -->
         <nav class="navbar navbar-expand-xxl menu">
             <div class="container-fluid">
-              <a class="navbar-brand" href="./test.html">
+              <a class="navbar-brand" href="./index.html">
                 <img src="./assets/img/Lexor-logo.svg" alt="">
               </a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,16 +35,16 @@
                         <a class="nav-link" href="./search.html">Buscar abogado</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./test.html#steps">Como funciona</a>
+                        <a class="nav-link" href="./index.html#steps">Como funciona</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./test.html#servicies">Servicios</a>
+                        <a class="nav-link" href="./index.html#servicies">Servicios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./test.html#faqs">Preguntas frecuentes</a>
+                        <a class="nav-link" href="./index.html#faqs">Preguntas frecuentes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link no-border" href="./pages-register.html">Registrarme</a>
+                        <a class="nav-link no-border" href="./panel/pages-register.html">Registrarme</a>
                     </li>
                 </ul>
               </div>
