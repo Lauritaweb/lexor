@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          $appointmentModel->update($id_appointment, $type, $urgency, $date, $hour, 1, $purpose, $filaname, $name_lastname, $phone, $email);
 
     $lawyer = $affiliateModelo->get($id_affiliate);
-    Utils::mailSenderCreatedAppointment($email,$name_lastname,$lawyer['name'] . ' ' . $lawyer['last_name'],Utils::fechaUsuario($date), $time );  
+    Utils::mailSenderCreatedAppointment($email,$name_lastname,$lawyer['name'] . ' ' . $lawyer['last_name'],Utils::fechaUsuario($date), $hour );  
 
     if (Utils::isAssessorLogged() || Utils::isAdminLogged())
         header("Location: ../asesor/dashboard-appointments.php");

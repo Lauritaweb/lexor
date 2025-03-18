@@ -25,14 +25,7 @@ $html = '
         </p>
         
         <img src="https://www.lexorabogados.com.ar/panel/assets/img/lines-reverse.svg" alt="" style="width: 200px;">
-        
-        <p style="color:#033333; font-family: Encode Sans, sans-serif; line-height: 22px;">
-            <a href="https://lexorabogados.com.ar/panel/login.html" 
-               style="display: inline-block; padding: 10px 20px; color: #ffffff; background-color: #033333; text-decoration: none; font-weight: 600; border-radius: 5px;">
-                Iniciar sesión
-            </a>
-        </p>
-
+               
         <img src="https://www.lexorabogados.com.ar/panel/assets/img/lines-reverse.svg" alt="" style="width: 200px;">
         
         <h2 style="color:#033333; font-size:20px; font-family: Encode Sans, sans-serif; font-weight: 600;">¿Necesitas ayuda?</h2>
