@@ -3,6 +3,9 @@ session_start();
 require __DIR__ . '/../vendor/autoload.php';
 use App\Utils\Utils;
 
+use App\Models\Affiliate;
+$affiliateModelo = new Affiliate();
+
 use App\Models\Appointments;
 $appointmentModel = new Appointments();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -18,6 +21,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $id_appointment = $appointmentModel->create($id_affiliate, $type, $urgency, $date, $hour, 1, $purpose, $filaname, $name_lastname, $phone, $email);    // lo creo y me guardo la referencia al id
     else if (isset($id_appointment) ) // valido que haya id_appointment en sesion y q este seteado el campo update
          $appointmentModel->update($id_appointment, $type, $urgency, $date, $hour, 1, $purpose, $filaname, $name_lastname, $phone, $email);
+
+    $lawyer = $affiliateModelo->get($id_affiliate);
+    Utils::mailSenderCreatedAppointment($email,$name_lastname,$lawyer['name'],$date, $time );  
 
     if (Utils::isAssessorLogged() || Utils::isAdminLogged())
         header("Location: ../asesor/dashboard-appointments.php");

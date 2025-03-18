@@ -70,6 +70,11 @@ class Utils
         Utils::mandarMail($email, "Lexor Abogados - Su cuenta ha sido desactivada", $html, $name);
     }
 
+    public static function mailSenderCreatedAppointment($email, $name, $lawyer_name, $date, $time){
+        include('templateNewAppointment.php');
+        Utils::mandarMail($email, "Bienvenido a Lexor Abogados", $html, $name);
+    }
+
     public static function mailForgotPassword($email){
         include('Token.php');
         $token = createJwtToken($email,JWT_IO_KEY);
