@@ -21,7 +21,7 @@ $html = '
             ¡Nuevo turno asignado, '.$name.'!
         </h1>
         <p style="color:#033333; font-family: Encode Sans, sans-serif; line-height: 22px;">
-            Nos complace informarte que se te ha asignado un turno con el abogado '.$lawyer_name.' para el dia '. $date.' a las '. $time .'
+            Nos complace informarte que se te ha asignado un turno con el abogado '.$lawyer_name.' para el dia '. $date.' de las '. $time .'
         </p>
         
         <img src="https://www.lexorabogados.com.ar/panel/assets/img/lines-reverse.svg" alt="" style="width: 200px;">
