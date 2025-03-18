@@ -72,7 +72,7 @@ class Utils
 
     public static function mailSenderCreatedAppointment($email, $name, $lawyer_name, $date, $time){
         include('templateNewAppointment.php');
-        Utils::mandarMail($email, "Bienvenido a Lexor Abogados", $html, $name);
+        Utils::mandarMail($email, "Nuevo turno asignado en Lexor Abogados", $html, $name);
     }
 
     public static function mailForgotPassword($email){
@@ -121,7 +121,14 @@ class Utils
         return $status;
     }
 
-
+    public static function fechaUsuario($fecha){
+        $arr = explode("-", $fecha);
+        if (count($arr) != 3) {
+            return $fecha;
+        } else {
+            return "$arr[2]/$arr[1]/$arr[0]";
+        }
+    }
 
 
 }
