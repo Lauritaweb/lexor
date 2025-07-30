@@ -20,6 +20,21 @@
         .main-search{
             z-index: 4;
         }
+        // boxes
+        .header-boxes .row{
+            height: auto!important;
+            flex-direction: column-reverse;
+            justify-content: flex-end!important;
+            align-items: center;
+            margin-top: 30px;
+            article{
+                width: 90%;
+                margin-top: 30px;
+                h2.fs-2.text-key{
+                   font-weight: 700;
+                }
+            }
+        }
     // nav
     .menu{
         .navbar-nav{

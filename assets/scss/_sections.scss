@@ -22,11 +22,33 @@
     top: 0;
     left: 0;
     z-index: 2;
+    display: flex;
+    flex-direction: column;
     .overlay{
         background-color: rgba(0,0, 0, 0);
         position: relative;
         z-index: 3;
         height: 100%;
+    }
+    .header-boxes{
+        height: 80%;
+        .row{
+            align-items: center!important;
+            height: 100%!important;
+        }
+        article{
+            background: linear-gradient(0deg, rgba(17, 17, 17, 0.80) 0%, rgba(0, 0, 0, 0.80) 100%);
+            padding: 30px;
+            border-radius: 30px;
+            border: solid 1px $keyColor;
+            text-align: center;
+            h2.fs-4{
+                text-transform: uppercase;
+            }
+            a.btn-key{
+                margin: auto;
+            }
+        }
     }
 }
 .menu{
